@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Павел](https://up.htmlacademy.ru/react/7/user/1573235).
-* Наставник: `Неизвестно`.
+* Студент: [Раевский Павел](https://up.htmlacademy.ru/react/7/user/1573235).
+* Наставник: [Виктор Кан](https://htmlacademy.ru/profile/viktorkan).
 
 ---
 
