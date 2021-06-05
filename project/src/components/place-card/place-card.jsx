@@ -11,6 +11,7 @@ function PremiumMark() {
 
 function PlaceCard(props) {
   const {place: {isPremium, price, previewImage}} = props;
+
   return (
     <article className="cities__place-card place-card">
       {isPremium && PremiumMark()}
