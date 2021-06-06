@@ -9,9 +9,9 @@ import Header from '../../header/header';
 import { AppRoute } from '../../../const';
 
 function MainPage(props) {
-  const {places, match: {path}} = props;
+  const {places, location: {pathname}} = props;
 
-  const isMainPageActive = path === AppRoute.ROOT;
+  const isMainPageActive = pathname === AppRoute.ROOT;
 
   return (
     <div className="page page--gray page--main">
@@ -90,8 +90,8 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object),
-  match: PropTypes.shape({
-    path: PropTypes.string,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }),
 };
 
