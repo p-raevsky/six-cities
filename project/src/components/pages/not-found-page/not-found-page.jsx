@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../../header/header';
-import Footer from '../../footer/footer';
+import Header from '../../elements/header/header';
+import Footer from '../../elements/footer/footer';
 
-function NotFoundPage(props) {
+function NotFoundPage() {
   return (
     <div className="page">
       <Header />

@@ -3,13 +3,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 
-import PlaceCard from '../../place-card/place-card';
-import Header from '../../header/header';
+import PlaceCard from '../../elements/place-card/place-card';
+import Header from '../../elements/header/header';
 
-import { AppRoute } from '../../../const';
+import {AppRoute, PlaceType} from '../../../const';
 
 function MainPage(props) {
-  const {places, location: {pathname}} = props;
+  const {
+    offers,
+    location: {
+      pathname,
+    },
+  } = props;
 
   const isMainPageActive = pathname === AppRoute.ROOT;
 
@@ -75,7 +80,7 @@ function MainPage(props) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {places.map((place) => <PlaceCard key = {place.id} place = {place} />)}
+                {offers.map((offer) => <PlaceCard key = {offer.id} offer = {offer} placesType = {PlaceType.CITIES}/>)}
               </div>
             </section>
             <div className="cities__right-section">
@@ -89,7 +94,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object),
+  offers: PropTypes.arrayOf(PropTypes.object),
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }),
