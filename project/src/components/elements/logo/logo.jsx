@@ -2,30 +2,29 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import {logoType} from '../../../settings';
+
 function Logo(props) {
   const {
-    isHeader = true,
-    isMainPageActive,
+    isActive,
+    type,
   } = props;
 
-  const isActiveClassName = isMainPageActive ? 'header__logo-link--active ' : '';
-  const isHeaderClassName = isHeader ? 'header__logo-link' : 'footer__logo-link';
-
   return (
-    <Link className={isActiveClassName + isHeaderClassName} to="/">
-      <img className={isHeader ? 'header__logo' : 'footer__logo'}
+    <Link className={`${type}__logo-link ${isActive ? `${type}__logo-link--active` : ''}`} to="/">
+      <img className={`${type}__logo`}
         src="img/logo.svg"
         alt="6 cities logo"
-        width={isHeader ? '81' : '64'}
-        height={isHeader ? '41' : '33'}
+        width={logoType[type.toUpperCase()].width}
+        height={logoType[type.toUpperCase()].height}
       />
     </Link>
   );
 }
 
 Logo.propTypes = {
-  isHeader: PropTypes.bool,
-  isMainPageActive: PropTypes.bool,
+  isActive: PropTypes.bool,
+  type: PropTypes.string.isRequired,
 };
 
 export default Logo;

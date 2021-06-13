@@ -1,19 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FavoritesLocationItem from '../../elements/favorites-location-item/favorites-location-item';
+import FavoritesLocationItem from '../../elements/favorites-location/favorites-location';
 
 import placeCardProp from '../../pages/offer.prop';
 
 function FavoritesList(props) {
   const {favoritesPlaces} = props;
-  const placesEntries = favoritesPlaces.map((place) => [place.city.name, place]);
-  const placesMap = new Map(placesEntries);
-  const uniquePlaces =  new Set(placesMap.keys());
+
+  const uniquePlaces = [...new Set(favoritesPlaces.map((offer) => offer.city.name))];
 
   return (
     <ul className="favorites__list">
-      {Array.from(uniquePlaces).map((city) => <FavoritesLocationItem key = {city} city = {city} favoritesPlaces = {favoritesPlaces} />)}
+      {uniquePlaces
+        .map((city) => {
+          const filteredPlaces = favoritesPlaces.filter((place) => place.city.name === city);
+          return <FavoritesLocationItem key = {city} city = {city} filteredPlaces = {filteredPlaces} />;
+        })}
     </ul>
   );
 }

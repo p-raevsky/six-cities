@@ -3,31 +3,26 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 
 import Header from '../../elements/header/header';
-import PlaceCard from '../../elements/place-card/place-card';
 import Image from '../../elements/image/image';
 import PropertyGoodsItem from '../../elements/property-goods-item/property-goods-item';
 import ReviewsItem from '../../elements/reviews-item/reviews-item';
 import ReviewsForm from '../../elements/reviews-form/reviews-form';
+import NearPlacesList from '../../elements/near-places-list/near-places-list';
 
 import placeCardProp from '../offer.prop';
 import reviewsProp from '../review.prop';
 
 import {getOfferRating} from '../../../utils';
-import {PlaceType} from '../../../const';
 
 const SLICED_REVIEWS_NUMBER = 10;
 const SLICED_PLACES_NUMBER = 3;
 
 function RoomPage(props) {
   const {
-    offers,
+    offer,
     reviews,
     nearPlaces,
-    itemId,
   } = props;
-
-  const offerInArray = offers.filter((offer) => offer.id === Number(itemId));
-  const [currentOffer] = offerInArray;
 
   const {
     images,
@@ -45,7 +40,7 @@ function RoomPage(props) {
       avatarUrl,
       isPro,
     },
-  } = currentOffer;
+  } = offer;
 
   const offerRating = getOfferRating(rating);
   const avatarClassName = `property__avatar-wrapper${isPro ? ' property__avatar-wrapper--pro' : ''} user__avatar-wrapper`;
@@ -68,7 +63,7 @@ function RoomPage(props) {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((url) => <Image key = {url} url = {url}/>)}
+              {images.map((url) => <Image key = {url} url = {url} />)}
             </div>
           </div>
           <div className="property__container container">
@@ -114,7 +109,7 @@ function RoomPage(props) {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {goods.map((item) => <PropertyGoodsItem key = {item} goodsItem = {item}/>)}
+                  {goods.map((item) => <PropertyGoodsItem key = {item} goodsItem = {item} />)}
                 </ul>
               </div>
               <div className="property__host">
@@ -152,9 +147,7 @@ function RoomPage(props) {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {slicedNearPlaces.map((offer) => <PlaceCard key = {offer.id} offer = {offer} placesType = {PlaceType.NEAR_PLACES}/>)}
-            </div>
+            <NearPlacesList places = {slicedNearPlaces}/>
           </section>
         </div>
       </main>
@@ -163,10 +156,9 @@ function RoomPage(props) {
 }
 
 RoomPage.propTypes = {
-  offers: PropTypes.arrayOf(placeCardProp),
+  offer: placeCardProp,
   reviews: PropTypes.arrayOf(reviewsProp),
   nearPlaces: PropTypes.arrayOf(placeCardProp),
-  itemId: PropTypes.PropTypes.string.isRequired,
 };
 
 export default RoomPage;

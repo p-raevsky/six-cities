@@ -1,26 +1,17 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
 
-import PlaceCard from '../../elements/place-card/place-card';
 import Header from '../../elements/header/header';
-
-import {AppRoute, PlaceType} from '../../../const';
+import PlacesList from '../../elements/places-list/places-list';
 
 function MainPage(props) {
   const {
     offers,
-    location: {
-      pathname,
-    },
   } = props;
-
-  const isMainPageActive = pathname === AppRoute.ROOT;
 
   return (
     <div className="page page--gray page--main">
-      <Header isMainPageActive = {isMainPageActive} />
+      <Header isActive/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -79,9 +70,7 @@ function MainPage(props) {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <PlaceCard key = {offer.id} offer = {offer} placesType = {PlaceType.CITIES}/>)}
-              </div>
+              <PlacesList offers = {offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -95,9 +84,6 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object),
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-  }),
 };
 
-export default withRouter(MainPage);
+export default MainPage;

@@ -8,14 +8,14 @@ export const AppRoute = {
 export const CitiesName = {
   PARIS: 'Paris',
   COLOGNE: 'Cologne',
-  BRUSSELS: 'BRUSSELS',
+  BRUSSELS: 'Brussels',
   AMSTERDAM: 'Amsterdam',
   HUMBURG: 'Humburg',
   DUSSELDORF: 'Dusseldorf',
 };
 
 export const PlaceType = {
-  CITIES: 'cities',
-  NEAR_PLACES: 'near-places',
-  FAVORITES: 'favorites',
+  CITIES: 'CITIES',
+  NEAR_PLACES: 'NEAR_PLACES',
+  FAVORITES: 'FAVORITES',
 };

@@ -35,7 +35,10 @@ function App(props) {
         <Route exact path = {`${AppRoute.OFFER}/:id`}
           render = {({match}) => {
             const {id} = match.params;
-            return <RoomPage itemId = {id} offers = {offers} reviews = {reviews} nearPlaces = {offers} />;
+            const offerInArray = offers.filter((offer) => offer.id === Number(id));
+            const [currentOffer] = offerInArray;
+
+            return <RoomPage offer = {currentOffer} reviews = {reviews} nearPlaces = {offers} />;
           }}
         />
         <Route>

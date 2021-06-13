@@ -1,10 +1,12 @@
 import React from 'react';
+
 import Logo from '../logo/logo';
+import {logoType} from '../../../settings';
 
 function Footer() {
   return (
     <footer className="footer container">
-      <Logo isHeader = {false} />
+      <Logo type = {logoType.FOOTER.type} />
     </footer>
   );
 }

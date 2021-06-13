@@ -1,17 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import Logo from '../logo/logo';
+import {logoType} from '../../../settings';
 
 function Header(props) {
-  const {isMainPageActive} = props;
+  const {
+    isActive = false,
+  } = props;
 
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo isMainPageActive = {isMainPageActive} />
+            <Logo type = {logoType.HEADER.type} isActive = {isActive}/>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
@@ -36,7 +40,7 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  isMainPageActive: PropTypes.bool,
+  isActive: PropTypes.bool,
 };
 
 export default Header;
