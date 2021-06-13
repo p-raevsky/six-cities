@@ -6,8 +6,8 @@ function ReviewsForm() {
 
   return (
     <form className="reviews__form form" action="#" method="post"
-      onSubmit = {(e) => {
-        e.preventDefault();
+      onSubmit = {(evt) => {
+        evt.preventDefault();
         setReview(textareaValue);
         setTextareaValue('');
       }}
@@ -52,8 +52,8 @@ function ReviewsForm() {
       <textarea className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={textareaValue}
-        onChange = {(e) => {
-          setTextareaValue(e.target.value);
+        onChange = {(evt) => {
+          setTextareaValue(evt.target.value);
         }}
       >
       </textarea>

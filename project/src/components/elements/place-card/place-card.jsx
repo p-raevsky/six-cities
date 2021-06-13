@@ -71,8 +71,11 @@ function PlaceCard(props) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.OFFER}/${id}`}
-            onClick={() => history.push(`${AppRoute.OFFER}/${id}`)}
+          <Link
+            onClick={(evt) => {
+              evt.preventDefault();
+              history.push(`${AppRoute.OFFER}/${id}`);
+            }}
           >
             {title}
           </Link>
