@@ -1,36 +1,17 @@
 import React from 'react';
-import PlaceCard from '../../place-card/place-card';
-import Logo from '../../logo/logo';
 import PropTypes from 'prop-types';
 
+import Header from '../../elements/header/header';
+import PlacesList from '../../elements/places-list/places-list';
+
 function MainPage(props) {
-  const {places} = props;
+  const {
+    offers,
+  } = props;
+
   return (
     <div className="page page--gray page--main">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <Logo />
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header isActive/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -89,9 +70,7 @@ function MainPage(props) {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {places.map((place) => <PlaceCard key = {place.id} place = {place} />)}
-              </div>
+              <PlacesList offers = {offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -104,7 +83,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object),
+  offers: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default MainPage;

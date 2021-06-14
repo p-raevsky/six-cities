@@ -11,25 +11,36 @@ import SingInPage from '../pages/sing-in-page/sing-in-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 
 function App(props) {
-  const {places} = props;
+  const {
+    offers,
+    reviews,
+  } = props;
 
   return (
     <Router>
       <Switch>
         <Route exact path = {AppRoute.ROOT}>
           <MainPage
-            places = {places}
+            offers = {offers}
           />
         </Route>
         <Route exact path = {AppRoute.FAVORITES}>
-          <FavoritesPage />
+          <FavoritesPage
+            offers = {offers}
+          />
         </Route>
         <Route exact path = {AppRoute.LOGIN}>
           <SingInPage />
         </Route>
-        <Route exact path = {AppRoute.DEV_ROOM}>
-          <RoomPage />
-        </Route>
+        <Route exact path = {`${AppRoute.OFFER}/:id`}
+          render = {({match}) => {
+            const {id} = match.params;
+            const offerInArray = offers.filter((offer) => offer.id === Number(id));
+            const [currentOffer] = offerInArray;
+
+            return <RoomPage offer = {currentOffer} reviews = {reviews} nearPlaces = {offers} />;
+          }}
+        />
         <Route>
           <NotFoundPage />
         </Route>
@@ -39,7 +50,8 @@ function App(props) {
 }
 
 App.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object),
+  offers: PropTypes.arrayOf(PropTypes.object),
+  reviews: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default App;
