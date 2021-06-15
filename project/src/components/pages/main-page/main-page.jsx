@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 
 import Header from '../../elements/header/header';
 import PlacesList from '../../elements/places-list/places-list';
+import Map from '../../elements/map/map';
 
 function MainPage(props) {
   const {
     offers,
   } = props;
 
+  const points = offers.map((offer) => Object({
+    id: offer.id,
+    location: offer.location,
+  }));
+
   return (
     <div className="page page--gray page--main">
-      <Header isActive/>
+      <Header isActive />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -70,10 +76,12 @@ function MainPage(props) {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <PlacesList offers = {offers}/>
+              <PlacesList offers = {offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city = {offers[0].city} points = {points} />
+              </section>
             </div>
           </div>
         </div>
