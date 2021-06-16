@@ -31,3 +31,16 @@ export const placeCardType = {
     height: '110',
   },
 };
+
+export const customPin = {
+  DEFAULT: {
+    iconUrl: 'img/pin.svg',
+    iconSize: [27, 39],
+    iconAnchor: [13, 39],
+  },
+  ACTIVE: {
+    iconUrl: 'img/pin-active.svg',
+    iconSize: [27, 39],
+    iconAnchor: [13, 39],
+  },
+};
