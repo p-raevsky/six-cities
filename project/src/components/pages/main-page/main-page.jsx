@@ -5,15 +5,14 @@ import Header from '../../elements/header/header';
 import PlacesList from '../../elements/places-list/places-list';
 import Map from '../../elements/map/map';
 
+import {getPoints} from '../../../utils';
+
 function MainPage(props) {
   const {
     offers,
   } = props;
 
-  const points = offers.map((offer) => Object({
-    id: offer.id,
-    location: offer.location,
-  }));
+  const points = getPoints(offers);
 
   return (
     <div className="page page--gray page--main">
