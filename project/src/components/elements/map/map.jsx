@@ -1,41 +1,11 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
 import {customPin} from '../../../settings';
 import 'leaflet/dist/leaflet.css';
 
-function useMap(mapRef, city) {
-  const {location: {latitude, longitude, zoom}} = city;
-  const [map, setMap] = useState(null);
-
-  useEffect(() => {
-    if (mapRef.current !== null && map === null) {
-      const instance = leaflet.map(mapRef.current, {
-        center: {
-          lat: latitude,
-          lng: longitude,
-        },
-        zoom: zoom,
-        zoomControl: false,
-        marker: true,
-      });
-
-      leaflet
-        .tileLayer(
-          'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-          {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          },
-        )
-        .addTo(instance);
-
-      setMap(instance);
-    }
-  }, [mapRef, map, city]);
-
-  return map;
-}
+import useMap from '../../../hooks/use-map';
 
 function Map({city, points}) {
   const mapRef = useRef(null);

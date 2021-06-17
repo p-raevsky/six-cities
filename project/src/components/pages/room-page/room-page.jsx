@@ -8,11 +8,12 @@ import PropertyGoodsItem from '../../elements/property-goods-item/property-goods
 import ReviewsItem from '../../elements/reviews-item/reviews-item';
 import ReviewsForm from '../../elements/reviews-form/reviews-form';
 import NearPlacesList from '../../elements/near-places-list/near-places-list';
+import Map from '../../elements/map/map';
 
 import placeCardProp from '../offer.prop';
 import reviewsProp from '../review.prop';
 
-import {getOfferRating} from '../../../utils';
+import {getOfferRating, getPoints} from '../../../utils';
 
 const SLICED_REVIEWS_NUMBER = 10;
 const SLICED_PLACES_NUMBER = 3;
@@ -25,6 +26,7 @@ function RoomPage(props) {
   } = props;
 
   const {
+    city,
     images,
     isPremium,
     title,
@@ -55,6 +57,7 @@ function RoomPage(props) {
   const bedroomsFeatureLabel = `${bedrooms} ${bedrooms === 1 ? ' Bedroom' : ' Bedrooms'}`;
   const maxAdultsFeatureLabel = `Max ${maxAdults} ${maxAdults === 1 ? ' adult' : ' adults'}`;
   const slicedNearPlaces = nearPlaces.slice(0, SLICED_PLACES_NUMBER);
+  const points = getPoints(slicedNearPlaces);
 
   return (
     <div className="page">
@@ -142,7 +145,9 @@ function RoomPage(props) {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map city = {city} points = {points} />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
