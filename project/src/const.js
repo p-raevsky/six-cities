@@ -5,7 +5,7 @@ export const AppRoute = {
   OFFER: '/offer',
 };
 
-export const CitiesName = {
+export const Cities = {
   PARIS: 'Paris',
   COLOGNE: 'Cologne',
   BRUSSELS: 'Brussels',

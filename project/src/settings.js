@@ -44,3 +44,48 @@ export const customPin = {
     iconAnchor: [13, 39],
   },
 };
+
+export const CityCenter = {
+  PARIS: {
+    location: {
+      latitude: 48.85,
+      longitude: 2.35,
+      zoom: 12,
+    },
+  },
+  COLOGNE: {
+    location: {
+      latitude: 50.93,
+      longitude: 6.95,
+      zoom: 12,
+    },
+  },
+  BRUSSELS: {
+    location: {
+      latitude: 50.85,
+      longitude: 4.35,
+      zoom: 12,
+    },
+  },
+  AMSTERDAM: {
+    location: {
+      latitude: 52.38333,
+      longitude: 4.9,
+      zoom: 12,
+    },
+  },
+  HUMBURG: {
+    location: {
+      latitude: 53.54,
+      longitude: 9.99,
+      zoom: 12,
+    },
+  },
+  DUSSELDORF: {
+    location: {
+      latitude: 51.23,
+      longitude: 6.77,
+      zoom: 12,
+    },
+  },
+};

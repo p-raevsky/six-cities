@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import Header from '../../elements/header/header';
 import Footer from '../../elements/footer/footer';
@@ -31,4 +32,8 @@ FavoritesPage.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp),
 };
 
-export default FavoritesPage;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export default connect(mapStateToProps)(FavoritesPage);
