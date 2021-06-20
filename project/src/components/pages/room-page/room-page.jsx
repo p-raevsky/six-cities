@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
+import {connect} from 'react-redux';
 
 import Header from '../../elements/header/header';
 import Image from '../../elements/image/image';
@@ -13,7 +14,7 @@ import Map from '../../elements/map/map';
 import placeCardProp from '../offer.prop';
 import reviewsProp from '../review.prop';
 
-import {getOfferRating, getPoints} from '../../../utils';
+import {getOfferRating} from '../../../utils';
 
 const SLICED_REVIEWS_NUMBER = 10;
 const SLICED_PLACES_NUMBER = 3;
@@ -23,6 +24,7 @@ function RoomPage(props) {
     offer,
     reviews,
     nearPlaces,
+    activePlaceId,
   } = props;
 
   const {
@@ -56,8 +58,9 @@ function RoomPage(props) {
     });
   const bedroomsFeatureLabel = `${bedrooms} ${bedrooms === 1 ? ' Bedroom' : ' Bedrooms'}`;
   const maxAdultsFeatureLabel = `Max ${maxAdults} ${maxAdults === 1 ? ' adult' : ' adults'}`;
-  const slicedNearPlaces = nearPlaces.slice(0, SLICED_PLACES_NUMBER);
-  const points = getPoints(slicedNearPlaces);
+  const slicedNearPlaces = nearPlaces
+    .filter((place) => place.city.name === city.name)
+    .slice(0, SLICED_PLACES_NUMBER);
 
   return (
     <div className="page">
@@ -146,7 +149,7 @@ function RoomPage(props) {
             </div>
           </div>
           <section className="property__map map">
-            <Map city = {city} points = {points} />
+            <Map city = {city.name} places = {slicedNearPlaces} activePlaceId = {activePlaceId}/>
           </section>
         </section>
         <div className="container">
@@ -164,6 +167,11 @@ RoomPage.propTypes = {
   offer: placeCardProp,
   reviews: PropTypes.arrayOf(reviewsProp),
   nearPlaces: PropTypes.arrayOf(placeCardProp),
+  activePlaceId: PropTypes.string,
 };
 
-export default RoomPage;
+const mapStateToProps = (state) => ({
+  activePlaceId: state.activePlaceId,
+});
+
+export default connect(mapStateToProps)(RoomPage);

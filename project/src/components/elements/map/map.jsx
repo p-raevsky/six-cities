@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
-import {connect} from 'react-redux';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -13,26 +12,39 @@ import {getPoints} from '../../../utils';
 
 import placeCardProp from '../../pages/offer.prop';
 
-function Map({city, places}) {
+function Map({city, places, activePlaceId}) {
   const cityCenter = CityCenter[city.toUpperCase()];
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityCenter);
   const defaultCustomIcon = leaflet.icon(customPin.DEFAULT);
+  const currentCustomIcon = leaflet.icon(customPin.ACTIVE);
   const points = getPoints(places);
+  const {location: {latitude: lat, longitude: lng, zoom}} = cityCenter;
 
   useEffect(() => {
+    const markers = leaflet.layerGroup();
+
     if (map) {
-      points.forEach(({location: {latitude, longitude}}) => {
+      markers.addTo(map);
+
+      points.forEach(({id, location: {latitude, longitude}}) => {
         leaflet
           .marker({
             lat: latitude,
             lng: longitude,
           }, {
-            icon: defaultCustomIcon,
+            icon: String(id) === activePlaceId ? currentCustomIcon : defaultCustomIcon,
           })
-          .addTo(map);
+          .addTo(markers);
       });
+
+      map.flyTo([lat, lng], zoom);
     }
+
+    return () => {
+      markers.clearLayers();
+    };
+
   }, [city, map, points]);
 
   return (
@@ -47,11 +59,7 @@ function Map({city, places}) {
 Map.propTypes = {
   city: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(placeCardProp),
+  activePlaceId: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  places: state.places,
-});
-
-export default connect(mapStateToProps)(Map);
+export default Map;

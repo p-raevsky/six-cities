@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
@@ -8,6 +9,7 @@ import placeCardProp from '../../pages/offer.prop';
 import {getOfferRating} from '../../../utils';
 import {PlaceType, AppRoute} from '../../../const';
 import {placeCardType} from '../../../settings';
+import {ActionCreator} from '../../../store/action';
 
 function PlaceCard(props) {
   const {
@@ -22,9 +24,8 @@ function PlaceCard(props) {
       previewImage,
     },
     placesType,
+    getActivePlaceID,
   } = props;
-
-  const [, setActivePlaceId] = useState('');
 
   const offerRating = getOfferRating(rating);
 
@@ -33,18 +34,18 @@ function PlaceCard(props) {
       data-id = {id}
       onMouseEnter = {({currentTarget}) => {
         const currentPlaceId =currentTarget.getAttribute('data-id');
-        setActivePlaceId(currentPlaceId);
+        getActivePlaceID(currentPlaceId);
       }}
     >
       {isPremium && (placesType !== PlaceType.FAVORITES) ? <PremiumMark /> : ''}
       <div className={`${placeCardType[placesType].type}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <Link to=''>
           <img className="place-card__image" src={previewImage}
             width={placeCardType[placesType].width}
             height={placeCardType[placesType].height}
             alt="Place"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -79,6 +80,14 @@ function PlaceCard(props) {
 PlaceCard.propTypes = {
   offer: placeCardProp,
   placesType: PropTypes.string.isRequired,
+  getActivePlaceID: PropTypes.func.isRequired,
 };
 
-export default PlaceCard;
+const mapDispatchToProps = (dispatch) => ({
+  getActivePlaceID(value) {
+    dispatch(ActionCreator.getActivePlaceID(value));
+  },
+
+});
+
+export default connect(null, mapDispatchToProps)(PlaceCard);

@@ -74,7 +74,7 @@ export const CityCenter = {
       zoom: 12,
     },
   },
-  HUMBURG: {
+  HAMBURG: {
     location: {
       latitude: 53.54,
       longitude: 9.99,
