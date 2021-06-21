@@ -9,9 +9,10 @@ import {ActionCreator} from '../../../store/action';
 
 function SortList(props) {
   const {
-    isSortingActive,
+    isSortingOpen,
     selectedSorting,
-    setSorting,
+    setOpening,
+    chahgeSortingType,
   } = props;
 
   const sortItems = Object.values(SortingType);
@@ -20,7 +21,7 @@ function SortList(props) {
     <form className="places__sorting" action="#" method="get"
       onClick={({target}) => {
         if (target.closest('.places__sorting-type') || target.closest('ul')) {
-          setSorting();
+          setOpening();
         }
       }}
     >
@@ -31,8 +32,8 @@ function SortList(props) {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom${isSortingActive ? 'places__options--opened' : ''}`}>
-        {sortItems.map((sortItem) => <SortItem key = {sortItem} sortItem = {sortItem} selectedSorting = {selectedSorting}/>)}
+      <ul className={`places__options places__options--custom${isSortingOpen ? 'places__options--opened' : ''}`}>
+        {sortItems.map((sortItem) => <SortItem key = {sortItem} onChahgeSortingType = {chahgeSortingType} sortItem = {sortItem} selectedSorting = {selectedSorting}/>)}
       </ul>
     </form>
   );
@@ -40,18 +41,22 @@ function SortList(props) {
 
 SortList.propTypes = {
   selectedSorting: PropTypes.string.isRequired,
-  isSortingActive: PropTypes.bool.isRequired,
-  setSorting: PropTypes.func.isRequired,
+  isSortingOpen: PropTypes.bool.isRequired,
+  setOpening: PropTypes.func.isRequired,
+  chahgeSortingType: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isSortingActive: state.isSortingActive,
+  isSortingOpen: state.isSortingOpen,
   selectedSorting: state.selectedSorting,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setSorting() {
-    dispatch(ActionCreator.setSorting());
+  setOpening() {
+    dispatch(ActionCreator.setOpening());
+  },
+  chahgeSortingType(value) {
+    dispatch(ActionCreator.chahgeSortingType(value));
   },
 });
 

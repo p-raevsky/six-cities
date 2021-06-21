@@ -5,15 +5,12 @@ import PropTypes from 'prop-types';
 import CityItem from '../city-item/city-item';
 
 import {Cities} from '../../../const';
-import placeCardProp from '../../pages/offer.prop';
 import {ActionCreator} from '../../../store/action';
 
 function CitiesList(props) {
   const {
     city: currentCity,
-    getCurrentCity,
-    getPlacesList,
-    offers,
+    setCurrentCity,
   } = props;
 
   const cities = Object.values(Cities);
@@ -21,17 +18,8 @@ function CitiesList(props) {
   return (
     <div className="tabs">
       <section className="locations container">
-        <ul className="locations__list tabs__list"
-          onClick={(evt) => {
-            evt.preventDefault();
-            if (evt.target.closest('li')) {
-              const value = evt.target.closest('li').dataset.city;
-              getCurrentCity(value);
-              getPlacesList(offers, value);
-            }
-          }}
-        >
-          {cities.map((cityItem) => <CityItem key = {cityItem} cityItem = {cityItem} currentCity = {currentCity}/>)}
+        <ul className="locations__list tabs__list">
+          {cities.map((cityItem) => <CityItem key = {cityItem} onCurrentCity = {setCurrentCity} cityItem = {cityItem} currentCity = {currentCity}/>)}
         </ul>
       </section>
     </div>
@@ -40,22 +28,16 @@ function CitiesList(props) {
 
 CitiesList.propTypes = {
   city: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(placeCardProp),
-  getCurrentCity: PropTypes.func.isRequired,
-  getPlacesList: PropTypes.func.isRequired,
+  setCurrentCity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
-  offers: state.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCurrentCity(value) {
-    dispatch(ActionCreator.getCurrentCity(value));
-  },
-  getPlacesList(places, city) {
-    dispatch(ActionCreator.getPlacesList(places, city));
+  setCurrentCity(value) {
+    dispatch(ActionCreator.setCurrentCity(value));
   },
 });
 

@@ -6,11 +6,18 @@ function CityItem(props) {
   const {
     cityItem,
     currentCity,
+    onCurrentCity,
   } = props;
 
   return (
     <li className="locations__item"
       data-city={cityItem}
+      onClick={(evt) => {
+        if (evt.target.closest('a')) {
+          const value = evt.target.closest('li').dataset.city;
+          onCurrentCity(value);
+        }
+      }}
     >
       <Link to=""
         className={`locations__item-link tabs__item${currentCity === cityItem ? ' tabs__item--active' : ''}`}
@@ -24,6 +31,7 @@ function CityItem(props) {
 CityItem.propTypes = {
   cityItem: PropTypes.string.isRequired,
   currentCity: PropTypes.string.isRequired,
+  onCurrentCity:  PropTypes.func.isRequired,
 };
 
 export default CityItem;

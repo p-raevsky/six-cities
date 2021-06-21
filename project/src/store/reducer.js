@@ -5,10 +5,9 @@ import {SortingType} from '../const';
 
 const initialState = {
   city: Cities.PARIS,
-  places: offers.filter((place) => place.city.name === Cities.PARIS),
   activePlaceId: null,
   offers,
-  isSortingActive: false,
+  isSortingOpen: false,
   selectedSorting: SortingType.POPULAR,
 };
 
@@ -19,20 +18,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         city: action.payload,
       };
-    case ActionType.PLACES_LIST:
-      return {
-        ...state,
-        places: action.payload,
-      };
     case ActionType.ACTIVE_PLACE_ID:
       return {
         ...state,
         activePlaceId: action.payload,
       };
-    case ActionType.IS_SORTING_ACTIVE:
+    case ActionType.IS_OPEN:
       return {
         ...state,
-        isSortingActive: !state.isSortingActive,
+        isSortingOpen: !state.isSortingOpen,
       };
     case ActionType.SORTING_TYPE:
       return {

@@ -24,7 +24,7 @@ function PlaceCard(props) {
       previewImage,
     },
     placesType,
-    getActivePlaceID,
+    setActivePlaceID,
   } = props;
 
   const offerRating = getOfferRating(rating);
@@ -34,12 +34,12 @@ function PlaceCard(props) {
       data-id = {id}
       onMouseEnter = {({currentTarget}) => {
         const currentPlaceId =currentTarget.getAttribute('data-id');
-        getActivePlaceID(currentPlaceId);
+        setActivePlaceID(currentPlaceId);
       }}
     >
       {isPremium && (placesType !== PlaceType.FAVORITES) ? <PremiumMark /> : ''}
       <div className={`${placeCardType[placesType].type}__image-wrapper place-card__image-wrapper`}>
-        <Link to=''>
+        <Link to={`${AppRoute.OFFER}/${id}`}>
           <img className="place-card__image" src={previewImage}
             width={placeCardType[placesType].width}
             height={placeCardType[placesType].height}
@@ -80,12 +80,12 @@ function PlaceCard(props) {
 PlaceCard.propTypes = {
   offer: placeCardProp,
   placesType: PropTypes.string.isRequired,
-  getActivePlaceID: PropTypes.func.isRequired,
+  setActivePlaceID: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getActivePlaceID(value) {
-    dispatch(ActionCreator.getActivePlaceID(value));
+  setActivePlaceID(value) {
+    dispatch(ActionCreator.setActivePlaceID(value));
   },
 
 });

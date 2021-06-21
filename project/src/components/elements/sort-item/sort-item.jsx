@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-
-import {ActionCreator} from '../../../store/action';
 
 function SortItem(props) {
   const {
     selectedSorting,
     sortItem,
-    chahgeSortingType,
+    onChahgeSortingType,
   } = props;
 
   return (
@@ -18,7 +15,7 @@ function SortItem(props) {
       data-name={sortItem}
       onClick={({target}) => {
         const value = target.dataset.name;
-        chahgeSortingType(value);
+        onChahgeSortingType(value);
       }}
     >
       {sortItem}
@@ -29,13 +26,7 @@ function SortItem(props) {
 SortItem.propTypes = {
   selectedSorting: PropTypes.string.isRequired,
   sortItem: PropTypes.string.isRequired,
-  chahgeSortingType: PropTypes.func.isRequired,
+  onChahgeSortingType: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  chahgeSortingType(value) {
-    dispatch(ActionCreator.chahgeSortingType(value));
-  },
-});
-
-export default connect(null, mapDispatchToProps)(SortItem);
+export default SortItem;

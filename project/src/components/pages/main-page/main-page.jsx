@@ -9,7 +9,7 @@ import CitiesList from '../../elements/cities-list/cities-list';
 import SortList from '../../elements/sort-list/sort-list';
 
 import placeCardProp from '../../pages/offer.prop';
-import sortPlaces from '../../../sort-places';
+import sortFilteredPlaces from '../../../sort-filtered-places';
 
 function MainPage(props) {
   const {
@@ -54,7 +54,7 @@ MainPage.propTypes = {
 
 const mapStateToProps = (state) => ({
   city: state.city,
-  places: sortPlaces(state.places, state.selectedSorting),
+  places: sortFilteredPlaces(state.offers, state.selectedSorting, state.city),
   activePlaceId: state.activePlaceId,
   selectedSorting: state.selectedSorting,
 });
