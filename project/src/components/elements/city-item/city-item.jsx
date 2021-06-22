@@ -12,9 +12,9 @@ function CityItem(props) {
   return (
     <li className="locations__item"
       data-city={cityItem}
-      onClick={(evt) => {
-        if (evt.target.closest('a')) {
-          const value = evt.target.closest('li').dataset.city;
+      onClick={({target}) => {
+        if (target.closest('a')) {
+          const value = target.closest('li').dataset.city;
           onCurrentCity(value);
         }
       }}

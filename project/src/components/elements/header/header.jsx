@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Logo from '../logo/logo';
-import {logoType} from '../../../settings';
+import {LogoType} from '../../../settings';
 
 function Header(props) {
   const {
@@ -15,7 +15,7 @@ function Header(props) {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo type = {logoType.HEADER.type} isActive = {isActive}/>
+            <Logo type = {LogoType.HEADER.type} isActive = {isActive}/>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter as Router} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import {AppRoute} from '../../const';
 
@@ -49,4 +50,9 @@ App.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  reviews: state.reviews,
+});
+
+export default connect(mapStateToProps)(App);
