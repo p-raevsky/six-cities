@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import Header from '../../elements/header/header';
 import Footer from '../../elements/footer/footer';
@@ -8,8 +9,9 @@ import FavoritesList from '../../elements/favorites-list/favorites-list';
 import placeCardProp from '../offer.prop';
 
 function FavoritesPage(props) {
-  const {offers} = props;
-  const favoritesPlaces = offers.filter(({isFavorite}) => isFavorite);
+  const {
+    offers,
+  } = props;
 
   return (
     <div className="page">
@@ -18,7 +20,7 @@ function FavoritesPage(props) {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList favoritesPlaces = {favoritesPlaces}/>
+            <FavoritesList favoritesPlaces = {offers}/>
           </section>
         </div>
       </main>
@@ -31,4 +33,8 @@ FavoritesPage.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp),
 };
 
-export default FavoritesPage;
+const mapStateToProps = (state) => ({
+  offers: state.offers.filter(({isFavorite}) => isFavorite),
+});
+
+export default connect(mapStateToProps)(FavoritesPage);

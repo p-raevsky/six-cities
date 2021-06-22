@@ -20,14 +20,10 @@ function App(props) {
     <Router>
       <Switch>
         <Route exact path = {AppRoute.ROOT}>
-          <MainPage
-            offers = {offers}
-          />
+          <MainPage />
         </Route>
         <Route exact path = {AppRoute.FAVORITES}>
-          <FavoritesPage
-            offers = {offers}
-          />
+          <FavoritesPage />
         </Route>
         <Route exact path = {AppRoute.LOGIN}>
           <SingInPage />
@@ -35,8 +31,7 @@ function App(props) {
         <Route exact path = {`${AppRoute.OFFER}/:id`}
           render = {({match}) => {
             const {id} = match.params;
-            const offerInArray = offers.filter((offer) => offer.id === Number(id));
-            const [currentOffer] = offerInArray;
+            const [currentOffer] = offers.filter((offer) => offer.id === Number(id));
 
             return <RoomPage offer = {currentOffer} reviews = {reviews} nearPlaces = {offers} />;
           }}
