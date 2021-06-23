@@ -26,3 +26,21 @@ export const SortingType = {
   PRICE_DOWN: 'Price: high to low',
   RATING: 'Top rated first',
 };
+
+export const HttpCode = {
+  UNAUTHORIZED: 401,
+};
+
+export const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
+
+export const APIRoute = {
+  HOTELS: '/hotels',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+  FAVORITE: '/favorite',
+  COMMENTS: '/comments',
+};

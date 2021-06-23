@@ -8,7 +8,7 @@ import PremiumMark from '../premium-mark/premium-mark';
 import placeCardProp from '../../pages/offer.prop';
 import {getOfferRating} from '../../../utils';
 import {PlaceType, AppRoute} from '../../../const';
-import {placeCardType} from '../../../settings';
+import {PlaceCardType} from '../../../settings';
 import {ActionCreator} from '../../../store/action';
 
 function PlaceCard(props) {
@@ -30,7 +30,7 @@ function PlaceCard(props) {
   const offerRating = getOfferRating(rating);
 
   return (
-    <article className={placeCardType[placesType].className}
+    <article className={PlaceCardType[placesType].className}
       data-id = {id}
       onMouseEnter = {({currentTarget}) => {
         const currentPlaceId =currentTarget.getAttribute('data-id');
@@ -38,11 +38,11 @@ function PlaceCard(props) {
       }}
     >
       {isPremium && (placesType !== PlaceType.FAVORITES) ? <PremiumMark /> : ''}
-      <div className={`${placeCardType[placesType].type}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${PlaceCardType[placesType].type}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.OFFER}/${id}`}>
           <img className="place-card__image" src={previewImage}
-            width={placeCardType[placesType].width}
-            height={placeCardType[placesType].height}
+            width={PlaceCardType[placesType].width}
+            height={PlaceCardType[placesType].height}
             alt="Place"
           />
         </Link>

@@ -9,13 +9,15 @@ import CitiesList from '../../elements/cities-list/cities-list';
 import SortList from '../../elements/sort-list/sort-list';
 
 import placeCardProp from '../../pages/offer.prop';
-import sortFilteredPlaces from '../../../sort-filtered-places';
+import {sortFilteredPlaces} from '../../../six-cities-data';
+import LoadingScreen from '../../elements/loading-screen';
 
 function MainPage(props) {
   const {
     city: currentCity,
     places,
     activePlaceId,
+    isDataLoaded,
   } = props;
 
   const placesCount = places.length;
@@ -32,7 +34,7 @@ function MainPage(props) {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{placesCount} {placesCount === 1 ? 'place' : 'places'} to stay in {currentCity}</b>
               <SortList />
-              <PlacesList places = {places} />
+              {!isDataLoaded ? <LoadingScreen /> : <PlacesList places = {places} />}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
@@ -50,6 +52,7 @@ MainPage.propTypes = {
   city: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(placeCardProp),
   activePlaceId: PropTypes.string,
+  isDataLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -57,6 +60,7 @@ const mapStateToProps = (state) => ({
   places: sortFilteredPlaces(state.offers, state.selectedSorting, state.city),
   activePlaceId: state.activePlaceId,
   selectedSorting: state.selectedSorting,
+  isDataLoaded: state.isDataLoaded,
 });
 
 export default connect(mapStateToProps)(MainPage);

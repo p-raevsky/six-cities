@@ -3,6 +3,9 @@ export const ActionType = {
   ACTIVE_PLACE_ID: 'places/activePlace',
   IS_OPEN: 'sorting/isOpen',
   SORTING_TYPE: 'sorting/chahgeSortingType',
+  LOAD_OFFERS: 'data/loadOffers',
+  REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
+  LOGOUT: 'user/logout',
 };
 
 export const ActionCreator = {
@@ -20,5 +23,16 @@ export const ActionCreator = {
   chahgeSortingType: (payload) => ({
     type: ActionType.SORTING_TYPE,
     payload,
+  }),
+  loadOffers: (payload) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload,
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+  logout: () => ({
+    type: ActionType.LOGOUT,
   }),
 };

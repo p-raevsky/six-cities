@@ -4,7 +4,7 @@ import leaflet from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
 
-import {customPin} from '../../../settings';
+import {CustomPin} from '../../../settings';
 import useMap from '../../../hooks/use-map';
 
 import {CityCenter} from '../../../settings';
@@ -16,8 +16,8 @@ function Map({city, places, activePlaceId}) {
   const cityCenter = CityCenter[city.toUpperCase()];
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityCenter);
-  const defaultCustomIcon = leaflet.icon(customPin.DEFAULT);
-  const currentCustomIcon = leaflet.icon(customPin.ACTIVE);
+  const defaultCustomIcon = leaflet.icon(CustomPin.DEFAULT);
+  const currentCustomIcon = leaflet.icon(CustomPin.ACTIVE);
   const points = getPoints(places);
   const {location: {latitude: lat, longitude: lng, zoom}} = cityCenter;
 

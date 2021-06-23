@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {logoType} from '../../../settings';
+import {LogoType} from '../../../settings';
 
 function Logo(props) {
   const {
@@ -15,8 +15,8 @@ function Logo(props) {
       <img className={`${type}__logo`}
         src="img/logo.svg"
         alt="6 cities logo"
-        width={logoType[type.toUpperCase()].width}
-        height={logoType[type.toUpperCase()].height}
+        width={LogoType[type.toUpperCase()].width}
+        height={LogoType[type.toUpperCase()].height}
       />
     </Link>
   );

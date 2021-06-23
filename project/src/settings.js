@@ -1,4 +1,4 @@
-export const logoType = {
+export const LogoType = {
   HEADER: {
     type: 'header',
     width: '81',
@@ -11,7 +11,7 @@ export const logoType = {
   },
 };
 
-export const placeCardType = {
+export const PlaceCardType = {
   CITIES: {
     type: 'cities',
     className: 'cities__place-card place-card',
@@ -32,7 +32,7 @@ export const placeCardType = {
   },
 };
 
-export const customPin = {
+export const CustomPin = {
   DEFAULT: {
     iconUrl: 'img/pin.svg',
     iconSize: [27, 39],
@@ -88,4 +88,9 @@ export const CityCenter = {
       zoom: 12,
     },
   },
+};
+
+export const ApiSettings = {
+  BACKEND_URL: 'https://7.react.pages.academy/six-cities',
+  REQUEST_TIMEOUT: 5000,
 };
