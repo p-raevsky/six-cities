@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FavoritesLocationItem from '../../elements/favorites-location/favorites-location';
+import FavoritesLocationItem from '../../elements/favorites-location';
 
 import placeCardProp from '../../pages/offer.prop';
 

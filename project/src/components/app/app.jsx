@@ -5,11 +5,11 @@ import {connect} from 'react-redux';
 
 import {AppRoute} from '../../const';
 
-import MainPage from '../pages/main-page/main-page';
-import FavoritesPage from '../pages/favorites-page/favorites-page';
-import RoomPage from '../pages/room-page/room-page';
-import SingInPage from '../pages/sing-in-page/sing-in-page';
-import NotFoundPage from '../pages/not-found-page/not-found-page';
+import MainPage from '../pages/main-page';
+import FavoritesPage from '../pages/favorites-page';
+import RoomPage from '../pages/room-page';
+import SingInPage from '../pages/sing-in-page';
+import NotFoundPage from '../pages/not-found-page';
 
 function App(props) {
   const {

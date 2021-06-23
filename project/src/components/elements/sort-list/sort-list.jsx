@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import SortItem from '../../elements/sort-item/sort-item';
+import SortItem from '../../elements/sort-item';
 
 import {SortingType} from '../../../const';
 import {ActionCreator} from '../../../store/action';

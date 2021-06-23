@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../elements/header/header';
+import Header from '../../elements/header';
 
 function SingInPage() {
   return (

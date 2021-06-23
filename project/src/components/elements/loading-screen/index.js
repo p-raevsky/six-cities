@@ -1,3 +1,3 @@
-import Spinner from './loading-screen';
+import LoadingScreen from './loading-screen';
 
-export default Spinner;
+export default LoadingScreen;

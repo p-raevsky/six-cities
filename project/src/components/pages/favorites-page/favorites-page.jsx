@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import Header from '../../elements/header/header';
-import Footer from '../../elements/footer/footer';
-import FavoritesList from '../../elements/favorites-list/favorites-list';
+import Header from '../../elements/header';
+import Footer from '../../elements/footer';
+import FavoritesList from '../../elements/favorites-list';
 
 import placeCardProp from '../offer.prop';
 

@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import Header from '../../elements/header/header';
-import PlacesList from '../../elements/places-list/places-list';
-import Map from '../../elements/map/map';
-import CitiesList from '../../elements/cities-list/cities-list';
-import SortList from '../../elements/sort-list/sort-list';
+import Header from '../../elements/header';
+import PlacesList from '../../elements/places-list';
+import Map from '../../elements/map';
+import CitiesList from '../../elements/cities-list';
+import SortList from '../../elements/sort-list';
+import LoadingScreen from '../../elements/loading-screen';
 
 import placeCardProp from '../../pages/offer.prop';
 import {sortFilteredPlaces} from '../../../six-cities-data';
-import LoadingScreen from '../../elements/loading-screen';
 
 function MainPage(props) {
   const {

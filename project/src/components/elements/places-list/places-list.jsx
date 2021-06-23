@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlaceCard from '../../elements/place-card/place-card';
+import PlaceCard from '../../elements/place-card';
 import {PlaceType} from '../../../const';
 
 function PlacesList(props) {

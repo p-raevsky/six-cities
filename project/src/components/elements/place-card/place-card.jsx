@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import PremiumMark from '../premium-mark/premium-mark';
+import PremiumMark from '../premium-mark';
 
 import placeCardProp from '../../pages/offer.prop';
 import {getOfferRating} from '../../../utils';

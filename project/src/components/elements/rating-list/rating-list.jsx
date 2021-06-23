@@ -1,6 +1,7 @@
 import React from 'react';
-import RatingItem from '../rating-item/rating-item';
 import {nanoid} from 'nanoid';
+
+import RatingItem from '../rating-item';
 
 const STARS_NUMBER = 5;
 

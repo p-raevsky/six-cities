@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import RatingList from '../rating-list/rating-list';
+import RatingList from '../rating-list';
 
 function ReviewsForm() {
   const [, setReview] = useState('');
