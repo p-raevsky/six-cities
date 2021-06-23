@@ -2,6 +2,7 @@ export const ActionType = {
   CURRENT_CITY: 'city/addCurrent',
   ACTIVE_PLACE_ID: 'places/activePlace',
   IS_OPEN: 'sorting/isOpen',
+  SORTING_CLOSED: 'sorting/closed',
   SORTING_TYPE: 'sorting/chahgeSortingType',
   LOAD_OFFERS: 'data/loadOffers',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
@@ -19,6 +20,9 @@ export const ActionCreator = {
   }),
   setOpening: () => ({
     type: ActionType.IS_OPEN,
+  }),
+  closeSorting: () => ({
+    type: ActionType.SORTING_CLOSED,
   }),
   chahgeSortingType: (payload) => ({
     type: ActionType.SORTING_TYPE,

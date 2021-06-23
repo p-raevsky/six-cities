@@ -33,6 +33,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         isSortingOpen: !state.isSortingOpen,
       };
+    case ActionType.SORTING_CLOSED:
+      return {
+        ...state,
+        isSortingOpen: false,
+      };
     case ActionType.SORTING_TYPE:
       return {
         ...state,
