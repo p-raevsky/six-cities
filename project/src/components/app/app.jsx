@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter as Router} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {AppRoute} from '../../const';
@@ -10,6 +10,9 @@ import FavoritesPage from '../pages/favorites-page';
 import RoomPage from '../pages/room-page';
 import SingInPage from '../pages/sing-in-page';
 import NotFoundPage from '../pages/not-found-page';
+import PrivateRoute from '../elements/private-route';
+
+import browserHistory from '../../services/browser-history';
 
 function App(props) {
   const {
@@ -18,30 +21,36 @@ function App(props) {
   } = props;
 
   return (
-    <Router>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path = {AppRoute.ROOT}>
           <MainPage />
         </Route>
-        <Route exact path = {AppRoute.FAVORITES}>
-          <FavoritesPage />
-        </Route>
+        <PrivateRoute exact path = {AppRoute.FAVORITES}
+          render = {() => <FavoritesPage />}
+        />
         <Route exact path = {AppRoute.LOGIN}>
           <SingInPage />
         </Route>
         <Route exact path = {`${AppRoute.OFFER}/:id`}
-          render = {({match}) => {
+          render = {({match, history}) => {
             const {id} = match.params;
             const [currentOffer] = offers.filter((offer) => offer.id === Number(id));
 
-            return <RoomPage offer = {currentOffer} reviews = {reviews} nearPlaces = {offers} />;
+            return (
+              <RoomPage
+                offer = {currentOffer}
+                reviews = {reviews}
+                nearPlaces = {offers}
+              />
+            );
           }}
         />
         <Route>
           <NotFoundPage />
         </Route>
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 

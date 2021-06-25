@@ -1,16 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import Logo from '../logo';
+import SignOut from '../sign-out';
+import SignIn from '../sign-in';
 
 import {LogoType} from '../../../settings';
-import {AppRoute} from '../../../const';
+import {AuthorizationStatus} from '../../../const';
 
 function Header(props) {
   const {
     isActive = false,
+    authorizationStatus,
   } = props;
+
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
   return (
     <header className="header">
@@ -21,18 +26,7 @@ function Header(props) {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <Link className="header__nav-link" to={AppRoute.ROOT}>
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
+              {isAuth ? <SignOut /> : <SignIn />}
             </ul>
           </nav>
         </div>
@@ -43,6 +37,11 @@ function Header(props) {
 
 Header.propTypes = {
   isActive: PropTypes.bool,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
+
+export default connect(mapStateToProps)(Header);
