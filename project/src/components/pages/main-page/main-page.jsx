@@ -4,21 +4,17 @@ import {connect} from 'react-redux';
 
 import Header from '../../elements/header';
 import CitiesList from '../../elements/cities-list';
-import PlacesContainer from '../../elements/places-container';
-import PlacesEmpty from '../../elements/places-empty';
 
 import placeCardProp from '../../pages/offer.prop';
 import {sortFilteredPlaces} from '../../../six-cities-data';
-import LoadingScreen from '../../elements/loading-screen';
+import LoadWrapper from '../../elements/load-wrapper';
+import PlacesWrapper from '../../elements/places-wrapper';
 
 function MainPage(props) {
   const {
     places,
     isDataLoaded,
   } = props;
-
-  const placesContainer = (!isDataLoaded && <LoadingScreen places = {places} />) || <PlacesContainer places = {places} />;
-  const placesEmpty = (!isDataLoaded && <LoadingScreen places = {places} />) || <PlacesEmpty />;
 
   return (
     <div className="page page--gray page--main">
@@ -27,7 +23,9 @@ function MainPage(props) {
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList />
         <div className="cities">
-          {places.length ? placesContainer : placesEmpty}
+          <LoadWrapper places = {places} isDataLoaded = {isDataLoaded}>
+            <PlacesWrapper places = {places} />
+          </LoadWrapper>
         </div>
       </main>
     </div>
