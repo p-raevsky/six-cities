@@ -15,9 +15,9 @@ import placeCardProp from '../offer.prop';
 import reviewsProp from '../review.prop';
 
 import {getOfferRating} from '../../../utils';
+import {isCheckedAuth} from '../../../six-cities-data';
 
 const SLICED_REVIEWS_NUMBER = 10;
-const SLICED_PLACES_NUMBER = 3;
 
 function RoomPage(props) {
   const {
@@ -25,6 +25,7 @@ function RoomPage(props) {
     reviews,
     nearPlaces,
     activePlaceId,
+    authorizationStatus,
   } = props;
 
   const {
@@ -39,6 +40,7 @@ function RoomPage(props) {
     price,
     goods,
     description,
+    id,
     host: {
       name,
       avatarUrl,
@@ -58,9 +60,8 @@ function RoomPage(props) {
     });
   const bedroomsFeatureLabel = `${bedrooms} ${bedrooms === 1 ? ' Bedroom' : ' Bedrooms'}`;
   const maxAdultsFeatureLabel = `Max ${maxAdults} ${maxAdults === 1 ? ' adult' : ' adults'}`;
-  const slicedNearPlaces = nearPlaces
-    .filter((place) => place.city.name === city.name)
-    .slice(0, SLICED_PLACES_NUMBER);
+
+  const isAuth = isCheckedAuth(authorizationStatus);
 
   return (
     <div className="page">
@@ -144,18 +145,18 @@ function RoomPage(props) {
                 <ul className="reviews__list">
                   {sortedReviews.map((review) => <ReviewsItem key = {review.id} review = {review} />)}
                 </ul>
-                {<ReviewsForm />}
+                {isAuth ? <ReviewsForm id = {id} /> : ''}
               </section>
             </div>
           </div>
           <section className="property__map map">
-            <Map city = {city.name} places = {slicedNearPlaces} activePlaceId = {activePlaceId}/>
+            <Map city = {city.name} places = {nearPlaces} activePlaceId = {activePlaceId}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <NearPlacesList places = {slicedNearPlaces}/>
+            <NearPlacesList places = {nearPlaces}/>
           </section>
         </div>
       </main>
@@ -168,10 +169,15 @@ RoomPage.propTypes = {
   reviews: PropTypes.arrayOf(reviewsProp),
   nearPlaces: PropTypes.arrayOf(placeCardProp),
   activePlaceId: PropTypes.string,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  offer: state.offer,
+  reviews: state.reviews,
+  nearPlaces: state.nearPlaces,
   activePlaceId: state.activePlaceId,
+  authorizationStatus: state.authorizationStatus,
 });
 
 export default connect(mapStateToProps)(RoomPage);

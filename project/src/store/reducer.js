@@ -9,11 +9,16 @@ const initialState = {
   city: Cities.PARIS,
   activePlaceId: null,
   offers: [],
+  offer: {},
   reviews: [],
+  nearPlaces: [],
   isSortingOpen: false,
   selectedSorting: SortingType.POPULAR,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   isDataLoaded: false,
+  userEmail: null,
+  newComment: '',
+  newRating: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -49,6 +54,21 @@ const reducer = (state = initialState, action) => {
         offers: action.payload,
         isDataLoaded: true,
       };
+    case ActionType.LOAD_OFFER:
+      return {
+        ...state,
+        offer: action.payload,
+      };
+    case ActionType.LOAD_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case ActionType.LOAD_NEARBY:
+      return {
+        ...state,
+        nearPlaces: action.payload,
+      };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
@@ -58,6 +78,21 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      };
+    case ActionType.EMAIL:
+      return {
+        ...state,
+        userEmail: action.payload,
+      };
+    case ActionType.NEW_COMMENT:
+      return {
+        ...state,
+        newComment: action.payload,
+      };
+    case ActionType.NEW_RATING:
+      return {
+        ...state,
+        newRating: action.payload,
       };
     default:
       return state;

@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import PremiumMark from '../premium-mark';
 
 import placeCardProp from '../../pages/offer.prop';
+
 import {getOfferRating} from '../../../utils';
 import {PlaceType, AppRoute} from '../../../const';
 import {PlaceCardType} from '../../../settings';
@@ -87,7 +88,6 @@ const mapDispatchToProps = (dispatch) => ({
   setActivePlaceID(value) {
     dispatch(ActionCreator.setActivePlaceID(value));
   },
-
 });
 
 export default connect(null, mapDispatchToProps)(PlaceCard);

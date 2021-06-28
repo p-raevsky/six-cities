@@ -10,7 +10,7 @@ function RatingList() {
 
   return (
     <div className="reviews__rating-form form__rating">
-      {ratingArray.map((_,i) => <RatingItem index = {i + 1} key = {nanoid()}/>)}
+      {ratingArray.map((_,i) => <RatingItem index = {5 - i} key = {nanoid()}/>)}
     </div>
   );
 }

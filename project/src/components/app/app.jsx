@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {AppRoute} from '../../const';
 
@@ -11,13 +11,19 @@ import RoomPage from '../pages/room-page';
 import SingInPage from '../pages/sing-in-page';
 import NotFoundPage from '../pages/not-found-page';
 import PrivateRoute from '../elements/private-route';
+import RoomPageWrapper from '../elements/room-page-wrapper';
 
 import browserHistory from '../../services/browser-history';
+import {
+  fetchReviwsList,
+  fetchNearbyList,
+  fetchHotel
+} from '../../store/api-actions';
 
 function App(props) {
   const {
-    offers,
-    reviews,
+    onPageLoad,
+    isDataLoaded,
   } = props;
 
   return (
@@ -33,16 +39,14 @@ function App(props) {
           <SingInPage />
         </Route>
         <Route exact path = {`${AppRoute.OFFER}/:id`}
-          render = {({match, history}) => {
+          render = {({match}) => {
             const {id} = match.params;
-            const [currentOffer] = offers.filter((offer) => offer.id === Number(id));
+            onPageLoad(id);
 
             return (
-              <RoomPage
-                offer = {currentOffer}
-                reviews = {reviews}
-                nearPlaces = {offers}
-              />
+              <RoomPageWrapper isDataLoaded = {isDataLoaded}>
+                <RoomPage />
+              </RoomPageWrapper>
             );
           }}
         />
@@ -55,13 +59,20 @@ function App(props) {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object),
-  reviews: PropTypes.arrayOf(PropTypes.object),
+  onPageLoad: PropTypes.func.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  reviews: state.reviews,
+  isDataLoaded: state.isDataLoaded,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  onPageLoad(id) {
+    dispatch(fetchReviwsList(id));
+    dispatch(fetchNearbyList(id));
+    dispatch(fetchHotel(id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

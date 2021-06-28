@@ -7,26 +7,27 @@ import SignOut from '../sign-out';
 import SignIn from '../sign-in';
 
 import {LogoType} from '../../../settings';
-import {AuthorizationStatus} from '../../../const';
+import {isCheckedAuth} from '../../../six-cities-data';
 
 function Header(props) {
   const {
     isActive = false,
     authorizationStatus,
+    userEmail,
   } = props;
 
-  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
+  const isAuth = isCheckedAuth(authorizationStatus);
 
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo type = {LogoType.HEADER.type} isActive = {isActive}/>
+            <Logo type = {LogoType.HEADER.type} isActive = {isActive} />
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {isAuth ? <SignOut /> : <SignIn />}
+              {isAuth ? <SignOut userEmail = {userEmail} /> : <SignIn />}
             </ul>
           </nav>
         </div>
@@ -38,10 +39,12 @@ function Header(props) {
 Header.propTypes = {
   isActive: PropTypes.bool,
   authorizationStatus: PropTypes.string.isRequired,
+  userEmail: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
+  userEmail: state.userEmail,
 });
 
 export default connect(mapStateToProps)(Header);
