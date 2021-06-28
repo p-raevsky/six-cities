@@ -69,9 +69,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onPageLoad(id) {
-    dispatch(fetchReviwsList(id));
-    dispatch(fetchNearbyList(id));
-    dispatch(fetchHotel(id));
+    Promise.all([
+      dispatch(fetchReviwsList(id)),
+      dispatch(fetchNearbyList(id)),
+      dispatch(fetchHotel(id)),
+    ]);
   },
 });
 
