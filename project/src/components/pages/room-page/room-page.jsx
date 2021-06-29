@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import {connect} from 'react-redux';
@@ -16,17 +16,26 @@ import reviewsProp from '../review.prop';
 
 import {getOfferRating} from '../../../utils';
 import {isCheckedAuth} from '../../../six-cities-data';
+import {
+  fetchNearbyList,
+  fetchReviwsList
+} from '../../../store/api-actions';
 
 const SLICED_REVIEWS_NUMBER = 10;
 
 function RoomPage(props) {
   const {
-    offer,
+    offerId,
+    offers,
     reviews,
     nearPlaces,
     activePlaceId,
     authorizationStatus,
+    getReviewsData,
+    getNearHotelsData,
   } = props;
+
+  const [offer] = offers.filter((item) => String(item.id) === offerId);
 
   const {
     city,
@@ -47,6 +56,11 @@ function RoomPage(props) {
       isPro,
     },
   } = offer;
+
+  useEffect(() => {
+    getReviewsData(offerId);
+    getNearHotelsData(offerId);
+  }, [offerId]);
 
   const offerRating = getOfferRating(rating);
   const avatarClassName = `property__avatar-wrapper${isPro ? ' property__avatar-wrapper--pro' : ''} user__avatar-wrapper`;
@@ -165,19 +179,30 @@ function RoomPage(props) {
 }
 
 RoomPage.propTypes = {
-  offer: placeCardProp,
+  offerId: PropTypes.string.isRequired,
+  offers: PropTypes.arrayOf(placeCardProp),
   reviews: PropTypes.arrayOf(reviewsProp),
   nearPlaces: PropTypes.arrayOf(placeCardProp),
   activePlaceId: PropTypes.string,
   authorizationStatus: PropTypes.string.isRequired,
+  getReviewsData: PropTypes.func,
+  getNearHotelsData: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  offer: state.offer,
   reviews: state.reviews,
   nearPlaces: state.nearPlaces,
   activePlaceId: state.activePlaceId,
   authorizationStatus: state.authorizationStatus,
 });
 
-export default connect(mapStateToProps)(RoomPage);
+const mapDispatchToProps = (dispatch) => ({
+  getNearHotelsData(id) {
+    dispatch(fetchNearbyList(id));
+  },
+  getReviewsData(id) {
+    dispatch(fetchReviwsList(id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

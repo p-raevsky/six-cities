@@ -11,7 +11,7 @@ import {AppRoute} from '../../../const';
 function SingInPage(props) {
   const {
     city: currentCity,
-    onSubmit,
+    loginUser,
   } = props;
 
   const loginRef = useRef();
@@ -20,7 +20,7 @@ function SingInPage(props) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onSubmit({
+    loginUser({
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
@@ -84,7 +84,7 @@ function SingInPage(props) {
 
 SingInPage.propTypes = {
   city: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -92,7 +92,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
+  loginUser(authData) {
     dispatch(login(authData));
   },
 });

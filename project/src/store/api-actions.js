@@ -1,5 +1,9 @@
 import {ActionCreator} from './action';
-import {AuthorizationStatus, APIRoute, AppRoute} from '../const';
+import {
+  AuthorizationStatus,
+  APIRoute,
+  AppRoute
+} from '../const';
 import {
   parseOfferData,
   parseReviewData
@@ -8,16 +12,18 @@ import {
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
     .then(({data}) => {
-      const parsedData = data.map((offer) => parseOfferData(offer));
-      dispatch(ActionCreator.loadOffers(parsedData));
+      dispatch(ActionCreator.loadOffers(
+        data.map((offer) => parseOfferData(offer)),
+      ));
     })
 );
 
 export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.HOTELS}/${id}/nearby`)
     .then(({data}) => {
-      const parsedData = data.map((offer) => parseOfferData(offer));
-      dispatch(ActionCreator.loadNearby(parsedData));
+      dispatch(ActionCreator.loadNearby(
+        data.map((offer) => parseOfferData(offer)),
+      ));
     })
     .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
@@ -25,8 +31,9 @@ export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
 export const fetchHotel = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.HOTELS}/${id}`)
     .then(({data}) => {
-      const parsedData = parseOfferData(data);
-      dispatch(ActionCreator.loadOffer(parsedData));
+      dispatch(ActionCreator.loadOffer(
+        parseOfferData(data)),
+      );
     })
     .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
@@ -34,8 +41,9 @@ export const fetchHotel = (id) => (dispatch, _getState, api) => (
 export const fetchReviwsList = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.COMMENTS}/${id}`)
     .then(({data}) => {
-      const parsedData = data.map((review) => parseReviewData(review));
-      dispatch(ActionCreator.loadReviews(parsedData));
+      dispatch(ActionCreator.loadReviews(
+        data.map((review) => parseReviewData(review)),
+      ));
     })
     .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
@@ -67,8 +75,9 @@ export const logout = () => (dispatch, _getState, api) => (
 export const createComment = (id, {comment, rating}) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, {comment, rating})
     .then(({data}) => {
-      const parsedData = data.map((review) => parseReviewData(review));
-      dispatch(ActionCreator.loadReviews(parsedData));
+      dispatch(ActionCreator.loadReviews(
+        data.map((review) => parseReviewData(review)),
+      ));
     })
     .catch(() => {})
 );

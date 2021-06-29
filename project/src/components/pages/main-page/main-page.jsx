@@ -23,9 +23,11 @@ function MainPage(props) {
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList />
         <div className="cities">
-          <LoadWrapper places = {places} isDataLoaded = {isDataLoaded}>
-            <PlacesWrapper places = {places} />
-          </LoadWrapper>
+          <div className="cities__places-container container">
+            <LoadWrapper isDataLoaded = {isDataLoaded}>
+              <PlacesWrapper places = {places} />
+            </LoadWrapper>
+          </div>
         </div>
       </main>
     </div>

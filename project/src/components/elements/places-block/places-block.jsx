@@ -17,7 +17,7 @@ function PlacesBlock(props) {
   const placesCount = places.length;
 
   return (
-    <div className="cities__places-container container">
+    <>
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{placesCount} {placesCount === 1 ? 'place' : 'places'} to stay in {currentCity}</b>
@@ -29,7 +29,7 @@ function PlacesBlock(props) {
           <Map places = {places} city = {currentCity} activePlaceId = {activePlaceId} />
         </section>
       </div>
-    </div>
+    </>
   );
 }
 

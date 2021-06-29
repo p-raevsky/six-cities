@@ -9,7 +9,7 @@ import { ActionCreator } from '../../../store/action';
 function ReviewsForm(props) {
   const {
     id,
-    onSubmit,
+    uploadNewComment,
     newRating,
     newComment,
     setNewComment,
@@ -21,7 +21,7 @@ function ReviewsForm(props) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onSubmit(id, {
+    uploadNewComment(id, {
       comment: newComment,
       rating: newRating,
     });
@@ -54,7 +54,7 @@ function ReviewsForm(props) {
 
 ReviewsForm.propTypes = {
   id: PropTypes.number,
-  onSubmit: PropTypes.func.isRequired,
+  uploadNewComment: PropTypes.func.isRequired,
   newComment: PropTypes.string,
   newRating: PropTypes.string,
   setNewComment: PropTypes.func.isRequired,
@@ -67,7 +67,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(...data) {
+  uploadNewComment(...data) {
     dispatch(createComment(...data));
   },
   setNewComment(value) {
