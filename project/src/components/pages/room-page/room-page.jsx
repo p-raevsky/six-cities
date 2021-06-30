@@ -1,41 +1,32 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import {connect} from 'react-redux';
 
-import Header from '../../elements/header';
 import Image from '../../elements/image';
 import PropertyGoodsItem from '../../elements/property-goods-item';
 import ReviewsItem from '../../elements/reviews-item';
 import ReviewsForm from '../../elements/reviews-form';
 import NearPlacesList from '../../elements/near-places-list';
 import Map from '../../elements/map';
+import Header from '../../elements/header';
 
 import placeCardProp from '../offer.prop';
 import reviewsProp from '../review.prop';
 
 import {getOfferRating} from '../../../utils';
 import {isCheckedAuth} from '../../../six-cities-data';
-import {
-  fetchNearbyList,
-  fetchReviwsList
-} from '../../../store/api-actions';
 
 const SLICED_REVIEWS_NUMBER = 10;
 
 function RoomPage(props) {
   const {
-    offerId,
-    offers,
+    offer,
     reviews,
     nearPlaces,
     activePlaceId,
     authorizationStatus,
-    getReviewsData,
-    getNearHotelsData,
   } = props;
-
-  const [offer] = offers.filter((item) => String(item.id) === offerId);
 
   const {
     city,
@@ -56,11 +47,6 @@ function RoomPage(props) {
       isPro,
     },
   } = offer;
-
-  useEffect(() => {
-    getReviewsData(offerId);
-    getNearHotelsData(offerId);
-  }, [offerId]);
 
   const offerRating = getOfferRating(rating);
   const avatarClassName = `property__avatar-wrapper${isPro ? ' property__avatar-wrapper--pro' : ''} user__avatar-wrapper`;
@@ -179,30 +165,15 @@ function RoomPage(props) {
 }
 
 RoomPage.propTypes = {
-  offerId: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(placeCardProp),
+  offer: placeCardProp,
   reviews: PropTypes.arrayOf(reviewsProp),
   nearPlaces: PropTypes.arrayOf(placeCardProp),
   activePlaceId: PropTypes.string,
   authorizationStatus: PropTypes.string.isRequired,
-  getReviewsData: PropTypes.func,
-  getNearHotelsData: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  reviews: state.reviews,
-  nearPlaces: state.nearPlaces,
-  activePlaceId: state.activePlaceId,
   authorizationStatus: state.authorizationStatus,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getNearHotelsData(id) {
-    dispatch(fetchNearbyList(id));
-  },
-  getReviewsData(id) {
-    dispatch(fetchReviwsList(id));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
+export default connect(mapStateToProps)(RoomPage);

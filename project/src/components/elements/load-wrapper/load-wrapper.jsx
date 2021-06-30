@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 
 function LoadWrapper(props) {
   const {
-    isDataLoaded,
+    isLoaded,
     children,
   } = props;
 
-  return (isDataLoaded && children) || <LoadingScreen />;
+  return (isLoaded && children) || <LoadingScreen />;
 }
 
 LoadWrapper.propTypes = {
-  isDataLoaded: PropTypes.bool.isRequired,
+  isLoaded: PropTypes.bool.isRequired,
   children: PropTypes.element,
 };
 

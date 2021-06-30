@@ -13,7 +13,7 @@ import PlacesWrapper from '../../elements/places-wrapper';
 function MainPage(props) {
   const {
     places,
-    isDataLoaded,
+    isOffersDataLoaded,
   } = props;
 
   return (
@@ -24,7 +24,7 @@ function MainPage(props) {
         <CitiesList />
         <div className="cities">
           <div className="cities__places-container container">
-            <LoadWrapper isDataLoaded = {isDataLoaded}>
+            <LoadWrapper isLoaded = {isOffersDataLoaded}>
               <PlacesWrapper places = {places} />
             </LoadWrapper>
           </div>
@@ -36,12 +36,12 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   places: PropTypes.arrayOf(placeCardProp),
-  isDataLoaded: PropTypes.bool.isRequired,
+  isOffersDataLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   places: sortFilteredPlaces(state.offers, state.selectedSorting, state.city),
-  isDataLoaded: state.isDataLoaded,
+  isOffersDataLoaded: state.isOffersDataLoaded,
 });
 
 export default connect(mapStateToProps)(MainPage);

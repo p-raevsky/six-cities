@@ -30,11 +30,7 @@ export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
 
 export const fetchHotel = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.HOTELS}/${id}`)
-    .then(({data}) => {
-      dispatch(ActionCreator.loadOffer(
-        parseOfferData(data)),
-      );
-    })
+    .then(({data}) => dispatch(ActionCreator.loadOffer(parseOfferData(data))))
     .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
 

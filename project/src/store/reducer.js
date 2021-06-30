@@ -15,7 +15,10 @@ const initialState = {
   isSortingOpen: false,
   selectedSorting: SortingType.POPULAR,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
-  isDataLoaded: false,
+  isOffersDataLoaded: false,
+  isOfferDataLoaded: false,
+  isReviewsDataLoaded: false,
+  isNearPlacesDataLoaded: false,
   userEmail: null,
   newComment: '',
   newRating: '',
@@ -52,22 +55,25 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
-        isDataLoaded: true,
+        isOffersDataLoaded: true,
       };
     case ActionType.LOAD_OFFER:
       return {
         ...state,
         offer: action.payload,
+        isOfferDataLoaded: true,
       };
     case ActionType.LOAD_REVIEWS:
       return {
         ...state,
         reviews: action.payload,
+        isReviewsDataLoaded: true,
       };
     case ActionType.LOAD_NEARBY:
       return {
         ...state,
         nearPlaces: action.payload,
+        isNearPlacesDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
