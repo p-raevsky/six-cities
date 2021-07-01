@@ -10,6 +10,7 @@ export const ActionType = {
   LOAD_OFFER: 'data/loadOffer',
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_NEARBY: 'data/loadNearby',
+  LOAD_FAVORITES: 'data/loadFavorites',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
@@ -70,5 +71,9 @@ export const setNewComment = createAction(ActionType.NEW_COMMENT, (payload) => (
 }));
 
 export const setNewRating = createAction(ActionType.NEW_RATING, (payload) => ({
+  payload,
+}));
+
+export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (payload) => ({
   payload,
 }));

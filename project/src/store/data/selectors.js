@@ -8,6 +8,10 @@ export const getReviews = (state) => state[NameSpace.DATA].reviews;
 
 export const getNearPlaces = (state) => state[NameSpace.DATA].nearPlaces;
 
+export const getFavorites = (state) => state[NameSpace.DATA].favorites;
+
+export const getIsFavoritesLoaded = (state) => state[NameSpace.DATA].isFavoritesLoaded;
+
 export const getIsOfferDataLoaded = (state) => state[NameSpace.DATA].isOfferDataLoaded;
 
 export const getIsOffersDataLoaded = (state) => state[NameSpace.DATA].isOffersDataLoaded;

@@ -4,7 +4,8 @@ import {
   loadOffers,
   loadOffer,
   loadReviews,
-  loadNearby
+  loadNearby,
+  loadFavorites
 } from '../action';
 
 const initialState = {
@@ -12,10 +13,12 @@ const initialState = {
   offer: {},
   reviews: [],
   nearPlaces: [],
+  favorites: [],
   isOffersDataLoaded: false,
   isOfferDataLoaded: false,
   isReviewsDataLoaded: false,
   isNearPlacesDataLoaded: false,
+  isFavoritesLoaded: false,
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -35,6 +38,10 @@ const data = createReducer(initialState, (builder) => {
     .addCase(loadNearby, (state, action) => {
       state.isNearPlacesDataLoaded = true;
       state.nearPlaces = action.payload;
+    })
+    .addCase(loadFavorites, (state, action) => {
+      state.isFavoritesLoaded = true;
+      state.favorites = action.payload;
     });
 });
 

@@ -11,6 +11,7 @@ import {getOfferRating} from '../../../utils';
 import {PlaceType, AppRoute} from '../../../const';
 import {PlaceCardType} from '../../../settings';
 import {setActivePlaceID} from '../../../store/action';
+import {sendFavoritePlace} from '../../../store/api-actions';
 
 function PlaceCard(props) {
   const {
@@ -29,6 +30,7 @@ function PlaceCard(props) {
 
   const offerRating = getOfferRating(rating);
   const dispatch = useDispatch();
+  const status = isFavorite ? '0' : '1';
 
   return (
     <article className={PlaceCardType[placesType].className}
@@ -54,7 +56,13 @@ function PlaceCard(props) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavorite ? ' place-card__bookmark-button--active' : ''}`} type="button">
+          <button
+            className={`place-card__bookmark-button button ${isFavorite ? ' place-card__bookmark-button--active' : ''}`}
+            type="button"
+            onClick={() => {
+              dispatch(sendFavoritePlace(id, status));
+            }}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

@@ -2,6 +2,7 @@ import {
   loadOffers,
   loadOffer,
   loadReviews,
+  loadFavorites,
   loadNearby,
   requireAuthorization,
   closeSession,
@@ -53,6 +54,16 @@ export const fetchReviwsList = (id) => (dispatch, _getState, api) => (
     .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
+export const fetchFavoriteList = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => {
+      dispatch(loadFavorites(
+        data.map((offer) => parseOfferData(offer)),
+      ));
+    })
+    .catch(() => dispatch(redirectToRoute(AppRoute.LOGIN)))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(({data}) => {
@@ -86,4 +97,9 @@ export const createComment = (id, {comment, rating}) => (dispatch, _getState, ap
       ));
     })
     .catch(() => {})
+);
+
+export const sendFavoritePlace = (id, status) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id}/${status}`)
+    .catch(() => dispatch(redirectToRoute(AppRoute.LOGIN)))
 );
