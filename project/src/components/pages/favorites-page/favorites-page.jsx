@@ -8,6 +8,7 @@ import FavoritesList from '../../elements/favorites-list';
 import FavoritesEmpty from '../../elements/favorites-empty';
 
 import placeCardProp from '../offer.prop';
+import {getOffers} from '../../../store/data/selectors';
 
 function FavoritesPage(props) {
   const {
@@ -32,7 +33,7 @@ FavoritesPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.filter(({isFavorite}) => isFavorite),
+  offers: getOffers(state).filter(({isFavorite}) => isFavorite),
 });
 
 export default connect(mapStateToProps)(FavoritesPage);

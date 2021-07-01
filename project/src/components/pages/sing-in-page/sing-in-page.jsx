@@ -7,6 +7,7 @@ import Header from '../../elements/header';
 
 import {login} from '../../../store/api-actions';
 import {AppRoute} from '../../../const';
+import {getCity} from '../../../store/process/selectors';
 
 function SingInPage(props) {
   const {
@@ -88,7 +89,7 @@ SingInPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
+  city: getCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 
 import RatingList from '../rating-list';
 import {createComment} from '../../../store/api-actions';
-import { ActionCreator } from '../../../store/action';
+import {
+  setNewComment,
+  setNewRating
+} from '../../../store/action';
+import {
+  getNewRating,
+  getNewComment
+} from '../../../store/process/selectors';
 
 function ReviewsForm(props) {
   const {
@@ -12,8 +19,8 @@ function ReviewsForm(props) {
     uploadNewComment,
     newRating,
     newComment,
-    setNewComment,
-    setNewRating,
+    setComment,
+    setRating,
   } = props;
 
   const commentRef = useRef();
@@ -25,8 +32,8 @@ function ReviewsForm(props) {
       comment: newComment,
       rating: newRating,
     });
-    setNewComment('');
-    setNewRating('');
+    setComment('');
+    setRating('');
   };
 
   return (
@@ -38,7 +45,7 @@ function ReviewsForm(props) {
       <textarea className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         ref={commentRef}
-        onChange={() => setNewComment(commentRef.current.value)}
+        onChange={() => setComment(commentRef.current.value)}
         value={newComment}
       >
       </textarea>
@@ -57,24 +64,24 @@ ReviewsForm.propTypes = {
   uploadNewComment: PropTypes.func.isRequired,
   newComment: PropTypes.string,
   newRating: PropTypes.string,
-  setNewComment: PropTypes.func.isRequired,
-  setNewRating: PropTypes.func.isRequired,
+  setComment: PropTypes.func.isRequired,
+  setRating: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  newComment: state.newComment,
-  newRating: state.newRating,
+  newComment: getNewComment(state),
+  newRating: getNewRating(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   uploadNewComment(...data) {
     dispatch(createComment(...data));
   },
-  setNewComment(value) {
-    dispatch(ActionCreator.setNewComment(value));
+  setComment(value) {
+    dispatch(setNewComment(value));
   },
-  setNewRating(value) {
-    dispatch(ActionCreator.setNewRating(value));
+  setRating(value) {
+    dispatch(setNewRating(value));
   },
 });
 

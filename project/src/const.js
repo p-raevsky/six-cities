@@ -45,3 +45,9 @@ export const APIRoute = {
   FAVORITE: '/favorite',
   COMMENTS: '/comments',
 };
+
+export const NameSpace = {
+  DATA: 'DATA',
+  PROCESS: 'PROCESS',
+  USER: 'USER',
+};

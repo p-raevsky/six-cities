@@ -7,13 +7,13 @@ import FavoritesPlacesList from '../favorites-places-list';
 
 import placeCardProp from '../../pages/offer.prop';
 import {AppRoute} from '../../../const';
-import {ActionCreator} from '../../../store/action';
+import {setCurrentCity} from '../../../store/action';
 
 function FavoritesLocation(props) {
   const {
     city,
     filteredPlaces,
-    setCurrentCity,
+    setCity,
   } = props;
 
   return (
@@ -23,7 +23,7 @@ function FavoritesLocation(props) {
         onClick={({target}) => {
           if (target.closest('a')) {
             const value = target.closest('a').dataset.city;
-            setCurrentCity(value);
+            setCity(value);
           }
         }}
       >
@@ -45,12 +45,12 @@ function FavoritesLocation(props) {
 FavoritesLocation.propTypes = {
   city: PropTypes.string,
   filteredPlaces: PropTypes.arrayOf(placeCardProp),
-  setCurrentCity: PropTypes.func.isRequired,
+  setCity: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentCity(value) {
-    dispatch(ActionCreator.setCurrentCity(value));
+  setCity(value) {
+    dispatch(setCurrentCity(value));
   },
 });
 

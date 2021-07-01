@@ -8,6 +8,10 @@ import SignIn from '../sign-in';
 
 import {LogoType} from '../../../settings';
 import {isCheckedAuth} from '../../../six-cities-data';
+import {
+  getAuthorizationStatus,
+  getUserEmail
+} from '../../../store/user/selectors';
 
 function Header(props) {
   const {
@@ -43,8 +47,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  userEmail: state.userEmail,
+  authorizationStatus: getAuthorizationStatus(state),
+  userEmail: getUserEmail(state),
 });
 
 export default connect(mapStateToProps)(Header);

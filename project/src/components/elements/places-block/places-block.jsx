@@ -7,6 +7,12 @@ import Map from '../map';
 import SortList from '../sort-list';
 import placeCardProp from '../../pages/offer.prop';
 
+import {
+  getCity,
+  getActivePlaceId,
+  getSelectedSorting
+} from '../../../store/process/selectors';
+
 function PlacesBlock(props) {
   const {
     city: currentCity,
@@ -40,9 +46,9 @@ PlacesBlock.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  activePlaceId: state.activePlaceId,
-  selectedSorting: state.selectedSorting,
+  city: getCity(state),
+  activePlaceId: getActivePlaceId(state),
+  selectedSorting: getSelectedSorting(state),
 });
 
 export default connect(mapStateToProps)(PlacesBlock);

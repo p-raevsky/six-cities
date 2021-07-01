@@ -11,6 +11,15 @@ import {
 } from '../../../store/api-actions';
 import placeCardProp from '../../pages/offer.prop';
 import reviewsProp from '../../pages/review.prop';
+import {getActivePlaceId} from '../../../store/process/selectors';
+import {
+  getOffer,
+  getReviews,
+  getNearPlaces,
+  getIsOfferDataLoaded,
+  getIsReviewsDataLoaded,
+  getIsNearPlacesDataLoaded
+} from '../../../store/data/selectors';
 
 function RoomPageLoadWrapper(props) {
   const {
@@ -30,7 +39,7 @@ function RoomPageLoadWrapper(props) {
     getHotelData(offerId);
     getReviewsData(offerId);
     getNearHotelsData(offerId);
-  }, [offerId]);
+  }, [offerId, getHotelData, getReviewsData, getNearHotelsData]);
 
   const isLoaded = isOfferDataLoaded && isReviewsDataLoaded && isNearPlacesDataLoaded;
 
@@ -51,13 +60,13 @@ RoomPageLoadWrapper.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offer: state.offer,
-  reviews: state.reviews,
-  nearPlaces: state.nearPlaces,
-  activePlaceId: state.activePlaceId,
-  isOfferDataLoaded: state.isOfferDataLoaded,
-  isReviewsDataLoaded: state.isReviewsDataLoaded,
-  isNearPlacesDataLoaded: state.isNearPlacesDataLoaded,
+  offer: getOffer(state),
+  reviews: getReviews(state),
+  nearPlaces: getNearPlaces(state),
+  activePlaceId: getActivePlaceId(state),
+  isOfferDataLoaded: getIsOfferDataLoaded(state),
+  isReviewsDataLoaded: getIsReviewsDataLoaded(state),
+  isNearPlacesDataLoaded: getIsNearPlacesDataLoaded(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

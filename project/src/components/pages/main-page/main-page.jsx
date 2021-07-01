@@ -10,6 +10,15 @@ import {sortFilteredPlaces} from '../../../six-cities-data';
 import LoadWrapper from '../../elements/load-wrapper';
 import PlacesWrapper from '../../elements/places-wrapper';
 
+import {
+  getSelectedSorting,
+  getCity
+} from '../../../store/process/selectors';
+import {
+  getIsOffersDataLoaded,
+  getOffers
+} from '../../../store/data/selectors';
+
 function MainPage(props) {
   const {
     places,
@@ -40,8 +49,8 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  places: sortFilteredPlaces(state.offers, state.selectedSorting, state.city),
-  isOffersDataLoaded: state.isOffersDataLoaded,
+  places: sortFilteredPlaces(getOffers(state), getSelectedSorting(state), getCity(state)),
+  isOffersDataLoaded: getIsOffersDataLoaded(state),
 });
 
 export default connect(mapStateToProps)(MainPage);

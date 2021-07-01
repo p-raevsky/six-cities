@@ -16,6 +16,7 @@ import reviewsProp from '../review.prop';
 
 import {getOfferRating} from '../../../utils';
 import {isCheckedAuth} from '../../../six-cities-data';
+import {getAuthorizationStatus} from '../../../store/user/selectors';
 
 const SLICED_REVIEWS_NUMBER = 10;
 
@@ -173,7 +174,7 @@ RoomPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export default connect(mapStateToProps)(RoomPage);
