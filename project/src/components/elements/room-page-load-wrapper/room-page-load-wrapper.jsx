@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import RoomPage from '../../pages/room-page';
 
@@ -9,9 +9,6 @@ import {
   fetchNearbyList,
   fetchReviwsList
 } from '../../../store/api-actions';
-import placeCardProp from '../../pages/offer.prop';
-import reviewsProp from '../../pages/review.prop';
-import {getActivePlaceId} from '../../../store/process/selectors';
 import {
   getOffer,
   getReviews,
@@ -21,25 +18,21 @@ import {
   getIsNearPlacesDataLoaded
 } from '../../../store/data/selectors';
 
-function RoomPageLoadWrapper(props) {
-  const {
-    offerId,
-    getHotelData,
-    isOfferDataLoaded,
-    isReviewsDataLoaded,
-    isNearPlacesDataLoaded,
-    getReviewsData,
-    getNearHotelsData,
-    offer,
-    reviews,
-    nearPlaces,
-  } = props;
+function RoomPageLoadWrapper({offerId}) {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getHotelData(offerId);
-    getReviewsData(offerId);
-    getNearHotelsData(offerId);
-  }, [offerId, getHotelData, getReviewsData, getNearHotelsData]);
+    dispatch(fetchHotel(offerId));
+    dispatch(fetchReviwsList(offerId));
+    dispatch(fetchNearbyList(offerId));
+  }, [offerId]);
+
+  const offer = useSelector(getOffer);
+  const reviews = useSelector(getReviews);
+  const nearPlaces = useSelector(getNearPlaces);
+  const isOfferDataLoaded = useSelector(getIsOfferDataLoaded);
+  const isReviewsDataLoaded = useSelector(getIsReviewsDataLoaded);
+  const isNearPlacesDataLoaded = useSelector(getIsNearPlacesDataLoaded);
 
   const isLoaded = isOfferDataLoaded && isReviewsDataLoaded && isNearPlacesDataLoaded;
 
@@ -47,38 +40,7 @@ function RoomPageLoadWrapper(props) {
 }
 
 RoomPageLoadWrapper.propTypes = {
-  offer: PropTypes.object,
-  reviews: PropTypes.arrayOf(reviewsProp),
-  nearPlaces: PropTypes.arrayOf(placeCardProp),
   offerId: PropTypes.string,
-  isOfferDataLoaded: PropTypes.bool.isRequired,
-  isReviewsDataLoaded: PropTypes.bool.isRequired,
-  isNearPlacesDataLoaded: PropTypes.bool.isRequired,
-  getHotelData: PropTypes.func.isRequired,
-  getReviewsData: PropTypes.func,
-  getNearHotelsData: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  offer: getOffer(state),
-  reviews: getReviews(state),
-  nearPlaces: getNearPlaces(state),
-  activePlaceId: getActivePlaceId(state),
-  isOfferDataLoaded: getIsOfferDataLoaded(state),
-  isReviewsDataLoaded: getIsReviewsDataLoaded(state),
-  isNearPlacesDataLoaded: getIsNearPlacesDataLoaded(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getHotelData(id) {
-    dispatch(fetchHotel(id));
-  },
-  getNearHotelsData(id) {
-    dispatch(fetchNearbyList(id));
-  },
-  getReviewsData(id) {
-    dispatch(fetchReviwsList(id));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RoomPageLoadWrapper);
+export default RoomPageLoadWrapper;

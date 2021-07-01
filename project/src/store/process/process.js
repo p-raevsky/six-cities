@@ -1,6 +1,17 @@
-import {ActionType} from '../action';
+import {createReducer} from '@reduxjs/toolkit';
+
+import {
+  setCurrentCity,
+  setActivePlaceID,
+  setOpening,
+  closeSorting,
+  chahgeSortingType,
+  setNewComment,
+  setNewRating
+} from '../action';
 import {Cities} from '../../const';
 import {SortingType} from '../../const';
+
 
 const initialState = {
   city: Cities.PARIS,
@@ -11,47 +22,29 @@ const initialState = {
   newRating: '',
 };
 
-const process = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.CURRENT_CITY:
-      return {
-        ...state,
-        city: action.payload,
-      };
-    case ActionType.ACTIVE_PLACE_ID:
-      return {
-        ...state,
-        activePlaceId: action.payload,
-      };
-    case ActionType.IS_OPEN:
-      return {
-        ...state,
-        isSortingOpen: !state.isSortingOpen,
-      };
-    case ActionType.SORTING_CLOSED:
-      return {
-        ...state,
-        isSortingOpen: false,
-      };
-    case ActionType.SORTING_TYPE:
-      return {
-        ...state,
-        selectedSorting: action.payload,
-      };
-    case ActionType.NEW_COMMENT:
-      return {
-        ...state,
-        newComment: action.payload,
-      };
-    case ActionType.NEW_RATING:
-      return {
-        ...state,
-        newRating: action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
+const process = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setCurrentCity, (state, action) => {
+      state.city = action.payload;
+    })
+    .addCase(setActivePlaceID, (state, action) => {
+      state.activePlaceId = action.payload;
+    })
+    .addCase(setOpening, (state) => {
+      state.isSortingOpen = !state.isSortingOpen;
+    })
+    .addCase(closeSorting, (state) => {
+      state.isSortingOpen = false;
+    })
+    .addCase(chahgeSortingType, (state, action) => {
+      state.selectedSorting = action.payload;
+    })
+    .addCase(setNewComment, (state, action) => {
+      state.newComment = action.payload;
+    })
+    .addCase(setNewRating, (state, action) => {
+      state.newRating = action.payload;
+    });
+});
 
 export {process};

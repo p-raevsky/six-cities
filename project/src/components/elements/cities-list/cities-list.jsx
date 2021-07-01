@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import CityItem from '../city-item';
@@ -8,12 +8,8 @@ import {Cities} from '../../../const';
 import {setCurrentCity} from '../../../store/action';
 import {getCity} from '../../../store/process/selectors';
 
-function CitiesList(props) {
-  const {
-    city: currentCity,
-    setCity,
-  } = props;
-
+function CitiesList({setCity}) {
+  const currentCity = useSelector(getCity);
   const cities = Object.values(Cities);
 
   return (
@@ -28,13 +24,8 @@ function CitiesList(props) {
 }
 
 CitiesList.propTypes = {
-  city: PropTypes.string.isRequired,
   setCity: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  city: getCity(state),
-});
 
 const mapDispatchToProps = (dispatch) => ({
   setCity(value) {
@@ -42,4 +33,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
+export default connect(null, mapDispatchToProps)(CitiesList);

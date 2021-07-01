@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import FavoritesPlacesList from '../favorites-places-list';
@@ -13,8 +13,9 @@ function FavoritesLocation(props) {
   const {
     city,
     filteredPlaces,
-    setCity,
   } = props;
+
+  const dispatch = useDispatch();
 
   return (
     <li className="favorites__locations-items">
@@ -23,7 +24,7 @@ function FavoritesLocation(props) {
         onClick={({target}) => {
           if (target.closest('a')) {
             const value = target.closest('a').dataset.city;
-            setCity(value);
+            dispatch(setCurrentCity(value));
           }
         }}
       >
@@ -45,13 +46,6 @@ function FavoritesLocation(props) {
 FavoritesLocation.propTypes = {
   city: PropTypes.string,
   filteredPlaces: PropTypes.arrayOf(placeCardProp),
-  setCity: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setCity(value) {
-    dispatch(setCurrentCity(value));
-  },
-});
-
-export default connect(null, mapDispatchToProps)(FavoritesLocation);
+export default FavoritesLocation;

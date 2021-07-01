@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import Logo from '../logo';
 import SignOut from '../sign-out';
@@ -16,9 +16,10 @@ import {
 function Header(props) {
   const {
     isActive = false,
-    authorizationStatus,
-    userEmail,
   } = props;
+
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const userEmail = useSelector(getUserEmail);
 
   const isAuth = isCheckedAuth(authorizationStatus);
 
@@ -42,13 +43,6 @@ function Header(props) {
 
 Header.propTypes = {
   isActive: PropTypes.bool,
-  authorizationStatus: PropTypes.string.isRequired,
-  userEmail: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  userEmail: getUserEmail(state),
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

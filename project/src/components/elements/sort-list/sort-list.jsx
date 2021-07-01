@@ -1,6 +1,6 @@
 import React, {useRef}  from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {connect, useSelector, useDispatch} from 'react-redux';
 
 import SortItem from '../../elements/sort-item';
 
@@ -18,17 +18,17 @@ import {
 
 function SortList(props) {
   const {
-    isSortingOpen,
-    selectedSorting,
-    setSortOpening,
     chahgeSortType,
-    closeSortingMenu,
   } = props;
+
+  const isSortingOpen = useSelector(getIsSortingOpen);
+  const selectedSorting = useSelector(getSelectedSorting);
 
   const sortItems = Object.values(SortingType);
   const ref = useRef();
+  const dispatch = useDispatch();
 
-  useOnClickOutside(ref, () => closeSortingMenu());
+  useOnClickOutside(ref, () => dispatch(closeSorting()));
 
   return (
     <form
@@ -38,7 +38,7 @@ function SortList(props) {
       ref={ref}
       onClick={({target}) => {
         if (target.closest('.places__sorting-type') || target.closest('.places__options')) {
-          setSortOpening();
+          dispatch(setOpening());
         }
       }}
     >
@@ -57,28 +57,13 @@ function SortList(props) {
 }
 
 SortList.propTypes = {
-  selectedSorting: PropTypes.string.isRequired,
-  isSortingOpen: PropTypes.bool.isRequired,
-  setSortOpening: PropTypes.func.isRequired,
   chahgeSortType: PropTypes.func.isRequired,
-  closeSortingMenu: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  isSortingOpen: getIsSortingOpen(state),
-  selectedSorting: getSelectedSorting(state),
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  setSortOpening() {
-    dispatch(setOpening());
-  },
   chahgeSortType(value) {
     dispatch(chahgeSortingType(value));
   },
-  closeSortingMenu() {
-    dispatch(closeSorting());
-  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortList);
+export default connect(null, mapDispatchToProps)(SortList);

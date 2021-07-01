@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CURRENT_CITY: 'city/addCurrent',
   ACTIVE_PLACE_ID: 'places/activePlace',
@@ -17,74 +19,56 @@ export const ActionType = {
 };
 
 
-export const setCurrentCity = (payload) => ({
-  type: ActionType.CURRENT_CITY,
+export const setCurrentCity = createAction(ActionType.CURRENT_CITY, (payload) => ({
   payload,
-});
+}));
 
-export const setActivePlaceID = (payload) => ({
-  type: ActionType.ACTIVE_PLACE_ID,
+export const setActivePlaceID = createAction(ActionType.ACTIVE_PLACE_ID, (payload) => ({
   payload,
-});
+}));
 
-export const setOpening = () => ({
-  type: ActionType.IS_OPEN,
-});
+export const setOpening = createAction(ActionType.IS_OPEN);
 
-export const closeSorting = () => ({
-  type: ActionType.SORTING_CLOSED,
-});
+export const closeSorting = createAction(ActionType.SORTING_CLOSED);
 
-export const chahgeSortingType = (payload) => ({
-  type: ActionType.SORTING_TYPE,
+export const chahgeSortingType = createAction(ActionType.SORTING_TYPE, (payload) => ({
   payload,
-});
+}));
 
-export const loadOffers = (payload) => ({
-  type: ActionType.LOAD_OFFERS,
+export const loadOffers = createAction(ActionType.LOAD_OFFERS, (payload) => ({
   payload,
-});
+}));
 
-export const loadOffer = (payload) => ({
-  type: ActionType.LOAD_OFFER,
+export const loadOffer = createAction(ActionType.LOAD_OFFER, (payload) => ({
   payload,
-});
+}));
 
-export const loadReviews = (payload) => ({
-  type: ActionType.LOAD_REVIEWS,
+export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (payload) => ({
   payload,
-});
+}));
 
-export const loadNearby = (payload) => ({
-  type: ActionType.LOAD_NEARBY,
+export const loadNearby = createAction(ActionType.LOAD_NEARBY, (payload) => ({
   payload,
-});
+}));
 
-export const requireAuthorization = (status) => ({
-  type: ActionType.REQUIRED_AUTHORIZATION,
-  payload: status,
-});
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (payload) => ({
+  payload,
+}));
 
-export const closeSession = () => ({
-  type: ActionType.LOGOUT,
-});
+export const closeSession = createAction(ActionType.LOGOUT);
 
-export const redirectToRoute = (url) => ({
-  type: ActionType.REDIRECT_TO_ROUTE,
-  payload: url,
-});
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (payload) => ({
+  payload,
+}));
 
-export const setEmail = (email) => ({
-  type: ActionType.EMAIL,
-  payload: email,
-});
+export const setEmail = createAction(ActionType.EMAIL, (payload) => ({
+  payload,
+}));
 
-export const setNewComment = (comment) => ({
-  type: ActionType.NEW_COMMENT,
-  payload: comment,
-});
+export const setNewComment = createAction(ActionType.NEW_COMMENT, (payload) => ({
+  payload,
+}));
 
-export const setNewRating = (rating) => ({
-  type: ActionType.NEW_RATING,
-  payload: rating,
-});
+export const setNewRating = createAction(ActionType.NEW_RATING, (payload) => ({
+  payload,
+}));

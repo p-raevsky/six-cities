@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import Image from '../../elements/image';
 import PropertyGoodsItem from '../../elements/property-goods-item';
@@ -26,7 +26,6 @@ function RoomPage(props) {
     reviews,
     nearPlaces,
     activePlaceId,
-    authorizationStatus,
   } = props;
 
   const {
@@ -48,6 +47,8 @@ function RoomPage(props) {
       isPro,
     },
   } = offer;
+
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const offerRating = getOfferRating(rating);
   const avatarClassName = `property__avatar-wrapper${isPro ? ' property__avatar-wrapper--pro' : ''} user__avatar-wrapper`;
@@ -170,11 +171,6 @@ RoomPage.propTypes = {
   reviews: PropTypes.arrayOf(reviewsProp),
   nearPlaces: PropTypes.arrayOf(placeCardProp),
   activePlaceId: PropTypes.string,
-  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-export default connect(mapStateToProps)(RoomPage);
+export default RoomPage;

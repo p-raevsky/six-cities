@@ -1,4 +1,11 @@
-import {ActionType} from '../action';
+import {createReducer} from '@reduxjs/toolkit';
+
+import {
+  loadOffers,
+  loadOffer,
+  loadReviews,
+  loadNearby
+} from '../action';
 
 const initialState = {
   offers: [],
@@ -11,36 +18,24 @@ const initialState = {
   isNearPlacesDataLoaded: false,
 };
 
-const data = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.LOAD_OFFERS:
-      return {
-        ...state,
-        offers: action.payload,
-        isOffersDataLoaded: true,
-      };
-    case ActionType.LOAD_OFFER:
-      return {
-        ...state,
-        offer: action.payload,
-        isOfferDataLoaded: true,
-      };
-    case ActionType.LOAD_REVIEWS:
-      return {
-        ...state,
-        reviews: action.payload,
-        isReviewsDataLoaded: true,
-      };
-    case ActionType.LOAD_NEARBY:
-      return {
-        ...state,
-        nearPlaces: action.payload,
-        isNearPlacesDataLoaded: true,
-      };
-    default:
-      return state;
-  }
-};
-
+const data = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadOffers, (state, action) => {
+      state.isOffersDataLoaded = true;
+      state.offers = action.payload;
+    })
+    .addCase(loadOffer, (state, action) => {
+      state.isOfferDataLoaded = true;
+      state.offer = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.isReviewsDataLoaded = true;
+      state.reviews = action.payload;
+    })
+    .addCase(loadNearby, (state, action) => {
+      state.isNearPlacesDataLoaded = true;
+      state.nearPlaces = action.payload;
+    });
+});
 
 export {data};

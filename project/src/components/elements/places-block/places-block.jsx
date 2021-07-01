@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import PlacesList from '../places-list';
 import Map from '../map';
@@ -9,16 +9,14 @@ import placeCardProp from '../../pages/offer.prop';
 
 import {
   getCity,
-  getActivePlaceId,
-  getSelectedSorting
+  getActivePlaceId
 } from '../../../store/process/selectors';
 
 function PlacesBlock(props) {
-  const {
-    city: currentCity,
-    places,
-    activePlaceId,
-  } = props;
+  const {places} = props;
+
+  const currentCity = useSelector(getCity);
+  const activePlaceId = useSelector(getActivePlaceId);
 
   const placesCount = places.length;
 
@@ -40,15 +38,7 @@ function PlacesBlock(props) {
 }
 
 PlacesBlock.propTypes = {
-  city: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(placeCardProp),
-  activePlaceId: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  city: getCity(state),
-  activePlaceId: getActivePlaceId(state),
-  selectedSorting: getSelectedSorting(state),
-});
-
-export default connect(mapStateToProps)(PlacesBlock);
+export default PlacesBlock;

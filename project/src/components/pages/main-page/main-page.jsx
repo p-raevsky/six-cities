@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import Header from '../../elements/header';
 import CitiesList from '../../elements/cities-list';
 
-import placeCardProp from '../../pages/offer.prop';
 import {sortFilteredPlaces} from '../../../six-cities-data';
 import LoadWrapper from '../../elements/load-wrapper';
 import PlacesWrapper from '../../elements/places-wrapper';
@@ -19,11 +17,13 @@ import {
   getOffers
 } from '../../../store/data/selectors';
 
-function MainPage(props) {
-  const {
-    places,
-    isOffersDataLoaded,
-  } = props;
+function MainPage() {
+  const offers = useSelector(getOffers);
+  const selectedSorting = useSelector(getSelectedSorting);
+  const city = useSelector(getCity);
+  const isOffersDataLoaded = useSelector(getIsOffersDataLoaded);
+
+  const places = sortFilteredPlaces(offers, selectedSorting, city);
 
   return (
     <div className="page page--gray page--main">
@@ -43,14 +43,4 @@ function MainPage(props) {
   );
 }
 
-MainPage.propTypes = {
-  places: PropTypes.arrayOf(placeCardProp),
-  isOffersDataLoaded: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  places: sortFilteredPlaces(getOffers(state), getSelectedSorting(state), getCity(state)),
-  isOffersDataLoaded: getIsOffersDataLoaded(state),
-});
-
-export default connect(mapStateToProps)(MainPage);
+export default MainPage;

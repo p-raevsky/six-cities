@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
@@ -25,17 +25,17 @@ function PlaceCard(props) {
       previewImage,
     },
     placesType,
-    setPlaceID,
   } = props;
 
   const offerRating = getOfferRating(rating);
+  const dispatch = useDispatch();
 
   return (
     <article className={PlaceCardType[placesType].className}
       data-id = {id}
       onMouseEnter = {({currentTarget}) => {
         const currentPlaceId =currentTarget.getAttribute('data-id');
-        setPlaceID(currentPlaceId);
+        dispatch(setActivePlaceID(currentPlaceId));
       }}
     >
       {isPremium && (placesType !== PlaceType.FAVORITES) ? <PremiumMark /> : ''}
@@ -81,13 +81,6 @@ function PlaceCard(props) {
 PlaceCard.propTypes = {
   offer: placeCardProp,
   placesType: PropTypes.string.isRequired,
-  setPlaceID: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setPlaceID(value) {
-    dispatch(setActivePlaceID(value));
-  },
-});
-
-export default connect(null, mapDispatchToProps)(PlaceCard);
+export default PlaceCard;
