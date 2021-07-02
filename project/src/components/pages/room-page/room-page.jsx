@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import Image from '../../elements/image';
 import PropertyGoodsItem from '../../elements/property-goods-item';
@@ -17,14 +17,16 @@ import reviewsProp from '../review.prop';
 import {getOfferRating} from '../../../utils';
 import {isCheckedAuth} from '../../../six-cities-data';
 import {getAuthorizationStatus} from '../../../store/user/selectors';
+import {sendFavoritePlace} from '../../../store/api-actions';
 
 const SLICED_REVIEWS_NUMBER = 10;
 
-function RoomPage({offer,reviews,nearPlaces,activePlaceId}) {
+function RoomPage({offer,reviews,nearPlaces}) {
   const {
     city,
     images,
     isPremium,
+    isFavorite,
     title,
     rating,
     type,
@@ -42,7 +44,10 @@ function RoomPage({offer,reviews,nearPlaces,activePlaceId}) {
   } = offer;
 
   const authorizationStatus = useSelector(getAuthorizationStatus);
+  const dispatch = useDispatch();
+  const buttonRef = useRef();
 
+  const status = isFavorite ? '0' : '1';
   const offerRating = getOfferRating(rating);
   const avatarClassName = `property__avatar-wrapper${isPro ? ' property__avatar-wrapper--pro' : ''} user__avatar-wrapper`;
   const sortedReviews = reviews
@@ -79,7 +84,15 @@ function RoomPage({offer,reviews,nearPlaces,activePlaceId}) {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className={`property__bookmark-button button${isFavorite ? ' property__bookmark-button--active' : ''}`}
+                  type="button"
+                  ref={buttonRef}
+                  onClick={() => {
+                    dispatch(sendFavoritePlace(id, status));
+                    buttonRef.current.classList.toggle('property__bookmark-button--active');
+                  }}
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -145,7 +158,7 @@ function RoomPage({offer,reviews,nearPlaces,activePlaceId}) {
             </div>
           </div>
           <section className="property__map map">
-            <Map city = {city.name} places = {nearPlaces} activePlaceId = {activePlaceId}/>
+            <Map city = {city.name} places = {nearPlaces} />
           </section>
         </section>
         <div className="container">
@@ -163,7 +176,6 @@ RoomPage.propTypes = {
   offer: placeCardProp,
   reviews: PropTypes.arrayOf(reviewsProp),
   nearPlaces: PropTypes.arrayOf(placeCardProp),
-  activePlaceId: PropTypes.string,
 };
 
 export default RoomPage;

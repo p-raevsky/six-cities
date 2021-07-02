@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 
 import Header from '../../elements/header';
@@ -23,7 +23,7 @@ function MainPage() {
   const city = useSelector(getCity);
   const isOffersDataLoaded = useSelector(getIsOffersDataLoaded);
 
-  const places = sortFilteredPlaces(offers, selectedSorting, city);
+  const places = useMemo(() => sortFilteredPlaces(offers, selectedSorting, city), [offers, selectedSorting, city]);
 
   return (
     <div className="page page--gray page--main">

@@ -23,8 +23,8 @@ function PrivateRoute({render, path, exact}) {
 }
 
 PrivateRoute.propTypes = {
-  exact: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
+  exact: PropTypes.bool,
+  path: PropTypes.string,
   render: PropTypes.func.isRequired,
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
@@ -28,9 +28,10 @@ function PlaceCard(props) {
     placesType,
   } = props;
 
-  const offerRating = getOfferRating(rating);
   const dispatch = useDispatch();
+  const offerRating = getOfferRating(rating);
   const status = isFavorite ? '0' : '1';
+  const buttonRef = useRef();
 
   return (
     <article className={PlaceCardType[placesType].className}
@@ -57,10 +58,12 @@ function PlaceCard(props) {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button button ${isFavorite ? ' place-card__bookmark-button--active' : ''}`}
+            className={`place-card__bookmark-button button${isFavorite ? ' place-card__bookmark-button--active' : ''}`}
             type="button"
+            ref={buttonRef}
             onClick={() => {
               dispatch(sendFavoritePlace(id, status));
+              buttonRef.current.classList.toggle('place-card__bookmark-button--active');
             }}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
