@@ -6,11 +6,7 @@ import PropTypes from 'prop-types';
 import {AppRoute} from '../../../const';
 import {logout} from '../../../store/api-actions';
 
-function SignOut(props) {
-  const {
-    userEmail,
-  } = props;
-
+function SignOut({userEmail}) {
   const dispatch = useDispatch();
 
   return (

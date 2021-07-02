@@ -2,13 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-function CityItem(props) {
-  const {
-    cityItem,
-    currentCity,
-    onCurrentCity,
-  } = props;
-
+function CityItem({cityItem, currentCity, onCurrentCity}) {
   return (
     <li className="locations__item"
       data-city={cityItem}

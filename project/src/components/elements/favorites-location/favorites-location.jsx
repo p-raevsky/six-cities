@@ -9,12 +9,7 @@ import placeCardProp from '../../pages/offer.prop';
 import {AppRoute} from '../../../const';
 import {setCurrentCity} from '../../../store/action';
 
-function FavoritesLocation(props) {
-  const {
-    city,
-    filteredPlaces,
-  } = props;
-
+function FavoritesLocation({city, filteredPlaces}) {
   const dispatch = useDispatch();
 
   return (

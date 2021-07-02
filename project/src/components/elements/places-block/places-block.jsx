@@ -12,9 +12,7 @@ import {
   getActivePlaceId
 } from '../../../store/process/selectors';
 
-function PlacesBlock(props) {
-  const {places} = props;
-
+function PlacesBlock({places}) {
   const currentCity = useSelector(getCity);
   const activePlaceId = useSelector(getActivePlaceId);
 

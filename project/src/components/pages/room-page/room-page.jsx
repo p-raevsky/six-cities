@@ -20,14 +20,7 @@ import {getAuthorizationStatus} from '../../../store/user/selectors';
 
 const SLICED_REVIEWS_NUMBER = 10;
 
-function RoomPage(props) {
-  const {
-    offer,
-    reviews,
-    nearPlaces,
-    activePlaceId,
-  } = props;
-
+function RoomPage({offer,reviews,nearPlaces,activePlaceId}) {
   const {
     city,
     images,

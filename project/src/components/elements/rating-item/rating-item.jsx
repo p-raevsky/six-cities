@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import {setNewRating} from '../../../store/action';
 import {getNewRating} from '../../../store//process/selectors';
 
-function RatingItem(props) {
-  const {index} = props;
-
+function RatingItem({index}) {
   const ratingRef = useRef();
   const dispatch = useDispatch();
   const newRating = useSelector(getNewRating);

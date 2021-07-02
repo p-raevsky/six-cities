@@ -13,11 +13,7 @@ import {
   getUserEmail
 } from '../../../store/user/selectors';
 
-function Header(props) {
-  const {
-    isActive = false,
-  } = props;
-
+function Header({isActive = false}) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const userEmail = useSelector(getUserEmail);
 

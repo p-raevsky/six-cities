@@ -16,11 +16,7 @@ import {
   getIsSortingOpen
 } from '../../../store/process/selectors';
 
-function SortList(props) {
-  const {
-    chahgeSortType,
-  } = props;
-
+function SortList({chahgeSortType}) {
   const isSortingOpen = useSelector(getIsSortingOpen);
   const selectedSorting = useSelector(getSelectedSorting);
 
