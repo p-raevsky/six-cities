@@ -9,11 +9,19 @@ const initialState = {
   city: Cities.PARIS,
   activePlaceId: null,
   offers: [],
+  offer: {},
   reviews: [],
+  nearPlaces: [],
   isSortingOpen: false,
   selectedSorting: SortingType.POPULAR,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
-  isDataLoaded: false,
+  isOffersDataLoaded: false,
+  isOfferDataLoaded: false,
+  isReviewsDataLoaded: false,
+  isNearPlacesDataLoaded: false,
+  userEmail: null,
+  newComment: '',
+  newRating: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +41,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         isSortingOpen: !state.isSortingOpen,
       };
+    case ActionType.SORTING_CLOSED:
+      return {
+        ...state,
+        isSortingOpen: false,
+      };
     case ActionType.SORTING_TYPE:
       return {
         ...state,
@@ -42,7 +55,25 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
-        isDataLoaded: true,
+        isOffersDataLoaded: true,
+      };
+    case ActionType.LOAD_OFFER:
+      return {
+        ...state,
+        offer: action.payload,
+        isOfferDataLoaded: true,
+      };
+    case ActionType.LOAD_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
+        isReviewsDataLoaded: true,
+      };
+    case ActionType.LOAD_NEARBY:
+      return {
+        ...state,
+        nearPlaces: action.payload,
+        isNearPlacesDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
@@ -53,6 +84,21 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      };
+    case ActionType.EMAIL:
+      return {
+        ...state,
+        userEmail: action.payload,
+      };
+    case ActionType.NEW_COMMENT:
+      return {
+        ...state,
+        newComment: action.payload,
+      };
+    case ActionType.NEW_RATING:
+      return {
+        ...state,
+        newRating: action.payload,
       };
     default:
       return state;

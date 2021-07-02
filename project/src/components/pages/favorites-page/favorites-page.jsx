@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import Header from '../../elements/header/header';
-import Footer from '../../elements/footer/footer';
-import FavoritesList from '../../elements/favorites-list/favorites-list';
+import Header from '../../elements/header';
+import Footer from '../../elements/footer';
+import FavoritesList from '../../elements/favorites-list';
+import FavoritesEmpty from '../../elements/favorites-empty';
 
 import placeCardProp from '../offer.prop';
 
@@ -14,14 +15,11 @@ function FavoritesPage(props) {
   } = props;
 
   return (
-    <div className="page">
+    <div className={`page${offers ? ' page--favorites-empty' : ''}`}>
       <Header />
-      <main className="page__main page__main--favorites">
+      <main className={`page__main page__main--favorites${offers ? ' page__main--favorites-empty' : ''}`}>
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList favoritesPlaces = {offers}/>
-          </section>
+          {offers.length ? <FavoritesList favoritesPlaces = {offers} /> : <FavoritesEmpty />}
         </div>
       </main>
       <Footer />

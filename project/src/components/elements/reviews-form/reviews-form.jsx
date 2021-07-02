@@ -1,27 +1,45 @@
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
-import RatingList from '../rating-list/rating-list';
+import RatingList from '../rating-list';
+import {createComment} from '../../../store/api-actions';
+import { ActionCreator } from '../../../store/action';
 
-function ReviewsForm() {
-  const [, setReview] = useState('');
-  const [textareaValue, setTextareaValue] =useState('');
+function ReviewsForm(props) {
+  const {
+    id,
+    uploadNewComment,
+    newRating,
+    newComment,
+    setNewComment,
+    setNewRating,
+  } = props;
+
+  const commentRef = useRef();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    uploadNewComment(id, {
+      comment: newComment,
+      rating: newRating,
+    });
+    setNewComment('');
+    setNewRating('');
+  };
 
   return (
     <form className="reviews__form form" action="#" method="post"
-      onSubmit = {(evt) => {
-        evt.preventDefault();
-        setReview(textareaValue);
-        setTextareaValue('');
-      }}
+      onSubmit = {handleSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <RatingList />
       <textarea className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={textareaValue}
-        onChange = {(evt) => {
-          setTextareaValue(evt.target.value);
-        }}
+        ref={commentRef}
+        onChange={() => setNewComment(commentRef.current.value)}
+        value={newComment}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -34,4 +52,30 @@ function ReviewsForm() {
   );
 }
 
-export default ReviewsForm;
+ReviewsForm.propTypes = {
+  id: PropTypes.number,
+  uploadNewComment: PropTypes.func.isRequired,
+  newComment: PropTypes.string,
+  newRating: PropTypes.string,
+  setNewComment: PropTypes.func.isRequired,
+  setNewRating: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  newComment: state.newComment,
+  newRating: state.newRating,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  uploadNewComment(...data) {
+    dispatch(createComment(...data));
+  },
+  setNewComment(value) {
+    dispatch(ActionCreator.setNewComment(value));
+  },
+  setNewRating(value) {
+    dispatch(ActionCreator.setNewRating(value));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsForm);

@@ -1,58 +1,44 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter as Router} from 'react-router-dom';
-import {connect} from 'react-redux';
-
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
-import MainPage from '../pages/main-page/main-page';
-import FavoritesPage from '../pages/favorites-page/favorites-page';
-import RoomPage from '../pages/room-page/room-page';
-import SingInPage from '../pages/sing-in-page/sing-in-page';
-import NotFoundPage from '../pages/not-found-page/not-found-page';
+import MainPage from '../pages/main-page';
+import FavoritesPage from '../pages/favorites-page';
+import SingInPage from '../pages/sing-in-page';
+import NotFoundPage from '../pages/not-found-page';
+import PrivateRoute from '../elements/private-route';
+import RoomPageLoadWrapper from '../elements/room-page-load-wrapper';
 
-function App(props) {
-  const {
-    offers,
-    reviews,
-  } = props;
+import browserHistory from '../../services/browser-history';
 
+function App() {
   return (
-    <Router>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path = {AppRoute.ROOT}>
           <MainPage />
         </Route>
-        <Route exact path = {AppRoute.FAVORITES}>
-          <FavoritesPage />
-        </Route>
+        <PrivateRoute exact path = {AppRoute.FAVORITES}
+          render = {() => <FavoritesPage />}
+        />
         <Route exact path = {AppRoute.LOGIN}>
           <SingInPage />
         </Route>
         <Route exact path = {`${AppRoute.OFFER}/:id`}
           render = {({match}) => {
             const {id} = match.params;
-            const [currentOffer] = offers.filter((offer) => offer.id === Number(id));
 
-            return <RoomPage offer = {currentOffer} reviews = {reviews} nearPlaces = {offers} />;
+            return (
+              <RoomPageLoadWrapper offerId = {id} />
+            );
           }}
         />
         <Route>
           <NotFoundPage />
         </Route>
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 
-App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object),
-  reviews: PropTypes.arrayOf(PropTypes.object),
-};
-
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  reviews: state.reviews,
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

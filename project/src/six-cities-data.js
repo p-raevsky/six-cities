@@ -15,7 +15,7 @@ export const sortFilteredPlaces = (places, type, city) => {
   }
 };
 
-export const parseData = (data) => data.map((offer) => {
+export const parseOfferData = (offer) => {
   const parsedData = {
     ...offer,
     host: {
@@ -36,6 +36,20 @@ export const parseData = (data) => data.map((offer) => {
   delete parsedData.preview_image;
 
   return parsedData;
-});
+};
 
-export const isCheckedAuth = (authorizationStatus) => authorizationStatus === AuthorizationStatus.UNKNOWN;
+export const parseReviewData = (review) => {
+  const parsedData = {
+    ...review,
+    user: {
+      avatarUrl: review.user.avatar_url,
+      isPro: review.user.is_pro,
+      id: review.user.id,
+      name: review.user.name,
+    },
+  };
+
+  return parsedData;
+};
+
+export const isCheckedAuth = (authorizationStatus) => authorizationStatus === AuthorizationStatus.AUTH;

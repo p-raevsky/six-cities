@@ -2,15 +2,13 @@ import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
-import 'leaflet/dist/leaflet.css';
-
 import {CustomPin} from '../../../settings';
 import useMap from '../../../hooks/use-map';
-
 import {CityCenter} from '../../../settings';
 import {getPoints} from '../../../utils';
-
 import placeCardProp from '../../pages/offer.prop';
+
+import 'leaflet/dist/leaflet.css';
 
 function Map({city, places, activePlaceId}) {
   const cityCenter = CityCenter[city.toUpperCase()];

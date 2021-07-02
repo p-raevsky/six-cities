@@ -3,6 +3,7 @@ export const AppRoute = {
   LOGIN: '/login',
   FAVORITES: '/favorites',
   OFFER: '/offer',
+  NOT_FOUND: '/404',
 };
 
 export const Cities = {

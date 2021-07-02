@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useRef}  from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import SortItem from '../../elements/sort-item/sort-item';
+import SortItem from '../../elements/sort-item';
 
 import {SortingType} from '../../../const';
 import {ActionCreator} from '../../../store/action';
+import {useOnClickOutside} from '../../../hooks/use-on-click-outside';
 
 function SortList(props) {
   const {
@@ -13,14 +14,22 @@ function SortList(props) {
     selectedSorting,
     setOpening,
     chahgeSortingType,
+    closeSorting,
   } = props;
 
   const sortItems = Object.values(SortingType);
+  const ref = useRef();
+
+  useOnClickOutside(ref, () => closeSorting());
 
   return (
-    <form className="places__sorting" action="#" method="get"
+    <form
+      className="places__sorting"
+      action="#"
+      method="get"
+      ref={ref}
       onClick={({target}) => {
-        if (target.closest('.places__sorting-type') || target.closest('ul')) {
+        if (target.closest('.places__sorting-type') || target.closest('.places__options')) {
           setOpening();
         }
       }}
@@ -33,7 +42,7 @@ function SortList(props) {
         </svg>
       </span>
       <ul className={`places__options places__options--custom${isSortingOpen ? 'places__options--opened' : ''}`}>
-        {sortItems.map((sortItem) => <SortItem key = {sortItem} onChahgeSortingType = {chahgeSortingType} sortItem = {sortItem} selectedSorting = {selectedSorting}/>)}
+        {sortItems.map((sortItem) => <SortItem key = {sortItem} onChahgeSortingType = {chahgeSortingType} sortItem = {sortItem} selectedSorting = {selectedSorting} />)}
       </ul>
     </form>
   );
@@ -44,6 +53,7 @@ SortList.propTypes = {
   isSortingOpen: PropTypes.bool.isRequired,
   setOpening: PropTypes.func.isRequired,
   chahgeSortingType: PropTypes.func.isRequired,
+  closeSorting: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -57,6 +67,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   chahgeSortingType(value) {
     dispatch(ActionCreator.chahgeSortingType(value));
+  },
+  closeSorting() {
+    dispatch(ActionCreator.closeSorting());
   },
 });
 

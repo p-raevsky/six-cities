@@ -1,36 +1,33 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-import Logo from '../logo/logo';
+import Logo from '../logo';
+import SignOut from '../sign-out';
+import SignIn from '../sign-in';
+
 import {LogoType} from '../../../settings';
+import {isCheckedAuth} from '../../../six-cities-data';
 
 function Header(props) {
   const {
     isActive = false,
+    authorizationStatus,
+    userEmail,
   } = props;
+
+  const isAuth = isCheckedAuth(authorizationStatus);
 
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo type = {LogoType.HEADER.type} isActive = {isActive}/>
+            <Logo type = {LogoType.HEADER.type} isActive = {isActive} />
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to="/favorites">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
-                  <span className="header__signout">Sign out</span>
-                </a>
-              </li>
+              {isAuth ? <SignOut userEmail = {userEmail} /> : <SignIn />}
             </ul>
           </nav>
         </div>
@@ -41,6 +38,13 @@ function Header(props) {
 
 Header.propTypes = {
   isActive: PropTypes.bool,
+  authorizationStatus: PropTypes.string.isRequired,
+  userEmail: PropTypes.string,
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  userEmail: state.userEmail,
+});
+
+export default connect(mapStateToProps)(Header);
