@@ -2,12 +2,7 @@ import React from 'react';
 import LoadingScreen from '../loading-screen';
 import PropTypes from 'prop-types';
 
-function LoadWrapper(props) {
-  const {
-    isLoaded,
-    children,
-  } = props;
-
+function LoadWrapper({isLoaded, children}) {
   return (isLoaded && children) || <LoadingScreen />;
 }
 

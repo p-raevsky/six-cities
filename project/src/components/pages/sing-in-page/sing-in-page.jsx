@@ -1,29 +1,27 @@
 import React, {useRef} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import Header from '../../elements/header';
 
 import {login} from '../../../store/api-actions';
 import {AppRoute} from '../../../const';
+import {getCity} from '../../../store/process/selectors';
 
-function SingInPage(props) {
-  const {
-    city: currentCity,
-    loginUser,
-  } = props;
+function SingInPage() {
+  const currentCity = useSelector(getCity);
 
   const loginRef = useRef();
   const passwordRef = useRef();
+  const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    loginUser({
+    dispatch(login({
       login: loginRef.current.value,
       password: passwordRef.current.value,
-    });
+    }));
   };
 
   return (
@@ -82,19 +80,4 @@ function SingInPage(props) {
   );
 }
 
-SingInPage.propTypes = {
-  city: PropTypes.string.isRequired,
-  loginUser: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  city: state.city,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loginUser(authData) {
-    dispatch(login(authData));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingInPage);
+export default SingInPage;

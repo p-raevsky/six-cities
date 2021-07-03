@@ -4,12 +4,7 @@ import PropTypes from 'prop-types';
 
 import {LogoType} from '../../../settings';
 
-function Logo(props) {
-  const {
-    isActive,
-    type,
-  } = props;
-
+function Logo({isActive, type}) {
   return (
     <Link className={`${type}__logo-link ${isActive ? `${type}__logo-link--active` : ''}`} to="/">
       <img className={`${type}__logo`}

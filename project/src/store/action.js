@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CURRENT_CITY: 'city/addCurrent',
   ACTIVE_PLACE_ID: 'places/activePlace',
@@ -8,6 +10,7 @@ export const ActionType = {
   LOAD_OFFER: 'data/loadOffer',
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_NEARBY: 'data/loadNearby',
+  LOAD_FAVORITES: 'data/loadFavorites',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
@@ -16,62 +19,61 @@ export const ActionType = {
   NEW_RATING: 'user/newRating',
 };
 
-export const ActionCreator = {
-  setCurrentCity: (payload) => ({
-    type: ActionType.CURRENT_CITY,
-    payload,
-  }),
-  setActivePlaceID: (payload) => ({
-    type: ActionType.ACTIVE_PLACE_ID,
-    payload,
-  }),
-  setOpening: () => ({
-    type: ActionType.IS_OPEN,
-  }),
-  closeSorting: () => ({
-    type: ActionType.SORTING_CLOSED,
-  }),
-  chahgeSortingType: (payload) => ({
-    type: ActionType.SORTING_TYPE,
-    payload,
-  }),
-  loadOffers: (payload) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload,
-  }),
-  loadOffer: (payload) => ({
-    type: ActionType.LOAD_OFFER,
-    payload,
-  }),
-  loadReviews: (payload) => ({
-    type: ActionType.LOAD_REVIEWS,
-    payload,
-  }),
-  loadNearby: (payload) => ({
-    type: ActionType.LOAD_NEARBY,
-    payload,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-  setEmail: (email) => ({
-    type: ActionType.EMAIL,
-    payload: email,
-  }),
-  setNewComment: (comment) => ({
-    type: ActionType.NEW_COMMENT,
-    payload: comment,
-  }),
-  setNewRating: (rating) => ({
-    type: ActionType.NEW_RATING,
-    payload: rating,
-  }),
-};
+
+export const setCurrentCity = createAction(ActionType.CURRENT_CITY, (payload) => ({
+  payload,
+}));
+
+export const setActivePlaceID = createAction(ActionType.ACTIVE_PLACE_ID, (payload) => ({
+  payload,
+}));
+
+export const setOpening = createAction(ActionType.IS_OPEN);
+
+export const closeSorting = createAction(ActionType.SORTING_CLOSED);
+
+export const chahgeSortingType = createAction(ActionType.SORTING_TYPE, (payload) => ({
+  payload,
+}));
+
+export const loadOffers = createAction(ActionType.LOAD_OFFERS, (payload) => ({
+  payload,
+}));
+
+export const loadOffer = createAction(ActionType.LOAD_OFFER, (payload) => ({
+  payload,
+}));
+
+export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (payload) => ({
+  payload,
+}));
+
+export const loadNearby = createAction(ActionType.LOAD_NEARBY, (payload) => ({
+  payload,
+}));
+
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (payload) => ({
+  payload,
+}));
+
+export const closeSession = createAction(ActionType.LOGOUT);
+
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (payload) => ({
+  payload,
+}));
+
+export const setEmail = createAction(ActionType.EMAIL, (payload) => ({
+  payload,
+}));
+
+export const setNewComment = createAction(ActionType.NEW_COMMENT, (payload) => ({
+  payload,
+}));
+
+export const setNewRating = createAction(ActionType.NEW_RATING, (payload) => ({
+  payload,
+}));
+
+export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (payload) => ({
+  payload,
+}));

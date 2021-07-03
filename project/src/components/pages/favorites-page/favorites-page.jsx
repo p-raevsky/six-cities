@@ -1,18 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import Header from '../../elements/header';
 import Footer from '../../elements/footer';
 import FavoritesList from '../../elements/favorites-list';
 import FavoritesEmpty from '../../elements/favorites-empty';
 
-import placeCardProp from '../offer.prop';
+import {getFavorites} from '../../../store/data/selectors';
 
-function FavoritesPage(props) {
-  const {
-    offers,
-  } = props;
+function FavoritesPage() {
+  const offers = useSelector(getFavorites);
 
   return (
     <div className={`page${offers ? ' page--favorites-empty' : ''}`}>
@@ -27,12 +24,4 @@ function FavoritesPage(props) {
   );
 }
 
-FavoritesPage.propTypes = {
-  offers: PropTypes.arrayOf(placeCardProp),
-};
-
-const mapStateToProps = (state) => ({
-  offers: state.offers.filter(({isFavorite}) => isFavorite),
-});
-
-export default connect(mapStateToProps)(FavoritesPage);
+export default FavoritesPage;

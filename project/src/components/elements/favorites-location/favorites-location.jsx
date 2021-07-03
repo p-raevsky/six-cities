@@ -1,20 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import FavoritesPlacesList from '../favorites-places-list';
 
 import placeCardProp from '../../pages/offer.prop';
 import {AppRoute} from '../../../const';
-import {ActionCreator} from '../../../store/action';
+import {setCurrentCity} from '../../../store/action';
 
-function FavoritesLocation(props) {
-  const {
-    city,
-    filteredPlaces,
-    setCurrentCity,
-  } = props;
+function FavoritesLocation({city, filteredPlaces}) {
+  const dispatch = useDispatch();
 
   return (
     <li className="favorites__locations-items">
@@ -23,7 +19,7 @@ function FavoritesLocation(props) {
         onClick={({target}) => {
           if (target.closest('a')) {
             const value = target.closest('a').dataset.city;
-            setCurrentCity(value);
+            dispatch(setCurrentCity(value));
           }
         }}
       >
@@ -45,13 +41,6 @@ function FavoritesLocation(props) {
 FavoritesLocation.propTypes = {
   city: PropTypes.string,
   filteredPlaces: PropTypes.arrayOf(placeCardProp),
-  setCurrentCity: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentCity(value) {
-    dispatch(ActionCreator.setCurrentCity(value));
-  },
-});
-
-export default connect(null, mapDispatchToProps)(FavoritesLocation);
+export default FavoritesLocation;

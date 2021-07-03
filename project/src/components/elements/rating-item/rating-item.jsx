@@ -1,17 +1,14 @@
 import React, {useRef} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { ActionCreator } from '../../../store/action';
+import {setNewRating} from '../../../store/action';
+import {getNewRating} from '../../../store//process/selectors';
 
-function RatingItem(props) {
-  const {
-    index,
-    setNewRating,
-    newRating,
-  } = props;
-
+function RatingItem({index}) {
   const ratingRef = useRef();
+  const dispatch = useDispatch();
+  const newRating = useSelector(getNewRating);
 
   const isChecked = newRating === index;
 
@@ -26,7 +23,7 @@ function RatingItem(props) {
         type="radio"
         checked={isChecked}
         onChange={() => {
-          setNewRating(ratingRef.current.value);
+          dispatch(setNewRating(ratingRef.current.value));
         }}
       />
       <label htmlFor={`${index}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
@@ -40,18 +37,6 @@ function RatingItem(props) {
 
 RatingItem.propTypes = {
   index: PropTypes.number.isRequired,
-  setNewRating: PropTypes.func.isRequired,
-  newRating: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  newRating: state.newRating,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setNewRating(value) {
-    dispatch(ActionCreator.setNewRating(value));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RatingItem);
+export default RatingItem;

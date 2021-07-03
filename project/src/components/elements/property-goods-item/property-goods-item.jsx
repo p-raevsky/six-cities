@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function PropertyGoodsItem(props) {
-  const {goodsItem} = props;
+function PropertyGoodsItem({goodsItem}) {
   return (
     <li className="property__inside-item">
       {goodsItem}

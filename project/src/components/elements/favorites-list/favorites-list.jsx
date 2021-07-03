@@ -5,9 +5,7 @@ import FavoritesLocationItem from '../../elements/favorites-location';
 
 import placeCardProp from '../../pages/offer.prop';
 
-function FavoritesList(props) {
-  const {favoritesPlaces} = props;
-
+function FavoritesList({favoritesPlaces}) {
   const uniquePlaces = [...new Set(favoritesPlaces.map((offer) => offer.city.name))];
 
   return (

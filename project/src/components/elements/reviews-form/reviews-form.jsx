@@ -1,32 +1,35 @@
 import React, {useRef} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import RatingList from '../rating-list';
 import {createComment} from '../../../store/api-actions';
-import { ActionCreator } from '../../../store/action';
+import {
+  setNewComment,
+  setNewRating
+} from '../../../store/action';
+import {
+  getNewRating,
+  getNewComment
+} from '../../../store/process/selectors';
 
-function ReviewsForm(props) {
-  const {
-    id,
-    uploadNewComment,
-    newRating,
-    newComment,
-    setNewComment,
-    setNewRating,
-  } = props;
-
+const MAX_LENGTH = 50;
+function ReviewsForm({id}) {
   const commentRef = useRef();
+  const dispatch = useDispatch();
+
+  const newComment = useSelector(getNewComment);
+  const newRating = useSelector(getNewRating);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    uploadNewComment(id, {
+    dispatch(createComment(id, {
       comment: newComment,
       rating: newRating,
-    });
-    setNewComment('');
-    setNewRating('');
+    }));
+    dispatch(setNewComment(''));
+    dispatch(setNewRating(''));
   };
 
   return (
@@ -38,8 +41,9 @@ function ReviewsForm(props) {
       <textarea className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         ref={commentRef}
-        onChange={() => setNewComment(commentRef.current.value)}
+        onChange={() => dispatch(setNewComment(commentRef.current.value))}
         value={newComment}
+        maxLength={MAX_LENGTH}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -54,28 +58,6 @@ function ReviewsForm(props) {
 
 ReviewsForm.propTypes = {
   id: PropTypes.number,
-  uploadNewComment: PropTypes.func.isRequired,
-  newComment: PropTypes.string,
-  newRating: PropTypes.string,
-  setNewComment: PropTypes.func.isRequired,
-  setNewRating: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  newComment: state.newComment,
-  newRating: state.newRating,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  uploadNewComment(...data) {
-    dispatch(createComment(...data));
-  },
-  setNewComment(value) {
-    dispatch(ActionCreator.setNewComment(value));
-  },
-  setNewRating(value) {
-    dispatch(ActionCreator.setNewRating(value));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewsForm);
+export default ReviewsForm;

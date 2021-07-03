@@ -6,11 +6,7 @@ import PlaceCard from '../place-card';
 import placeCardProp from '../../pages/offer.prop';
 import {PlaceType} from '../../../const';
 
-function FavoritesPlacesList(props) {
-  const {
-    filteredPlaces,
-  } = props;
-
+function FavoritesPlacesList({filteredPlaces}) {
   return (
     <div className="favorites__places">
       {filteredPlaces.map((offer) => <PlaceCard key = {offer.id} offer = {offer} placesType = {PlaceType.FAVORITES} />)}

@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function SortItem(props) {
-  const {
-    selectedSorting,
-    sortItem,
-    onChahgeSortingType,
-  } = props;
-
+function SortItem({selectedSorting, sortItem, onChahgeSortingType}) {
   return (
     <li
       className={`places__option ${sortItem === selectedSorting ? 'places__option--active' : ''}`}

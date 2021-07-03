@@ -1,25 +1,22 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import CityItem from '../city-item';
 
 import {Cities} from '../../../const';
-import {ActionCreator} from '../../../store/action';
+import {setCurrentCity} from '../../../store/action';
+import {getCity} from '../../../store/process/selectors';
 
-function CitiesList(props) {
-  const {
-    city: currentCity,
-    setCurrentCity,
-  } = props;
-
+function CitiesList({setCity}) {
+  const currentCity = useSelector(getCity);
   const cities = Object.values(Cities);
 
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((cityItem) => <CityItem key = {cityItem} onCurrentCity = {setCurrentCity} cityItem = {cityItem} currentCity = {currentCity}/>)}
+          {cities.map((cityItem) => <CityItem key = {cityItem} onCurrentCity = {setCity} cityItem = {cityItem} currentCity = {currentCity}/>)}
         </ul>
       </section>
     </div>
@@ -27,18 +24,13 @@ function CitiesList(props) {
 }
 
 CitiesList.propTypes = {
-  city: PropTypes.string.isRequired,
-  setCurrentCity: PropTypes.func.isRequired,
+  setCity: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentCity(value) {
-    dispatch(ActionCreator.setCurrentCity(value));
+  setCity(value) {
+    dispatch(setCurrentCity(value));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
+export default connect(null, mapDispatchToProps)(CitiesList);
