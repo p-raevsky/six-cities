@@ -1,5 +1,4 @@
-import React, {useRef} from 'react';
-import PropTypes from 'prop-types';
+import React, {useEffect} from 'react';
 import dayjs from 'dayjs';
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -10,18 +9,28 @@ import ReviewsForm from '../../elements/reviews-form';
 import NearPlacesList from '../../elements/near-places-list';
 import Map from '../../elements/map';
 import Header from '../../elements/header';
+import LoadWrapper from '../../elements/load-wrapper';
 
 import placeCardProp from '../offer.prop';
-import reviewsProp from '../review.prop';
 
 import {getOfferRating} from '../../../utils';
 import {isCheckedAuth} from '../../../six-cities-data';
 import {getAuthorizationStatus} from '../../../store/user/selectors';
 import {sendFavoritePlace} from '../../../store/api-actions';
+import {
+  getReviews,
+  getNearPlaces,
+  getIsReviewsDataLoaded,
+  getIsNearPlacesDataLoaded
+} from '../../../store/data/selectors';
+import {
+  fetchNearbyList,
+  fetchReviwsList
+} from '../../../store/api-actions';
 
 const SLICED_REVIEWS_NUMBER = 10;
 
-function RoomPage({offer,reviews,nearPlaces}) {
+function RoomPage({offer}) {
   const {
     city,
     images,
@@ -43,9 +52,17 @@ function RoomPage({offer,reviews,nearPlaces}) {
     },
   } = offer;
 
+  useEffect(() => {
+    dispatch(fetchReviwsList(id));
+    dispatch(fetchNearbyList(id));
+  }, [id]);
+
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
-  const buttonRef = useRef();
+  const reviews = useSelector(getReviews);
+  const nearPlaces = useSelector(getNearPlaces);
+  const isReviewsDataLoaded = useSelector(getIsReviewsDataLoaded);
+  const isNearPlacesDataLoaded = useSelector(getIsNearPlacesDataLoaded);
 
   const status = isFavorite ? '0' : '1';
   const offerRating = getOfferRating(rating);
@@ -87,10 +104,8 @@ function RoomPage({offer,reviews,nearPlaces}) {
                 <button
                   className={`property__bookmark-button button${isFavorite ? ' property__bookmark-button--active' : ''}`}
                   type="button"
-                  ref={buttonRef}
                   onClick={() => {
                     dispatch(sendFavoritePlace(id, status));
-                    buttonRef.current.classList.toggle('property__bookmark-button--active');
                   }}
                 >
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -153,7 +168,7 @@ function RoomPage({offer,reviews,nearPlaces}) {
                 <ul className="reviews__list">
                   {sortedReviews.map((review) => <ReviewsItem key = {review.id} review = {review} />)}
                 </ul>
-                {isAuth ? <ReviewsForm id = {id} /> : ''}
+                {isAuth &&  isReviewsDataLoaded && <ReviewsForm id = {id} />}
               </section>
             </div>
           </div>
@@ -164,7 +179,9 @@ function RoomPage({offer,reviews,nearPlaces}) {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <NearPlacesList places = {nearPlaces}/>
+            <LoadWrapper isLoaded = {isNearPlacesDataLoaded}>
+              <NearPlacesList places = {nearPlaces}/>
+            </LoadWrapper>
           </section>
         </div>
       </main>
@@ -174,8 +191,6 @@ function RoomPage({offer,reviews,nearPlaces}) {
 
 RoomPage.propTypes = {
   offer: placeCardProp,
-  reviews: PropTypes.arrayOf(reviewsProp),
-  nearPlaces: PropTypes.arrayOf(placeCardProp),
 };
 
 export default RoomPage;

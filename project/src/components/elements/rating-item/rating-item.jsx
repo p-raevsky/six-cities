@@ -3,12 +3,17 @@ import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {setNewRating} from '../../../store/action';
-import {getNewRating} from '../../../store//process/selectors';
+import {
+  getNewRating,
+  getIsNewCommentDisabled
+} from '../../../store//process/selectors';
 
 function RatingItem({index}) {
   const ratingRef = useRef();
   const dispatch = useDispatch();
+
   const newRating = useSelector(getNewRating);
+  const isNewCommentDisabled= useSelector(getIsNewCommentDisabled);
 
   const isChecked = newRating === index;
 
@@ -22,6 +27,7 @@ function RatingItem({index}) {
         id={`${index}-stars`}
         type="radio"
         checked={isChecked}
+        disabled={isNewCommentDisabled}
         onChange={() => {
           dispatch(setNewRating(ratingRef.current.value));
         }}

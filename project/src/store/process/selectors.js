@@ -12,3 +12,6 @@ export const getNewRating = (state) => state[NameSpace.PROCESS].newRating;
 
 export const getNewComment = (state) => state[NameSpace.PROCESS].newComment;
 
+export const getIsNewCommentDisabled = (state) => state[NameSpace.PROCESS].isNewCommentDisabled;
+
+export const getIsCommentTextValid = (state) => state[NameSpace.PROCESS].isCommentTextValid;

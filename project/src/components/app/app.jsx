@@ -1,5 +1,4 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 
 import MainPage from '../pages/main-page';
@@ -12,11 +11,8 @@ import FavoritesPage from '../pages/favorites-page';
 
 import browserHistory from '../../services/browser-history';
 import {AppRoute} from '../../const';
-import {getAuthorizationStatus} from '../../store/user/selectors';
 
 function App() {
-  const authorizationStatus = useSelector(getAuthorizationStatus);
-
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
@@ -24,7 +20,6 @@ function App() {
           <MainPage />
         </Route>
         <PrivateRoute exact path = {AppRoute.FAVORITES}
-          authorizationStatus = {authorizationStatus}
           render = {() => <FavoritesPage />}
         />
         <Route exact path = {AppRoute.LOGIN}>
