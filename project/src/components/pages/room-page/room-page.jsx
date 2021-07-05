@@ -35,7 +35,7 @@ function RoomPage(props) {
     title = '',
     rating = '',
     type = '',
-    bedrooms = null,
+    bedrooms = '',
     maxAdults = '',
     price = '',
     goods = '',
