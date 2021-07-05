@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 import {useSelector, useDispatch} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Image from '../../elements/image';
 import PropertyGoodsItem from '../../elements/property-goods-item';
@@ -9,60 +10,46 @@ import ReviewsForm from '../../elements/reviews-form';
 import NearPlacesList from '../../elements/near-places-list';
 import Map from '../../elements/map';
 import Header from '../../elements/header';
-import LoadWrapper from '../../elements/load-wrapper';
 
 import placeCardProp from '../offer.prop';
+import reviewCardProp from '../review.prop';
 
 import {getOfferRating} from '../../../utils';
 import {isCheckedAuth} from '../../../six-cities-data';
 import {getAuthorizationStatus} from '../../../store/user/selectors';
 import {sendFavoritePlace} from '../../../store/api-actions';
-import {
-  getReviews,
-  getNearPlaces,
-  getIsReviewsDataLoaded,
-  getIsNearPlacesDataLoaded
-} from '../../../store/data/selectors';
-import {
-  fetchNearbyList,
-  fetchReviwsList
-} from '../../../store/api-actions';
 
 const SLICED_REVIEWS_NUMBER = 10;
 
-function RoomPage({offer}) {
+function RoomPage(props) {
   const {
-    city,
-    images,
-    isPremium,
-    isFavorite,
-    title,
-    rating,
-    type,
-    bedrooms,
-    maxAdults,
-    price,
-    goods,
-    description,
-    id,
+    offer,
+    reviews,
+    nearPlaces,
+  } = props;
+  const {
+    city = '',
+    images = '',
+    isPremium = false,
+    isFavorite = false,
+    title = '',
+    rating = '',
+    type = '',
+    bedrooms = null,
+    maxAdults = '',
+    price = '',
+    goods = '',
+    description = '',
+    id = '',
     host: {
-      name,
-      avatarUrl,
-      isPro,
-    },
+      name = '',
+      avatarUrl = '',
+      isPro = false,
+    } = {},
   } = offer;
-
-  useEffect(() => {
-    dispatch(fetchReviwsList(id));
-    dispatch(fetchNearbyList(id));
-  }, [id]);
 
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
-  const reviews = useSelector(getReviews);
-  const nearPlaces = useSelector(getNearPlaces);
-  const isReviewsDataLoaded = useSelector(getIsReviewsDataLoaded);
-  const isNearPlacesDataLoaded = useSelector(getIsNearPlacesDataLoaded);
 
   const status = isFavorite ? '0' : '1';
   const offerRating = getOfferRating(rating);
@@ -168,7 +155,7 @@ function RoomPage({offer}) {
                 <ul className="reviews__list">
                   {sortedReviews.map((review) => <ReviewsItem key = {review.id} review = {review} />)}
                 </ul>
-                {isAuth &&  isReviewsDataLoaded && <ReviewsForm id = {id} />}
+                {isAuth && <ReviewsForm id = {id} />}
               </section>
             </div>
           </div>
@@ -179,9 +166,7 @@ function RoomPage({offer}) {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <LoadWrapper isLoaded = {isNearPlacesDataLoaded}>
-              <NearPlacesList places = {nearPlaces}/>
-            </LoadWrapper>
+            <NearPlacesList places = {nearPlaces}/>
           </section>
         </div>
       </main>
@@ -191,6 +176,8 @@ function RoomPage({offer}) {
 
 RoomPage.propTypes = {
   offer: placeCardProp,
+  reviews: PropTypes.arrayOf(reviewCardProp),
+  nearPlaces: PropTypes.arrayOf(placeCardProp),
 };
 
 export default RoomPage;

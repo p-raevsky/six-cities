@@ -82,18 +82,6 @@ export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (payload) =
   payload,
 }));
 
-export const setNewCommentDisabling = createAction(ActionType.NEW_COMMENT_IS_DISABLED, (payload) => ({
-  payload,
-}));
-
-export const setNewComment = createAction(ActionType.NEW_COMMENT, (payload) => ({
-  payload,
-}));
-
-export const setIsCommentTextValid = createAction(ActionType.NEW_COMMENT_IS_VALID, (payload) => ({
-  payload,
-}));
-
 export const setUserAvatar = createAction(ActionType.USER_AVATAR, (payload) => ({
   payload,
 }));

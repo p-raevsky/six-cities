@@ -27,6 +27,7 @@ export function showAlert(message) {
   alertContainer.style.textAlign = AlertValues.TEXT_ALIGN;
   alertContainer.style.backgroundColor = AlertValues.BACKGROUND_COLOR;
   alertContainer.style.color = AlertValues.COLOR;
+  alertContainer.style.borderTop = AlertValues.BORDER_TOP;
   alertContainer.style.boxShadow = AlertValues.BOX_SHADOW;
 
   alertContainer.textContent = message;

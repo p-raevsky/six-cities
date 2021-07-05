@@ -104,11 +104,12 @@ export const AlertValues = {
   TOP: '50%',
   TRANSRORM: 'translate(-50%, -50%)',
   RIGHT: '50%',
-  PADDING: '100px 50px',
+  PADDING: '50px 50px',
   FONT_SIZE: '30px',
   TEXT_ALIGN: 'center',
   BACKGROUND_COLOR: 'white',
   COLOR:'#00000',
   BOX_SHADOW: '0 7px 15px rgba(0,0,0,0.5)',
   SHOW_TIME: '3000',
+  BORDER_TOP: '10px solid #4481c3',
 };

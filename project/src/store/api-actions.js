@@ -8,10 +8,7 @@ import {
   closeSession,
   redirectToRoute,
   setEmail,
-  setNewCommentDisabling,
-  setNewComment,
   setNewRating,
-  setIsCommentTextValid,
   setUserAvatar,
   updateFavorites,
   updateOffers,
@@ -27,9 +24,6 @@ import {
   parseOfferData,
   parseReviewData
 } from '../six-cities-data';
-import {showAlert} from '../utils';
-
-const ERROR_MSG = 'Something went wrong, please try posting your comment later';
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
@@ -94,12 +88,14 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       dispatch(setUserAvatar(data.avatar_url));
     })
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(fetchHotelsList()))
     .then(() => dispatch(redirectToRoute(AppRoute.ROOT)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))
+    .then(() => dispatch(fetchHotelsList()))
     .then(() => dispatch(closeSession()))
 );
 
@@ -109,12 +105,8 @@ export const createComment = (id, {comment, rating}) => (dispatch, _getState, ap
       dispatch(loadReviews(
         data.map((review) => parseReviewData(review)),
       ));
-      dispatch(setNewComment(''));
       dispatch(setNewRating(''));
-      dispatch(setIsCommentTextValid(false));
     })
-    .catch(() => showAlert(ERROR_MSG))
-    .finally(() => dispatch(setNewCommentDisabling(false)))
 );
 
 export const sendFavoritePlace = (id, status) => (dispatch, _getState, api) => (
@@ -126,5 +118,5 @@ export const sendFavoritePlace = (id, status) => (dispatch, _getState, api) => (
       dispatch(updateFavorites(parsedData));
       dispatch(updateNearby(parsedData));
     })
-    .catch(() => {})
+    .catch(() => dispatch(redirectToRoute(AppRoute.LOGIN)))
 );

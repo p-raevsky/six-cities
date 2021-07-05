@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -7,50 +7,46 @@ import RatingList from '../rating-list';
 import {createComment} from '../../../store/api-actions';
 import {showAlert} from '../../../utils';
 
-import {
-  setNewComment,
-  setNewCommentDisabling,
-  setIsCommentTextValid
-} from '../../../store/action';
-import {
-  getNewRating,
-  getNewComment,
-  getIsNewCommentDisabled,
-  getIsCommentTextValid
-} from '../../../store/process/selectors';
+import {getNewRating} from '../../../store/process/selectors';
 
 const MIN_LENGTH = 50;
 const MAX_LENGTH = 300;
-const ERROR_MSG = 'Rating is required';
+const ERROR_RATING_MSG = 'Rating is required';
+const ERROR_MSG = 'Something went wrong, please try posting your comment later';
+
 function ReviewsForm({id}) {
   const dispatch = useDispatch();
+  const [isCommentTextValid, setIsCommentTextValid] = useState(false);
+  const [isNewCommentDisabled, setNewCommentDisabling] = useState(false);
+  const [newComment, setNewComment] = useState('');
 
   const newRating = useSelector(getNewRating);
-  const newComment = useSelector(getNewComment);
-  const isNewCommentDisabled = useSelector(getIsNewCommentDisabled);
-  const isCommentTextValid = useSelector(getIsCommentTextValid);
 
   const checkCommentTextValidity = (comment) => (comment.length >= MIN_LENGTH && comment.length < MAX_LENGTH)
-    ? dispatch(setIsCommentTextValid(true))
-    : dispatch(setIsCommentTextValid(false));
+    ? setIsCommentTextValid(true)
+    : setIsCommentTextValid(false);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
     if (!newRating.length) {
-      showAlert(ERROR_MSG);
+      showAlert(ERROR_RATING_MSG);
       return;
     }
 
-    dispatch(setNewCommentDisabling(true));
+    setNewCommentDisabling(true);
     dispatch(createComment(id, {
       comment: newComment,
       rating: newRating,
-    }));
+    }))
+      .then(() => setIsCommentTextValid(false))
+      .then(() => setNewComment(''))
+      .catch(() => showAlert(ERROR_MSG))
+      .finally(() => setNewCommentDisabling(false));
   };
 
   const handleCommentChange = ({target: {value}}) => {
-    dispatch(setNewComment(value));
+    setNewComment(value);
     checkCommentTextValidity(value);
   };
 
@@ -59,7 +55,7 @@ function ReviewsForm({id}) {
       onSubmit = {handleSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <RatingList />
+      <RatingList isDisabled = {isNewCommentDisabled} />
       <textarea className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleCommentChange}

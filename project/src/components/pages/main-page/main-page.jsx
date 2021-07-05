@@ -22,7 +22,6 @@ function MainPage() {
   const selectedSorting = useSelector(getSelectedSorting);
   const city = useSelector(getCity);
   const isOffersDataLoaded = useSelector(getIsOffersDataLoaded);
-
   const places = useMemo(() => sortFilteredPlaces(offers, selectedSorting, city), [offers, selectedSorting, city]);
 
   return (

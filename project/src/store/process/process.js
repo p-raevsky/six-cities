@@ -6,10 +6,7 @@ import {
   setOpening,
   closeSorting,
   chahgeSortingType,
-  setNewRating,
-  setNewComment,
-  setNewCommentDisabling,
-  setIsCommentTextValid
+  setNewRating
 } from '../action';
 import {Cities} from '../../const';
 import {SortingType} from '../../const';
@@ -45,15 +42,6 @@ const process = createReducer(initialState, (builder) => {
     })
     .addCase(setNewRating, (state, action) => {
       state.newRating = action.payload;
-    })
-    .addCase(setNewComment, (state, action) => {
-      state.newComment = action.payload;
-    })
-    .addCase(setNewCommentDisabling, (state, action) => {
-      state.isNewCommentDisabled = action.payload;
-    })
-    .addCase(setIsCommentTextValid, (state, action) => {
-      state.isCommentTextValid = action.payload;
     });
 });
 
