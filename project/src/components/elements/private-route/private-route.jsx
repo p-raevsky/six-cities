@@ -4,21 +4,24 @@ import {Route, Redirect} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {AppRoute, AuthorizationStatus} from '../../../const';
 
+import LoadWrapper from '../load-wrapper';
 import {getAuthorizationStatus} from '../../../store/user/selectors';
 
 function PrivateRoute({render, path, exact}) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   return (
-    <Route
-      path={path}
-      exact={exact}
-      render={(routeProps) => (
-        authorizationStatus === AuthorizationStatus.AUTH
-          ? render(routeProps)
-          : <Redirect to={AppRoute.LOGIN} />
-      )}
-    />
+    <LoadWrapper isLoaded = {authorizationStatus !== AuthorizationStatus.UNKNOWN}>
+      <Route
+        path={path}
+        exact={exact}
+        render={(routeProps) => (
+          authorizationStatus === AuthorizationStatus.AUTH
+            ? render(routeProps)
+            : <Redirect to={AppRoute.LOGIN} />
+        )}
+      />
+    </LoadWrapper>
   );
 }
 

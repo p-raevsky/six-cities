@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
 
 import RoomPage from '../../pages/room-page';
+import LoadWrapper from '../load-wrapper';
 
 import {
   fetchHotel,
@@ -18,7 +19,7 @@ import {
   getIsNearPlacesDataLoaded
 } from '../../../store/data/selectors';
 
-function RoomPageLoadWrapper({offerId}) {
+function RoomPageWrapper({offerId}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,13 +35,15 @@ function RoomPageLoadWrapper({offerId}) {
   const isReviewsDataLoaded = useSelector(getIsReviewsDataLoaded);
   const isNearPlacesDataLoaded = useSelector(getIsNearPlacesDataLoaded);
 
-  const isLoaded = isOfferDataLoaded && isReviewsDataLoaded && isNearPlacesDataLoaded;
-
-  return isLoaded && <RoomPage offer = {offer} reviews = {reviews} nearPlaces = {nearPlaces} />;
+  return (
+    <LoadWrapper isLoaded = {isOfferDataLoaded && isReviewsDataLoaded && isNearPlacesDataLoaded}>
+      <RoomPage offer = {offer} reviews = {reviews} nearPlaces = {nearPlaces} />
+    </LoadWrapper>
+  );
 }
 
-RoomPageLoadWrapper.propTypes = {
+RoomPageWrapper.propTypes = {
   offerId: PropTypes.string,
 };
 
-export default RoomPageLoadWrapper;
+export default RoomPageWrapper;

@@ -6,7 +6,6 @@ import {
   setOpening,
   closeSorting,
   chahgeSortingType,
-  setNewComment,
   setNewRating
 } from '../action';
 import {Cities} from '../../const';
@@ -20,6 +19,8 @@ const initialState = {
   selectedSorting: SortingType.POPULAR,
   newComment: '',
   newRating: '',
+  isNewCommentDisabled: false,
+  isCommentTextValid: false,
 };
 
 const process = createReducer(initialState, (builder) => {
@@ -38,9 +39,6 @@ const process = createReducer(initialState, (builder) => {
     })
     .addCase(chahgeSortingType, (state, action) => {
       state.selectedSorting = action.payload;
-    })
-    .addCase(setNewComment, (state, action) => {
-      state.newComment = action.payload;
     })
     .addCase(setNewRating, (state, action) => {
       state.newRating = action.payload;

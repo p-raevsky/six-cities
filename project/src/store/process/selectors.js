@@ -9,6 +9,3 @@ export const getSelectedSorting = (state) => state[NameSpace.PROCESS].selectedSo
 export const getIsSortingOpen = (state) => state[NameSpace.PROCESS].isSortingOpen;
 
 export const getNewRating = (state) => state[NameSpace.PROCESS].newRating;
-
-export const getNewComment = (state) => state[NameSpace.PROCESS].newComment;
-

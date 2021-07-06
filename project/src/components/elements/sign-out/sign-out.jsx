@@ -1,19 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {AppRoute} from '../../../const';
 import {logout} from '../../../store/api-actions';
+import {getUserAvatar} from '../../../store/user/selectors';
 
 function SignOut({userEmail}) {
   const dispatch = useDispatch();
+  const userAvatar = useSelector(getUserAvatar);
 
   return (
     <>
       <li className="header__nav-item user">
         <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
-          <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+          <div
+            className="header__avatar-wrapper user__avatar-wrapper"
+            style={{backgroundImage: `url(${userAvatar})`, borderRadius: '50%'}}
+          >
+          </div>
           <span className="header__user-name user__name">{userEmail}</span>
         </Link>
       </li>

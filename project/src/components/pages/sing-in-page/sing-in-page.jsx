@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 
@@ -14,14 +14,24 @@ function SingInPage() {
   const loginRef = useRef();
   const passwordRef = useRef();
   const dispatch = useDispatch();
+  const [password, setPassword] = useState('');
+  const [isValid, setIsValid] = useState(false);
+
+  const checkValidity = (str) => str.trim() ? setIsValid(true) : setIsValid(false);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    passwordRef.current.value.trim();
 
     dispatch(login({
       login: loginRef.current.value,
-      password: passwordRef.current.value,
+      password: password,
     }));
+  };
+
+  const handlePasswordChange = ({target: {value}}) => {
+    setPassword(value);
+    checkValidity(value);
   };
 
   return (
@@ -51,17 +61,19 @@ function SingInPage() {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
-                  ref={passwordRef}
                   className="login__input form__input"
                   type="password"
                   name="password"
                   placeholder="Password"
                   required
+                  ref={passwordRef}
+                  onChange={handlePasswordChange}
                 />
               </div>
               <button
                 className="login__submit form__submit button"
                 type="submit"
+                disabled={!isValid}
               >
                 Sign in
               </button>

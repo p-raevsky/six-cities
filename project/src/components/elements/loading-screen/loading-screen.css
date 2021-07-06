@@ -16,7 +16,8 @@
 }
 .ldio-6etoy8b1ix3 div {
   position: absolute;
-  width: 10px }
+  width: 10px
+}
 .ldio-6etoy8b1ix3 div:nth-child(1) {
   left: 20px;
   background: #4481c3;
@@ -36,15 +37,16 @@
   animation-delay: undefineds
 }
 .loadingio-spinner-pulse-b2f9g7e93n {
-  width: 64px;
+  width: 100%;
   height: 64px;
-  display: inline-block;
+  display: flex;
   overflow: hidden;
   background: rgba(255, 255, 255, 0);
 }
 .ldio-6etoy8b1ix3 {
-  width: 100%;
+  width: max-content;
   height: 100%;
+  margin: auto;
   position: relative;
   transform: translateZ(0) scale(0.64);
   backface-visibility: hidden;
