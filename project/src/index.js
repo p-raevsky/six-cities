@@ -7,7 +7,7 @@ import App from './components/app/app';
 import rootReducer from './store/root-reducer';
 import {createAPI} from './services/api';
 import {requireAuthorization} from './store/action';
-import {checkAuth, fetchHotelsList} from './store/api-actions';
+import {checkAuth} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 import {redirect} from './store/middlewares/redirect';
 
@@ -26,7 +26,6 @@ const store = configureStore({
 });
 
 store.dispatch(checkAuth());
-store.dispatch(fetchHotelsList());
 
 ReactDOM.render(
   <React.StrictMode>

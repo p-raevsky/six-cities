@@ -1,3 +1,33 @@
+export const DEFAULT_OFFER_DATA = {
+  city: {
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    },
+    name: '',
+  },
+  images: [],
+  isPremium: false,
+  isFavorite: false,
+  title: '',
+  rating: 0,
+  type: '',
+  bedrooms: 0,
+  maxAdults: 0,
+  price: 0,
+  goods: [],
+  description: '',
+  id: 0,
+  previewImage: '',
+  host: {
+    id: 0,
+    name: '',
+    avatarUrl: '',
+    isPro: false,
+  },
+};
+
 export const AppRoute = {
   ROOT: '/',
   LOGIN: '/login',

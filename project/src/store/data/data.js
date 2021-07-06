@@ -1,5 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {updateData} from '../../utils';
+import {DEFAULT_OFFER_DATA} from '../../const';
 
 import {
   loadOffers,
@@ -15,7 +16,7 @@ import {
 
 const initialState = {
   offers: [],
-  offer: {},
+  offer: DEFAULT_OFFER_DATA,
   reviews: [],
   nearPlaces: [],
   favorites: [],
