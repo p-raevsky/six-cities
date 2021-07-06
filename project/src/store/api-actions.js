@@ -10,10 +10,7 @@ import {
   setEmail,
   setNewRating,
   setUserAvatar,
-  updateFavorites,
-  updateOffers,
-  updateOffer,
-  updateNearby
+  updateFavorites
 } from './action';
 import {
   AuthorizationStatus,
@@ -113,10 +110,7 @@ export const sendFavoritePlace = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITE}/${id}/${status}`)
     .then(({data}) => {
       const parsedData = parseOfferData(data);
-      dispatch(updateOffer(parsedData));
-      dispatch(updateOffers(parsedData));
       dispatch(updateFavorites(parsedData));
-      dispatch(updateNearby(parsedData));
     })
     .catch(() => dispatch(redirectToRoute(AppRoute.LOGIN)))
 );
