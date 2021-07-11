@@ -28,6 +28,12 @@ export const DEFAULT_OFFER_DATA = {
   },
 };
 
+export const ErrorMessages = {
+  ERROR_RATING_MSG: 'Rating is required',
+  ERROR_COMMENT_MSG: 'Something went wrong, please try posting your comment later',
+  ERROR_CONNECT_MSG: 'Something went wrong. Try refreshing the page or come back later',
+};
+
 export const AppRoute = {
   ROOT: '/',
   LOGIN: '/login',
@@ -60,6 +66,7 @@ export const SortingType = {
 
 export const HttpCode = {
   UNAUTHORIZED: 401,
+  SERVER_ERORR: 500,
 };
 
 export const AuthorizationStatus = {

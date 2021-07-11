@@ -6,13 +6,12 @@ import RatingList from '../rating-list';
 
 import {createComment} from '../../../store/api-actions';
 import {showAlert} from '../../../utils';
+import {ErrorMessages} from '../../../const';
 
 import {getNewRating} from '../../../store/process/selectors';
 
 const MIN_LENGTH = 50;
 const MAX_LENGTH = 300;
-const ERROR_RATING_MSG = 'Rating is required';
-const ERROR_MSG = 'Something went wrong, please try posting your comment later';
 
 function ReviewsForm({id}) {
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ function ReviewsForm({id}) {
     evt.preventDefault();
 
     if (!newRating.length) {
-      showAlert(ERROR_RATING_MSG);
+      showAlert(ErrorMessages.ERROR_RATING_MSG);
       return;
     }
 
@@ -41,7 +40,7 @@ function ReviewsForm({id}) {
     }))
       .then(() => setIsCommentTextValid(false))
       .then(() => setNewComment(''))
-      .catch(() => showAlert(ERROR_MSG))
+      .catch(() => showAlert(ErrorMessages.ERROR_COMMENT_MSG))
       .finally(() => setNewCommentDisabling(false));
   };
 

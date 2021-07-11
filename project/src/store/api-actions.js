@@ -15,12 +15,15 @@ import {
 import {
   AuthorizationStatus,
   APIRoute,
-  AppRoute
+  AppRoute,
+  ErrorMessages,
+  HttpCode
 } from '../const';
 import {
   parseOfferData,
   parseReviewData
 } from '../six-cities-data';
+import {showAlert} from '../utils';
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
@@ -47,7 +50,7 @@ export const fetchHotel = (id) => (dispatch, _getState, api) => (
     .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
-export const fetchReviwsList = (id) => (dispatch, _getState, api) => (
+export const fetchReviewsList = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.COMMENTS}/${id}`)
     .then(({data}) => {
       dispatch(loadReviews(
@@ -69,9 +72,12 @@ export const fetchFavoriteList = () => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(({data}) => {
+    .then(({data, status}) => {
       dispatch(setEmail(data.email));
       dispatch(setUserAvatar(data.avatar_url));
+      if (status >= HttpCode) {
+        showAlert(ErrorMessages.ERROR_CONNECT_MSG);
+      }
     })
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {})
@@ -85,15 +91,14 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       dispatch(setUserAvatar(data.avatar_url));
     })
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(fetchHotelsList()))
     .then(() => dispatch(redirectToRoute(AppRoute.ROOT)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))
-    .then(() => dispatch(fetchHotelsList()))
     .then(() => dispatch(closeSession()))
+    .then(() => dispatch(fetchHotelsList()))
 );
 
 export const createComment = (id, {comment, rating}) => (dispatch, _getState, api) => (
@@ -109,8 +114,7 @@ export const createComment = (id, {comment, rating}) => (dispatch, _getState, ap
 export const sendFavoritePlace = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITE}/${id}/${status}`)
     .then(({data}) => {
-      const parsedData = parseOfferData(data);
-      dispatch(updateFavorites(parsedData));
+      dispatch(updateFavorites(parseOfferData(data)));
     })
     .catch(() => dispatch(redirectToRoute(AppRoute.LOGIN)))
 );

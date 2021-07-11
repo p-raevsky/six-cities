@@ -8,7 +8,7 @@ import LoadWrapper from '../load-wrapper';
 import {
   fetchHotel,
   fetchNearbyList,
-  fetchReviwsList
+  fetchReviewsList
 } from '../../../store/api-actions';
 import {
   getOffer,
@@ -24,7 +24,7 @@ function RoomPageWrapper({offerId}) {
 
   useEffect(() => {
     dispatch(fetchHotel(offerId));
-    dispatch(fetchReviwsList(offerId));
+    dispatch(fetchReviewsList(offerId));
     dispatch(fetchNearbyList(offerId));
   }, [offerId]);
 
