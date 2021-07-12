@@ -27,5 +27,10 @@ export const createAPI = (onUnauthorized) => {
 
   api.interceptors.response.use(onSuccess, onFail);
 
+  api.interceptors.request.use((request) => {
+    request.headers = { 'x-token': localStorage.getItem('token') ?? '' };
+    return request;
+  });
+
   return api;
 };
