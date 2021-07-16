@@ -56,4 +56,18 @@ describe('Component: FavoritesLocation', () => {
 
     expect(linkElement).toBeInTheDocument();
   });
+  it('should render correctly when component filteredPlaces is empty', () => {
+    const history = createMemoryHistory();
+    const {getByText} = render(
+      <Provider store = {mockStore()}>
+        <Router history = {history}>
+          <FavoritesLocation city = {city} filteredPlaces = {[]} />
+        </Router>
+      </Provider>,
+    );
+
+    const linkElement = getByText(city);
+
+    expect(linkElement).toBeInTheDocument();
+  });
 });

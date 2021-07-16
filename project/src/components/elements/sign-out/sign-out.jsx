@@ -30,9 +30,9 @@ function SignOut({userEmail}) {
           dispatch(logout());
         }}
       >
-        <a className="header__nav-link">
+        <Link to='' className="header__nav-link">
           <span className="header__signout">Sign out</span>
-        </a>
+        </Link>
       </li>
     </>
   );

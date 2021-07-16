@@ -1,49 +1,49 @@
 
-@keyframes ldio-6etoy8b1ix3-1 {
+@keyframes loading-spinner-1 {
   0% { top: 10px; height: 80px }
   50% { top: 30px; height: 40px }
   100% { top: 30px; height: 40px }
 }
-@keyframes ldio-6etoy8b1ix3-2 {
+@keyframes loading-spinner-2 {
   0% { top: 15px; height: 70px }
   50% { top: 30px; height: 40px }
   100% { top: 30px; height: 40px }
 }
-@keyframes ldio-6etoy8b1ix3-3 {
+@keyframes loading-spinner-3 {
   0% { top: 20px; height: 60px }
   50% { top: 30px; height: 40px }
   100% { top: 30px; height: 40px }
 }
-.ldio-6etoy8b1ix3 div {
+.loading-spinner div {
   position: absolute;
   width: 10px
 }
-.ldio-6etoy8b1ix3 div:nth-child(1) {
+.loading-spinner div:nth-child(1) {
   left: 20px;
   background: #4481c3;
-  animation: ldio-6etoy8b1ix3-1 0.9615384615384615s cubic-bezier(0,0.5,0.5,1) infinite;
+  animation: loading-spinner-1 0.9615384615384615s cubic-bezier(0,0.5,0.5,1) infinite;
   animation-delay: -0.19230769230769232s
 }
-.ldio-6etoy8b1ix3 div:nth-child(2) {
+.loading-spinner div:nth-child(2) {
   left: 45px;
   background: #4481c3;
-  animation: ldio-6etoy8b1ix3-2 0.9615384615384615s cubic-bezier(0,0.5,0.5,1) infinite;
+  animation: loading-spinner-2 0.9615384615384615s cubic-bezier(0,0.5,0.5,1) infinite;
   animation-delay: -0.09615384615384616s
 }
-.ldio-6etoy8b1ix3 div:nth-child(3) {
+.loading-spinner div:nth-child(3) {
   left: 70px;
   background: #4481c3;
-  animation: ldio-6etoy8b1ix3-3 0.9615384615384615s cubic-bezier(0,0.5,0.5,1) infinite;
+  animation: loading-spinner-3 0.9615384615384615s cubic-bezier(0,0.5,0.5,1) infinite;
   animation-delay: undefineds
 }
-.loadingio-spinner-pulse-b2f9g7e93n {
+.loading-spinner-pulse {
   width: 100%;
   height: 64px;
   display: flex;
   overflow: hidden;
   background: rgba(255, 255, 255, 0);
 }
-.ldio-6etoy8b1ix3 {
+.loading-spinner {
   width: max-content;
   height: 100%;
   margin: auto;
@@ -52,6 +52,6 @@
   backface-visibility: hidden;
   transform-origin: 0 0;
 }
-.ldio-6etoy8b1ix3 div {
+.loading-spinner div {
   box-sizing: content-box;
 }

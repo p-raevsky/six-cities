@@ -10,6 +10,7 @@ import ReviewsForm from '../../elements/reviews-form';
 import NearPlacesList from '../../elements/near-places-list';
 import Map from '../../elements/map';
 import Header from '../../elements/header';
+import PremiumMark from '../../elements/premium-mark';
 
 import placeCardProp from '../offer.prop';
 import reviewCardProp from '../review.prop';
@@ -79,11 +80,7 @@ function RoomPage(props) {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium ?
-                <div className="property__mark">
-                  <span>Premium</span>
-                </div>
-                : ''}
+              {isPremium ? <PremiumMark /> : ''}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}

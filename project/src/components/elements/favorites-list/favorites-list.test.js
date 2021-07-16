@@ -54,4 +54,18 @@ describe('Component: FavoritesList', () => {
 
     expect(headerElement).toBeInTheDocument();
   });
+  it('should render correctly when component favoritesPlaces is empty', () => {
+    const history = createMemoryHistory();
+    const {getByText} = render(
+      <Provider store = {mockStore()}>
+        <Router history = {history}>
+          <FavoritesList favoritesPlaces = {[]} />
+        </Router>
+      </Provider>,
+    );
+
+    const headerElement = getByText('Saved listing');
+
+    expect(headerElement).toBeInTheDocument();
+  });
 });

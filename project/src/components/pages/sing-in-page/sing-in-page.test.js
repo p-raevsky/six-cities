@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import userEvent from '@testing-library/user-event';
 
 import {createMemoryHistory} from 'history';
-import SingInPage from '.';
+import SingInPage from './sing-in-page';
 
 const mockStore = configureStore({});
 
