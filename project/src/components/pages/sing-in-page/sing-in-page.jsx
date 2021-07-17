@@ -55,6 +55,7 @@ function SingInPage() {
                   type="email"
                   name="email"
                   placeholder="Email"
+                  data-testid="login"
                   required
                 />
               </div>
@@ -66,6 +67,7 @@ function SingInPage() {
                   name="password"
                   placeholder="Password"
                   required
+                  data-testid="password"
                   ref={passwordRef}
                   onChange={handlePasswordChange}
                 />

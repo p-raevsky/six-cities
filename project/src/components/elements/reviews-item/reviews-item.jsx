@@ -22,6 +22,7 @@ function ReviewsItem(props) {
   } = props;
 
   const offerRating = getOfferRating(rating);
+  const parsedDate = parseDate(date);
 
   return (
     <li className="reviews__item">
@@ -43,7 +44,7 @@ function ReviewsItem(props) {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{parseDate(date)}</time>
+        <time className="reviews__time" dateTime={parsedDate}>{parsedDate}</time>
       </div>
     </li>
   );

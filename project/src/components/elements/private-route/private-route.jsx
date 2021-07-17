@@ -1,34 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import {AppRoute, AuthorizationStatus} from '../../../const';
 
-import LoadWrapper from '../load-wrapper';
-import {getAuthorizationStatus} from '../../../store/user/selectors';
-
-function PrivateRoute({render, path, exact}) {
-  const authorizationStatus = useSelector(getAuthorizationStatus);
+function PrivateRoute({render, path, exact, isAuth, redirectPath}) {
 
   return (
-    <LoadWrapper isLoaded = {authorizationStatus !== AuthorizationStatus.UNKNOWN}>
-      <Route
-        path={path}
-        exact={exact}
-        render={(routeProps) => (
-          authorizationStatus === AuthorizationStatus.AUTH
-            ? render(routeProps)
-            : <Redirect to={AppRoute.LOGIN} />
-        )}
-      />
-    </LoadWrapper>
+    <Route
+      path={path}
+      exact={exact}
+      render={(routeProps) => (
+        isAuth
+          ? render(routeProps)
+          : <Redirect to={redirectPath} />
+      )}
+    />
   );
 }
 
 PrivateRoute.propTypes = {
-  exact: PropTypes.bool,
-  path: PropTypes.string,
+  exact: PropTypes.bool.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
+  redirectPath: PropTypes.string.isRequired,
 };
 
 export default PrivateRoute;

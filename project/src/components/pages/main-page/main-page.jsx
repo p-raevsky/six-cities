@@ -1,12 +1,13 @@
-import React, {useMemo} from 'react';
-import {useSelector} from 'react-redux';
+import React, {useMemo, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 
 import Header from '../../elements/header';
 import CitiesList from '../../elements/cities-list';
-
-import {sortFilteredPlaces} from '../../../six-cities-data';
 import LoadWrapper from '../../elements/load-wrapper';
 import PlacesWrapper from '../../elements/places-wrapper';
+
+import {sortFilteredPlaces} from '../../../six-cities-data';
+import {fetchHotelsList} from '../../../store/api-actions';
 
 import {
   getSelectedSorting,
@@ -18,6 +19,12 @@ import {
 } from '../../../store/data/selectors';
 
 function MainPage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchHotelsList());
+  }, []);
+
   const offers = useSelector(getOffers);
   const selectedSorting = useSelector(getSelectedSorting);
   const city = useSelector(getCity);

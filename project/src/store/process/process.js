@@ -8,19 +8,17 @@ import {
   chahgeSortingType,
   setNewRating
 } from '../action';
-import {Cities} from '../../const';
-import {SortingType} from '../../const';
-
+import {
+  Cities,
+  SortingType
+} from '../../const';
 
 const initialState = {
   city: Cities.PARIS,
   activePlaceId: null,
   isSortingOpen: false,
   selectedSorting: SortingType.POPULAR,
-  newComment: '',
   newRating: '',
-  isNewCommentDisabled: false,
-  isCommentTextValid: false,
 };
 
 const process = createReducer(initialState, (builder) => {
