@@ -7,7 +7,7 @@ function LoadWrapper({isLoaded, children}) {
 }
 
 LoadWrapper.propTypes = {
-  isLoaded: PropTypes.bool.isRequired,
+  isLoaded: PropTypes.bool,
   children: PropTypes.element,
 };
 

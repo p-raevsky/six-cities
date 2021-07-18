@@ -187,7 +187,7 @@ describe('Async operations', () => {
 
     apiMock
       .onDelete(APIRoute.LOGOUT)
-      .reply(204);
+      .reply(204, [{fake: true}]);
 
     return logoutLoader(dispatch, () => {}, api)
       .then(() => {
