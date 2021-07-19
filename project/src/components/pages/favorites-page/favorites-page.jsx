@@ -17,7 +17,7 @@ function FavoritesPage() {
 
   useEffect(() => {
     dispatch(fetchFavoriteList());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={`page${offers ? ' page--favorites-empty' : ''}`}>

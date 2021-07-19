@@ -22,7 +22,7 @@ function RoomPageWrapper({offerId}) {
     dispatch(fetchHotel(offerId));
     dispatch(fetchReviewsList(offerId));
     dispatch(fetchNearbyList(offerId));
-  }, [offerId]);
+  }, [dispatch, offerId]);
 
   const offer = useSelector(getOffer);
   const reviews = useSelector(getReviews);

@@ -30,7 +30,7 @@ function useMap(mapRef, city) {
 
       setMap(instance);
     }
-  }, [mapRef, map, city]);
+  }, [latitude, longitude, mapRef, zoom, map, city]);
 
   return map;
 }

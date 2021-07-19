@@ -43,7 +43,7 @@ function Map({city, places, activePlaceId}) {
       markers.clearLayers();
     };
 
-  }, [city, activePlaceId, map, points]);
+  }, [currentCustomIcon, defaultCustomIcon, lat, lng, zoom, city, activePlaceId, map, points]);
 
   return (
     <div

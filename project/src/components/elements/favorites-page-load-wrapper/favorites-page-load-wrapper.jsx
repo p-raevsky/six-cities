@@ -9,7 +9,7 @@ function FavoritesPageLoadWrapper({children}) {
 
   useEffect(() => {
     dispatch(fetchFavoriteList());
-  }, []);
+  }, [dispatch]);
 
   const IsFavoritesLoaded = useSelector(getIsFavoritesLoaded);
 
