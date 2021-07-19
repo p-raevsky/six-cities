@@ -17,7 +17,7 @@ function MainPage() {
 
   useEffect(() => {
     dispatch(fetchHotelsList());
-  }, []);
+  }, [dispatch]);
 
   const offers = useSelector(getOffers);
   const selectedSorting = useSelector(getSelectedSorting);
