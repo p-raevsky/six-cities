@@ -28,7 +28,7 @@ describe('Application Routing', () => {
       },
       DATA: {
         offers: [],
-        offer: {},
+        offer: {id: 1},
         reviews: [],
         nearPlaces: [],
         favorites: [],
@@ -98,7 +98,8 @@ describe('Application Routing', () => {
   });
 
   it('should render "RoomPageWrapper" when user navigate to "/offer"', () => {
-    history.push(AppRoute.OFFER);
+    const id = 1;
+    history.push(`${AppRoute.OFFER}/${id}`);
     render(fakeApp);
   });
 

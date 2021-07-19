@@ -1,11 +1,13 @@
 import React from 'react';
-import {render} from '@testing-library/react';
-import {Router} from 'react-router-dom';
+import {render, screen} from '@testing-library/react';
+import {Router, Switch, Route} from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 
 import {createMemoryHistory} from 'history';
 import PlaceCard from './place-card';
+import {AppRoute} from '../../../const';
 
 const mockStore = configureStore({});
 
@@ -40,10 +42,13 @@ const offer = {
 };
 
 const placesType = 'CITIES';
+let history;
 
 describe('Component: PlaceCard', () => {
+  beforeAll(() => {
+    history = createMemoryHistory();
+  });
   it('should render correctly', () => {
-    const history = createMemoryHistory();
     const {getByText} = render(
       <Provider store = {mockStore()}>
         <Router history = {history}>
@@ -61,5 +66,49 @@ describe('Component: PlaceCard', () => {
     expect(priceTextElement).toBeInTheDocument();
     expect(titleElement).toBeInTheDocument();
     expect(typeElement).toBeInTheDocument();
+  });
+
+  it('should redirect to offer url when user clicked to image', () => {
+    history.push('/fake');
+    render(
+      <Provider store = {mockStore()}>
+        <Router history={history}>
+          <Switch>
+            <Route path = {`${AppRoute.OFFER}/${offer.id}`} exact>
+              <h1>This is offer page</h1>
+            </Route>
+            <Route>
+              <PlaceCard offer = {offer} placesType = {placesType} />
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>,
+    );
+
+    expect(screen.queryByText(/This is offer page/i)).not.toBeInTheDocument();
+    userEvent.click(screen.getByAltText('Place'));
+    expect(screen.queryByText(/This is offer page/i)).toBeInTheDocument();
+  });
+
+  it('should redirect to offer url when user clicked to title', () => {
+    history.push('/fake');
+    render(
+      <Provider store = {mockStore()}>
+        <Router history={history}>
+          <Switch>
+            <Route path = {`${AppRoute.OFFER}/${offer.id}`} exact>
+              <h1>This is offer page</h1>
+            </Route>
+            <Route>
+              <PlaceCard offer = {offer} placesType = {placesType} />
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>,
+    );
+
+    expect(screen.queryByText(/This is offer page/i)).not.toBeInTheDocument();
+    userEvent.click(screen.getByText(offer.title));
+    expect(screen.queryByText(/This is offer page/i)).toBeInTheDocument();
   });
 });
