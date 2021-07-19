@@ -3,14 +3,14 @@ import dayjs from 'dayjs';
 import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Image from '../../elements/image';
-import PropertyGoodsItem from '../../elements/property-goods-item';
-import ReviewsItem from '../../elements/reviews-item';
-import ReviewsForm from '../../elements/reviews-form';
-import NearPlacesList from '../../elements/near-places-list';
-import Map from '../../elements/map';
-import Header from '../../elements/header';
-import PremiumMark from '../../elements/premium-mark';
+import Image from '../../elements/image/image';
+import PropertyGoodsItem from '../../elements/property-goods-item/property-goods-item';
+import ReviewsItem from '../../elements/reviews-item/reviews-item';
+import ReviewsForm from '../../elements/reviews-form/reviews-form';
+import NearPlacesList from '../../elements/near-places-list/near-places-list';
+import Map from '../../elements/map/map';
+import Header from '../../elements/header/header';
+import PremiumMark from '../../elements/premium-mark/premium-mark';
 
 import placeCardProp from '../offer.prop';
 import reviewCardProp from '../review.prop';

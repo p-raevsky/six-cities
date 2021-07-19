@@ -1,13 +1,13 @@
 import React from 'react';
-import {Switch, Route } from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
-import MainPage from '../pages/main-page';
-import SingInPage from '../pages/sing-in-page';
-import NotFoundPage from '../pages/not-found-page';
-import PrivateRoute from '../elements/private-route';
-import RoomPageWrapper from '../elements/room-page-wrapper';
-import FavoritesPage from '../pages/favorites-page';
+import MainPage from '../pages/main-page/main-page';
+import SingInPage from '../pages/sing-in-page/sing-in-page';
+import NotFoundPage from '../pages/not-found-page/not-found-page';
+import PrivateRoute from '../elements/private-route/private-route';
+import RoomPageWrapper from '../elements/room-page-wrapper/room-page-wrapper';
+import FavoritesPage from '../pages/favorites-page/favorites-page';
 
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {AppRoute, AuthorizationStatus} from '../../const';

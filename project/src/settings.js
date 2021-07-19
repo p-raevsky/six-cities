@@ -113,3 +113,8 @@ export const AlertValues = {
   SHOW_TIME: '3000',
   BORDER_TOP: '10px solid #4481c3',
 };
+
+export const ReviewSettings = {
+  MIN_LENGTH: 50,
+  MAX_LENGTH: 300,
+};

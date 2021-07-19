@@ -2,16 +2,14 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import RatingList from '../rating-list';
+import RatingList from '../rating-list/rating-list';
 
 import {createComment} from '../../../store/api-actions';
 import {showAlert} from '../../../utils';
 import {ErrorMessages} from '../../../const';
+import {ReviewSettings} from '../../../settings';
 
 import {getNewRating} from '../../../store/process/selectors';
-
-const MIN_LENGTH = 50;
-const MAX_LENGTH = 300;
 
 function ReviewsForm({id}) {
   const dispatch = useDispatch();
@@ -21,7 +19,7 @@ function ReviewsForm({id}) {
 
   const newRating = useSelector(getNewRating);
 
-  const checkCommentTextValidity = (comment) => (comment.length >= MIN_LENGTH && comment.length < MAX_LENGTH)
+  const checkCommentTextValidity = (comment) => (comment.length >= ReviewSettings.MIN_LENGTH && comment.length < ReviewSettings.MAX_LENGTH)
     ? setIsCommentTextValid(true)
     : setIsCommentTextValid(false);
 
@@ -60,8 +58,8 @@ function ReviewsForm({id}) {
         onChange={handleCommentChange}
         value={newComment}
         disabled={isNewCommentDisabled}
-        minLength={MIN_LENGTH}
-        maxLength={MAX_LENGTH}
+        minLength={ReviewSettings.MIN_LENGTH}
+        maxLength={ReviewSettings.MAX_LENGTH}
       >
       </textarea>
       <div className="reviews__button-wrapper">

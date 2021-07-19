@@ -2,16 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {useSelector} from 'react-redux';
 
-import Logo from '../logo';
-import SignOut from '../sign-out';
-import SignIn from '../sign-in';
+import Logo from '../logo/logo';
+import SignOut from '../sign-out/sign-out';
+import SignIn from '../sign-in/sign-in';
 
 import {LogoType} from '../../../settings';
 import {isCheckedAuth} from '../../../six-cities-data';
-import {
-  getAuthorizationStatus,
-  getUserEmail
-} from '../../../store/user/selectors';
+import {getAuthorizationStatus, getUserEmail} from '../../../store/user/selectors';
 
 function Header({isActive = false}) {
   const authorizationStatus = useSelector(getAuthorizationStatus);

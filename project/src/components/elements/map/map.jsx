@@ -43,7 +43,7 @@ function Map({city, places, activePlaceId}) {
       markers.clearLayers();
     };
 
-  }, [city, map, points]);
+  }, [city, activePlaceId, map, points]);
 
   return (
     <div
