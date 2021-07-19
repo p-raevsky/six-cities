@@ -2,19 +2,12 @@ import React, {useRef}  from 'react';
 import PropTypes from 'prop-types';
 import {connect, useSelector, useDispatch} from 'react-redux';
 
-import SortItem from '../../elements/sort-item';
+import SortItem from '../../elements/sort-item/sort-item';
 
 import {SortingType} from '../../../const';
-import {
-  setOpening,
-  chahgeSortingType,
-  closeSorting
-} from '../../../store/action';
+import {setOpening, chahgeSortingType, closeSorting} from '../../../store/action';
 import {useOnClickOutside} from '../../../hooks/use-on-click-outside';
-import {
-  getSelectedSorting,
-  getIsSortingOpen
-} from '../../../store/process/selectors';
+import {getSelectedSorting, getIsSortingOpen} from '../../../store/process/selectors';
 
 function SortList({chahgeSortType}) {
   const isSortingOpen = useSelector(getIsSortingOpen);

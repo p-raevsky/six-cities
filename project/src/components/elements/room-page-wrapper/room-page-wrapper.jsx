@@ -2,14 +2,10 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
 
-import RoomPage from '../../pages/room-page';
-import LoadWrapper from '../load-wrapper';
+import RoomPage from '../../pages/room-page/room-page';
+import LoadWrapper from '../load-wrapper/load-wrapper';
 
-import {
-  fetchHotel,
-  fetchNearbyList,
-  fetchReviewsList
-} from '../../../store/api-actions';
+import {fetchHotel, fetchNearbyList, fetchReviewsList} from '../../../store/api-actions';
 import {
   getOffer,
   getReviews,

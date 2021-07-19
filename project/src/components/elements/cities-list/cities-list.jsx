@@ -2,7 +2,7 @@ import React from 'react';
 import {connect, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import CityItem from '../city-item';
+import CityItem from '../city-item/city-item';
 
 import {Cities} from '../../../const';
 import {setCurrentCity} from '../../../store/action';

@@ -1,22 +1,16 @@
 import React, {useMemo, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
-import Header from '../../elements/header';
-import CitiesList from '../../elements/cities-list';
-import LoadWrapper from '../../elements/load-wrapper';
-import PlacesWrapper from '../../elements/places-wrapper';
+import Header from '../../elements/header/header';
+import CitiesList from '../../elements/cities-list/cities-list';
+import LoadWrapper from '../../elements/load-wrapper/load-wrapper';
+import PlacesWrapper from '../../elements/places-wrapper/places-wrapper';
 
 import {sortFilteredPlaces} from '../../../six-cities-data';
 import {fetchHotelsList} from '../../../store/api-actions';
 
-import {
-  getSelectedSorting,
-  getCity
-} from '../../../store/process/selectors';
-import {
-  getIsOffersDataLoaded,
-  getOffers
-} from '../../../store/data/selectors';
+import {getSelectedSorting, getCity} from '../../../store/process/selectors';
+import {getIsOffersDataLoaded, getOffers} from '../../../store/data/selectors';
 
 function MainPage() {
   const dispatch = useDispatch();

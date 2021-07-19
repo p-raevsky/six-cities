@@ -19,10 +19,7 @@ import {
   ErrorMessages,
   HttpCode
 } from '../const';
-import {
-  parseOfferData,
-  parseReviewData
-} from '../six-cities-data';
+import {parseOfferData, parseReviewData} from '../six-cities-data';
 import {showAlert} from '../utils';
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
@@ -73,11 +70,11 @@ export const fetchFavoriteList = () => (dispatch, _getState, api) => (
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(({data, status}) => {
-      dispatch(setEmail(data.email));
-      dispatch(setUserAvatar(data.avatar_url));
       if (status >= HttpCode) {
         showAlert(ErrorMessages.ERROR_CONNECT_MSG);
       }
+      dispatch(setEmail(data.email));
+      dispatch(setUserAvatar(data.avatar_url));
     })
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {})

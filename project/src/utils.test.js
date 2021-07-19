@@ -1,8 +1,4 @@
-import {
-  getOfferRating,
-  getPoints,
-  updateData
-} from './utils';
+import {getOfferRating, getPoints, updateData} from './utils';
 
 let offer1 = null;
 let offer2 = null;

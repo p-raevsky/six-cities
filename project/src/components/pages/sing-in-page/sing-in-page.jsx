@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import Header from '../../elements/header';
+import Header from '../../elements/header/header';
 
 import {login} from '../../../store/api-actions';
 import {AppRoute} from '../../../const';

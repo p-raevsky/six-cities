@@ -1,17 +1,14 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
-import Header from '../../elements/header';
-import Footer from '../../elements/footer';
-import FavoritesList from '../../elements/favorites-list';
-import FavoritesEmpty from '../../elements/favorites-empty';
-import LoadWrapper from '../../elements/load-wrapper';
+import Header from '../../elements/header/header';
+import Footer from '../../elements/footer/footer';
+import FavoritesList from '../../elements/favorites-list/favorites-list';
+import FavoritesEmpty from '../../elements/favorites-empty/favorites-empty';
+import LoadWrapper from '../../elements/load-wrapper/load-wrapper';
 
 import {fetchFavoriteList} from '../../../store/api-actions';
-import {
-  getFavorites,
-  getIsFavoritesLoaded
-} from '../../../store/data/selectors';
+import {getFavorites, getIsFavoritesLoaded} from '../../../store/data/selectors';
 
 function FavoritesPage() {
   const IsFavoritesLoaded = useSelector(getIsFavoritesLoaded);

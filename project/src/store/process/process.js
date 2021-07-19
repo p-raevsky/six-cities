@@ -8,10 +8,7 @@ import {
   chahgeSortingType,
   setNewRating
 } from '../action';
-import {
-  Cities,
-  SortingType
-} from '../../const';
+import {Cities, SortingType} from '../../const';
 
 const initialState = {
   city: Cities.PARIS,

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import FavoritesPlacesList from '../favorites-places-list';
+import FavoritesPlacesList from '../favorites-places-list/favorites-places-list';
 
 import placeCardProp from '../../pages/offer.prop';
 import {AppRoute} from '../../../const';

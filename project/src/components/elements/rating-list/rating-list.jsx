@@ -2,7 +2,7 @@ import React from 'react';
 import {nanoid} from 'nanoid';
 import PropTypes from 'prop-types';
 
-import RatingItem from '../rating-item';
+import RatingItem from '../rating-item/rating-item';
 
 const STARS_NUMBER = 5;
 

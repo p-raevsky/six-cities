@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingScreen from '../loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import PropTypes from 'prop-types';
 
 function LoadWrapper({isLoaded, children}) {

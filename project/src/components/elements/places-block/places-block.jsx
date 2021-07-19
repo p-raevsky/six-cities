@@ -2,15 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {useSelector} from 'react-redux';
 
-import PlacesList from '../places-list';
-import Map from '../map';
-import SortList from '../sort-list';
+import PlacesList from '../places-list/places-list';
+import Map from '../map/map';
+import SortList from '../sort-list/sort-list';
+
 import placeCardProp from '../../pages/offer.prop';
 
-import {
-  getCity,
-  getActivePlaceId
-} from '../../../store/process/selectors';
+import {getCity, getActivePlaceId} from '../../../store/process/selectors';
 
 function PlacesBlock({places}) {
   const currentCity = useSelector(getCity);

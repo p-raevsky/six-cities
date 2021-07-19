@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {setNewRating} from '../../../store/action';
-import {getNewRating} from '../../../store//process/selectors';
+import {getNewRating} from '../../../store/process/selectors';
 
 function RatingItem({isDisabled, index}) {
   const dispatch = useDispatch();
