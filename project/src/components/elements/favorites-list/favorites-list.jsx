@@ -13,9 +13,9 @@ function FavoritesList({favoritesPlaces}) {
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
         {uniquePlaces
-          .map((city) => {
-            const filteredPlaces = favoritesPlaces.filter((place) => place.city.name === city);
-            return <FavoritesLocationItem key = {city} city = {city} filteredPlaces = {filteredPlaces} />;
+          .map((cityItem) => {
+            const filteredPlaces = favoritesPlaces.filter(({city}) => city.name === cityItem);
+            return filteredPlaces.length ? <FavoritesLocationItem key = {cityItem} city = {cityItem} filteredPlaces = {filteredPlaces} /> : '';
           })}
       </ul>
     </section>
