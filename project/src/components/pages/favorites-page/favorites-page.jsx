@@ -14,6 +14,7 @@ function FavoritesPage() {
   const IsFavoritesLoaded = useSelector(getIsFavoritesLoaded);
   const offers = useSelector(getFavorites);
   const dispatch = useDispatch();
+  const filteredOffers = offers.filter(({isFavorite}) => isFavorite);
 
   useEffect(() => {
     dispatch(fetchFavoriteList());
@@ -25,7 +26,7 @@ function FavoritesPage() {
       <LoadWrapper isLoaded = {IsFavoritesLoaded}>
         <main className={`page__main page__main--favorites${offers ? ' page__main--favorites-empty' : ''}`}>
           <div className="page__favorites-container container">
-            {offers.length ? <FavoritesList favoritesPlaces = {offers} /> : <FavoritesEmpty />}
+            {filteredOffers.length ? <FavoritesList favoritesPlaces = {filteredOffers} /> : <FavoritesEmpty />}
           </div>
         </main>
       </LoadWrapper>

@@ -9,7 +9,7 @@ import placeCardProp from '../../pages/offer.prop';
 import {AppRoute} from '../../../const';
 import {setCurrentCity} from '../../../store/action';
 
-function FavoritesLocation({city, filteredPlaces}) {
+function FavoritesLocationItem({city, filteredPlaces}) {
   const dispatch = useDispatch();
 
   return (
@@ -38,9 +38,9 @@ function FavoritesLocation({city, filteredPlaces}) {
   );
 }
 
-FavoritesLocation.propTypes = {
+FavoritesLocationItem.propTypes = {
   city: PropTypes.string,
   filteredPlaces: PropTypes.arrayOf(placeCardProp),
 };
 
-export default FavoritesLocation;
+export default FavoritesLocationItem;

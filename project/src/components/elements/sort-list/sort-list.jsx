@@ -38,7 +38,10 @@ function SortList({chahgeSortType}) {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom${isSortingOpen ? 'places__options--opened' : ''}`}>
+      <ul
+        className={`places__options places__options--custom${isSortingOpen ? 'places__options--opened' : ''}`}
+        style={{position: `${isSortingOpen ? 'absolute' : ''}`, zIndex: `${isSortingOpen ? 1 : ''}`}}
+      >
         {sortItems.map((sortItem) => <SortItem key = {sortItem} onChahgeSortingType = {chahgeSortType} sortItem = {sortItem} selectedSorting = {selectedSorting} />)}
       </ul>
     </form>

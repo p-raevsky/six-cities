@@ -51,6 +51,8 @@ function RoomPage(props) {
 
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
+  const placesForMap = nearPlaces.slice();
+  placesForMap.push(offer);
 
   const status = isFavorite ? '0' : '1';
   const offerRating = getOfferRating(rating);
@@ -157,7 +159,7 @@ function RoomPage(props) {
             </div>
           </div>
           <section className="property__map map">
-            <Map city = {city.name} places = {nearPlaces} />
+            <Map city = {city.name} places = {placesForMap} activePlaceId = {String(id)} />
           </section>
         </section>
         <div className="container">
