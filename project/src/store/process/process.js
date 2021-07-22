@@ -5,7 +5,7 @@ import {
   setActivePlaceID,
   setOpening,
   closeSorting,
-  chahgeSortingType,
+  changeSortingType,
   setNewRating
 } from '../action';
 import {Cities, SortingType} from '../../const';
@@ -32,7 +32,7 @@ const process = createReducer(initialState, (builder) => {
     .addCase(closeSorting, (state) => {
       state.isSortingOpen = false;
     })
-    .addCase(chahgeSortingType, (state, action) => {
+    .addCase(changeSortingType, (state, action) => {
       state.selectedSorting = action.payload;
     })
     .addCase(setNewRating, (state, action) => {

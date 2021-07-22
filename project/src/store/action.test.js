@@ -4,7 +4,7 @@ import {
   setActivePlaceID,
   setOpening,
   closeSorting,
-  chahgeSortingType,
+  changeSortingType,
   loadOffers,
   loadOffer,
   loadReviews,
@@ -66,7 +66,7 @@ describe('Actions', () => {
 
     const sortingType = 'sortingType';
 
-    expect(chahgeSortingType(sortingType)).toEqual(expectedAction);
+    expect(changeSortingType(sortingType)).toEqual(expectedAction);
   });
 
   it('action creator for loading offers, returns correct action with array of objects in payload', () => {

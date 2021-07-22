@@ -4,7 +4,7 @@ import {
   setActivePlaceID,
   setOpening,
   closeSorting,
-  chahgeSortingType,
+  changeSortingType,
   setNewRating
 } from '../action';
 
@@ -53,7 +53,7 @@ describe('Reducer: process', () => {
   it('should return sorting type in a given value', () => {
     const sortingType = 'sortingType';
 
-    expect(process({selectedSorting: initialState.selectedSorting}, chahgeSortingType(sortingType)))
+    expect(process({selectedSorting: initialState.selectedSorting}, changeSortingType(sortingType)))
       .toEqual({selectedSorting: sortingType});
   });
 

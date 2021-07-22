@@ -38,18 +38,14 @@ export const parseOfferData = (offer) => {
   return parsedData;
 };
 
-export const parseReviewData = (review) => {
-  const parsedData = {
-    ...review,
-    user: {
-      avatarUrl: review.user.avatar_url,
-      isPro: review.user.is_pro,
-      id: review.user.id,
-      name: review.user.name,
-    },
-  };
-
-  return parsedData;
-};
+export const parseReviewData = (review) => ({
+  ...review,
+  user: {
+    avatarUrl: review.user.avatar_url,
+    isPro: review.user.is_pro,
+    id: review.user.id,
+    name: review.user.name,
+  },
+});
 
 export const isCheckedAuth = (authorizationStatus) => authorizationStatus === AuthorizationStatus.AUTH;
