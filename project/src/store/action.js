@@ -5,7 +5,7 @@ export const ActionType = {
   ACTIVE_PLACE_ID: 'process/places/activePlace',
   IS_OPEN: 'process/sorting/isOpen',
   SORTING_CLOSED: 'process/sorting/closed',
-  SORTING_TYPE: 'process/sorting/chahgeSortingType',
+  SORTING_TYPE: 'process/sorting/changeSortingType',
   LOAD_OFFERS: 'data/loadOffers',
   LOAD_OFFER: 'data/loadOffer',
   LOAD_REVIEWS: 'data/loadReviews',
@@ -34,7 +34,7 @@ export const setOpening = createAction(ActionType.IS_OPEN);
 
 export const closeSorting = createAction(ActionType.SORTING_CLOSED);
 
-export const chahgeSortingType = createAction(ActionType.SORTING_TYPE, (payload) => ({
+export const changeSortingType = createAction(ActionType.SORTING_TYPE, (payload) => ({
   payload,
 }));
 

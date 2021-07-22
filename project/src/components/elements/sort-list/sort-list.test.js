@@ -8,7 +8,7 @@ import {createMemoryHistory} from 'history';
 import SortList from './sort-list';
 
 const mockStore = configureStore({});
-const chahgeSortType = () => {};
+const changeSortType = () => {};
 
 describe('Component: SortList', () => {
   it('should render correctly when isSortingOpen: false', () => {
@@ -17,7 +17,7 @@ describe('Component: SortList', () => {
     const {getByText} = render(
       <Provider store = {mockStore({PROCESS: {isSortingOpen: false, selectedSorting: 'selectedSorting'}})}>
         <Router history = {history}>
-          <SortList chahgeSortType = {chahgeSortType} />
+          <SortList changeSortType = {changeSortType} />
         </Router>
       </Provider>,
     );
@@ -31,7 +31,7 @@ describe('Component: SortList', () => {
     const {getByText} = render(
       <Provider store = {mockStore({PROCESS: {isSortingOpen: true, selectedSorting: 'selectedSorting'}})}>
         <Router history = {history}>
-          <SortList chahgeSortType = {chahgeSortType} />
+          <SortList changeSortType = {changeSortType} />
         </Router>
       </Provider>,
     );

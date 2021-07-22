@@ -66,7 +66,7 @@ export const SortingType = {
 
 export const HttpCode = {
   UNAUTHORIZED: 401,
-  SERVER_ERORR: 500,
+  SERVER_ERROR: 500,
 };
 
 export const AuthorizationStatus = {

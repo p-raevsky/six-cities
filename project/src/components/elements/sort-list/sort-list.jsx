@@ -5,11 +5,11 @@ import {connect, useSelector, useDispatch} from 'react-redux';
 import SortItem from '../../elements/sort-item/sort-item';
 
 import {SortingType} from '../../../const';
-import {setOpening, chahgeSortingType, closeSorting} from '../../../store/action';
+import {setOpening, changeSortingType, closeSorting} from '../../../store/action';
 import {useOnClickOutside} from '../../../hooks/use-on-click-outside';
 import {getSelectedSorting, getIsSortingOpen} from '../../../store/process/selectors';
 
-function SortList({chahgeSortType}) {
+function SortList({changeSortType}) {
   const isSortingOpen = useSelector(getIsSortingOpen);
   const selectedSorting = useSelector(getSelectedSorting);
 
@@ -42,19 +42,19 @@ function SortList({chahgeSortType}) {
         className={`places__options places__options--custom${isSortingOpen ? 'places__options--opened' : ''}`}
         style={{position: `${isSortingOpen ? 'absolute' : ''}`, zIndex: `${isSortingOpen ? 1 : ''}`}}
       >
-        {sortItems.map((sortItem) => <SortItem key = {sortItem} onChahgeSortingType = {chahgeSortType} sortItem = {sortItem} selectedSorting = {selectedSorting} />)}
+        {sortItems.map((sortItem) => <SortItem key = {sortItem} onChahgeSortingType = {changeSortType} sortItem = {sortItem} selectedSorting = {selectedSorting} />)}
       </ul>
     </form>
   );
 }
 
 SortList.propTypes = {
-  chahgeSortType: PropTypes.func.isRequired,
+  changeSortType: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  chahgeSortType(value) {
-    dispatch(chahgeSortingType(value));
+  changeSortType(value) {
+    dispatch(changeSortingType(value));
   },
 });
 
