@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.bd0646cd.chunk.css",
-    "main.js": "/static/js/main.13e0ebda.chunk.js",
-    "main.js.map": "/static/js/main.13e0ebda.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.baaec1ba.js",
-    "runtime-main.js.map": "/static/js/runtime-main.baaec1ba.js.map",
-    "static/css/2.c1e28d34.chunk.css": "/static/css/2.c1e28d34.chunk.css",
-    "static/js/2.ac9b4479.chunk.js": "/static/js/2.ac9b4479.chunk.js",
-    "static/js/2.ac9b4479.chunk.js.map": "/static/js/2.ac9b4479.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.c1e28d34.chunk.css.map": "/static/css/2.c1e28d34.chunk.css.map",
-    "static/css/main.bd0646cd.chunk.css.map": "/static/css/main.bd0646cd.chunk.css.map",
-    "static/js/2.ac9b4479.chunk.js.LICENSE.txt": "/static/js/2.ac9b4479.chunk.js.LICENSE.txt"
+    "main.css": "/six-cities/static/css/main.bd0646cd.chunk.css",
+    "main.js": "/six-cities/static/js/main.13e0ebda.chunk.js",
+    "main.js.map": "/six-cities/static/js/main.13e0ebda.chunk.js.map",
+    "runtime-main.js": "/six-cities/static/js/runtime-main.b543d512.js",
+    "runtime-main.js.map": "/six-cities/static/js/runtime-main.b543d512.js.map",
+    "static/css/2.c1e28d34.chunk.css": "/six-cities/static/css/2.c1e28d34.chunk.css",
+    "static/js/2.ac9b4479.chunk.js": "/six-cities/static/js/2.ac9b4479.chunk.js",
+    "static/js/2.ac9b4479.chunk.js.map": "/six-cities/static/js/2.ac9b4479.chunk.js.map",
+    "index.html": "/six-cities/index.html",
+    "static/css/2.c1e28d34.chunk.css.map": "/six-cities/static/css/2.c1e28d34.chunk.css.map",
+    "static/css/main.bd0646cd.chunk.css.map": "/six-cities/static/css/main.bd0646cd.chunk.css.map",
+    "static/js/2.ac9b4479.chunk.js.LICENSE.txt": "/six-cities/static/js/2.ac9b4479.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.baaec1ba.js",
+    "static/js/runtime-main.b543d512.js",
     "static/css/2.c1e28d34.chunk.css",
     "static/js/2.ac9b4479.chunk.js",
     "static/css/main.bd0646cd.chunk.css",
